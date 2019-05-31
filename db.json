@@ -1,0 +1,20 @@
+{
+  "users" : [
+    {
+      "id": 1,
+      "sid": "1234567890123",
+      "firstName": "mark",
+      "lastName": "kiti",
+      "university": "Chiang mai university",
+      "email": "mark@mail.co"
+    },
+    {
+      "id": 2,
+      "sid": "0123456789012",
+      "firstName": "Test",
+      "lastName": "Test",
+      "university": "",
+      "email": "test@mail.com"
+    }
+  ]
+}
