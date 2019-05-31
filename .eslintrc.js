@@ -14,10 +14,9 @@ module.exports = {
     'prettier',
     'prettier/vue'
   ],
-  plugins: [
-    'prettier'
-  ],
+  plugins: ['prettier'],
   // add your custom rules here
   rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
 }
