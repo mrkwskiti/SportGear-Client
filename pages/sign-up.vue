@@ -19,9 +19,9 @@
           <label class="label">University</label>
           <div class="select">
             <select v-model="user.university" :disabled="user.loaded">
-              <option>Chiang mai university</option>
-              <option>Chulalongkorn university</option>
-              <option>Thammasat university</option>
+              <option v-for="university in universities" :key="university">
+                {{ university }}
+              </option>
             </select>
           </div>
         </div>
@@ -59,11 +59,36 @@
           />
         </div>
       </div>
+
+      <div class="columns is-mobile">
+        <div class="column is-narrow">
+          <label class="label">Type of Sport</label>
+          <div class="select">
+            <select v-model="user.sport">
+              <option v-for="sport in sports" :key="sport">{{ sport }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="column">
+          <label class="label">Team</label>
+          <div class="select">
+            <select>
+              <option>A</option>
+              <option>B</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Univers from '~/modules/university'
+import Sport from '~/modules/sport'
+import ApiService from '~/services/ApiService'
+
 export default {
   data() {
     return {
@@ -73,8 +98,11 @@ export default {
         lastName: '',
         university: '',
         email: '',
+        sport: '',
         loaded: false
-      }
+      },
+      universities: Univers.list(),
+      sports: Sport.list()
     }
   },
   watch: {
@@ -85,15 +113,11 @@ export default {
   methods: {
     async fetchUser(sid) {
       if (this.user.sid.length === 13) {
-        const response = await this.$axios.$get(
-          'http://localhost:3000/users?sid=' + sid
-        )
-        console.log(response)
-        console.log(response[0].firstName)
-        this.user.firstName = response[0].firstName
-        this.user.lastName = response[0].lastName
-        this.user.university = response[0].university
-        this.user.email = response[0].email
+        const response = await ApiService.fetchUser(this.user.sid)
+        this.user.firstName = response.firstName
+        this.user.lastName = response.lastName
+        this.user.university = response.university
+        this.user.email = response.email
         this.user.loaded = true
       } else {
         this.user.loaded = false
@@ -105,7 +129,7 @@ export default {
 
 <style>
 h2 {
-  padding: 20px 0 20px;
+  padding: 40px 0 40px;
 }
 .grid {
   display: grid;
