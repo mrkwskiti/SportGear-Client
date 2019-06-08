@@ -3,80 +3,41 @@
     <div class="contrainer grid">
       <div class="field">
         <h2 class="title is-1">Sign Up</h2>
-      </div>
-      <div class="columns">
-        <div class="column">
-          <label class="label">SID</label>
-          <input
-            v-model="user.sid"
-            type="text"
-            class="input"
-            placeholder="1234567890123"
-          />
-        </div>
 
-        <div class="column is-narrow">
-          <label class="label">University</label>
-          <div class="select">
-            <select v-model="user.university" :disabled="user.loaded">
-              <option v-for="university in universities" :key="university">
-                {{ university }}
-              </option>
-            </select>
+        <div class="columns is-mobile">
+          <div class="column is-narrow">
+            <label class="label">Type of Sport</label>
+            <div class="select">
+              <select v-model="data.sport">
+                <option v-for="sport in sports" :key="sport">
+                  {{ sport }}
+                </option>
+              </select>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="columns">
-        <div class="column">
-          <label for="" class="label">First Name</label>
-          <input
-            v-model="user.firstName"
-            type="text"
-            class="input"
-            :disabled="user.loaded"
-          />
-        </div>
-        <div class="column">
-          <label for="" class="label">Last Name</label>
-          <input
-            v-model="user.lastName"
-            type="text"
-            class="input"
-            :disabled="user.loaded"
-          />
-        </div>
-      </div>
-
-      <div class="columns">
-        <div class="column">
-          <label class="label">Email</label>
-          <input
-            v-model="user.email"
-            type="text"
-            class="input"
-            :disabled="user.loaded"
-          />
-        </div>
-      </div>
-
-      <div class="columns is-mobile">
-        <div class="column is-narrow">
-          <label class="label">Type of Sport</label>
-          <div class="select">
-            <select v-model="user.sport">
-              <option v-for="sport in sports" :key="sport">{{ sport }}</option>
-            </select>
+          <div v-if="competitions != ''" class="column is-narrow">
+            <label class="label">Type of Competition</label>
+            <div class="select">
+              <select v-model="data.competition">
+                <option
+                  v-for="competition in competitions"
+                  :key="competition"
+                  >{{ competition }}</option
+                >
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div class="column">
-          <label class="label">Team</label>
-          <div class="select">
-            <select>
-              <option>A</option>
-              <option>B</option>
-            </select>
+          <div v-if="teams" class="column">
+            <label class="label">Team</label>
+            <div class="select">
+              <select v-model="data.team">
+                <option v-for="n in teams" :key="n">{{
+                  String.fromCharCode(64 + n)
+                }}</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -85,42 +46,32 @@
 </template>
 
 <script>
-import Univers from '~/modules/university'
 import Sport from '~/modules/sport'
-import ApiService from '~/services/ApiService'
 
 export default {
   data() {
     return {
-      user: {
-        sid: '',
-        firstName: '',
-        lastName: '',
-        university: '',
-        email: '',
+      data: {
         sport: '',
-        loaded: false
-      },
-      universities: Univers.list(),
-      sports: Sport.list()
+        competition: '',
+        team: ''
+      }
     }
   },
-  watch: {
-    'user.sid': function(val) {
-      this.fetchUser(val)
-    }
-  },
-  methods: {
-    async fetchUser(sid) {
-      if (this.user.sid.length === 13) {
-        const response = await ApiService.fetchUser(this.user.sid)
-        this.user.firstName = response.firstName
-        this.user.lastName = response.lastName
-        this.user.university = response.university
-        this.user.email = response.email
-        this.user.loaded = true
-      } else {
-        this.user.loaded = false
+  computed: {
+    sports() {
+      return Sport.list()
+    },
+    competitions() {
+      if (this.data.sport) {
+        return Sport.listCompetition(this.data.sport)
+      } else return []
+    },
+    teams() {
+      try {
+        return Sport.teams(this.data.sport, this.data.competition)
+      } catch {
+        return 0
       }
     }
   }
@@ -129,7 +80,7 @@ export default {
 
 <style>
 h2 {
-  padding: 40px 0 40px;
+  padding: 60px 0 0 0;
 }
 .grid {
   display: grid;
