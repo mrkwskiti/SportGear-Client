@@ -1,4 +1,7 @@
 const data = require('~/data/sport')
-const list = () => data
 
-module.exports = { list }
+const listSport = () => Object.keys(data)
+
+const listTypeOfSport = sport => Object(data[sport].type)
+
+module.exports = { listSport, listTypeOfSport }
