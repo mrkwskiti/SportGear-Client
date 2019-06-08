@@ -4,7 +4,7 @@
       <div class="field">
         <h2 class="title is-1">Sign Up</h2>
 
-        <div class="columns is-mobile">
+        <div class="columns is-desktop">
           <div class="column is-narrow">
             <label class="label">Type of Sport</label>
             <div class="select">
@@ -40,15 +40,26 @@
             </div>
           </div>
         </div>
+
+        <div class="columns">
+          <div class="column">
+            <label class="label">Team</label>
+            <UserCard />
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import UserCard from '~/components/UserCard'
 import Sport from '~/modules/sport'
 
 export default {
+  components: {
+    UserCard
+  },
   data() {
     return {
       data: {
