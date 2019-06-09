@@ -73,7 +73,6 @@ export default {
       if (sid.length === 13) {
         const response = await ApiService.fetchUser(sid)
         this.user.loaded = true
-        console.log(response)
         if (!response) {
           this.isRegister = true
         } else {

@@ -14,7 +14,6 @@ export default {
     return apiClient
       .get('/users?sid=' + sid)
       .then(response => {
-        console.log(response)
         return response.data[0]
       })
       .catch(error => {
