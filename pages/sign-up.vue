@@ -4,42 +4,31 @@
       <div class="field">
         <h2 class="title is-1">Sign Up</h2>
 
-        <div class="columns is-desktop">
-          <div class="column is-narrow">
-            <label class="label">Type of Sport</label>
-            <div class="select">
-              <select v-model="data.sport">
-                <option v-for="sport in sports" :key="sport">
-                  {{ sport }}
-                </option>
-              </select>
-            </div>
-          </div>
+        <b-field grouped group-multiline>
+          <b-field label="Type of Sport">
+            <b-select v-model="data.sport">
+              <option v-for="sport in sports" :key="sport">
+                {{ sport }}
+              </option>
+            </b-select>
+          </b-field>
 
-          <div v-if="competitions != ''" class="column is-narrow">
-            <label class="label">Type of Competition</label>
-            <div class="select">
-              <select v-model="data.competition">
-                <option
-                  v-for="competition in competitions"
-                  :key="competition"
-                  >{{ competition }}</option
-                >
-              </select>
-            </div>
-          </div>
+          <b-field v-if="competitions != ''" label="Type of Competition">
+            <b-select v-model="data.competition">
+              <option v-for="competition in competitions" :key="competition">
+                {{ competition }}
+              </option>
+            </b-select>
+          </b-field>
 
-          <div v-if="teams" class="column">
-            <label class="label">Team</label>
-            <div class="select">
-              <select v-model="data.team">
-                <option v-for="n in teams" :key="n">{{
-                  String.fromCharCode(64 + n)
-                }}</option>
-              </select>
-            </div>
-          </div>
-        </div>
+          <b-field v-if="teams" label="Teams">
+            <b-select v-model="data.team">
+              <option v-for="n in teams" :key="n">
+                {{ String.fromCharCode(64 + n) }}
+              </option>
+            </b-select>
+          </b-field>
+        </b-field>
 
         <div class="columns">
           <div class="column">
