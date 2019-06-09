@@ -22,8 +22,9 @@
             ></b-input>
           </div>
           <b-select v-model="user.gender" placeholder="Gender">
-            <option>Male</option>
-            <option>Female</option>
+            <option v-for="gender in genders" :key="gender">
+              {{ gender | capitalize }}
+            </option>
           </b-select>
         </div>
       </div>
@@ -43,8 +44,10 @@
 
 <script>
 import ApiService from '~/services/ApiService'
+import Filter from '~/mixins/filter'
 
 export default {
+  mixins: [Filter],
   data() {
     return {
       user: {
@@ -55,7 +58,8 @@ export default {
         email: '',
         loaded: false
       },
-      isRegister: false
+      isRegister: false,
+      genders: ['male', 'female']
     }
   },
   computed: {
