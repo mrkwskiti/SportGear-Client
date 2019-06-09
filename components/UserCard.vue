@@ -1,26 +1,34 @@
 <template>
   <div :class="{ 'box hero is-light': isRegister }">
     <b-field :message="[!isRegister ? fullName : null]">
-      <b-input v-model="sid" expanded placeholder="SID"></b-input>
+      <b-input v-model="user.sid" expanded placeholder="SID"></b-input>
     </b-field>
 
     <section v-if="isRegister">
       <div class="field is-horizontal">
         <div class="field-body">
           <div class="field">
-            <b-input expanded placeholder="First Name"></b-input>
+            <b-input
+              v-model="user.firstName"
+              expanded
+              placeholder="First Name"
+            ></b-input>
           </div>
           <div class="field">
-            <b-input expanded placeholder="Last Name"></b-input>
+            <b-input
+              v-model="user.lastName"
+              expanded
+              placeholder="Last Name"
+            ></b-input>
           </div>
-          <b-select placeholder="Gender">
+          <b-select v-model="user.gender" placeholder="Gender">
             <option>Male</option>
             <option>Female</option>
           </b-select>
         </div>
       </div>
       <b-field>
-        <b-input placeholder="Email"></b-input>
+        <b-input v-model="user.email" placeholder="Email"></b-input>
       </b-field>
       <div class="field is-grouped is-grouped-right">
         <div class="control">
@@ -34,20 +42,50 @@
 </template>
 
 <script>
-// import ApiService from '~/services/ApiService'
+import ApiService from '~/services/ApiService'
 
 export default {
   data() {
     return {
-      sid: '',
-      firstName: 'Wasutan',
-      lastName: 'Kitijerapat',
+      user: {
+        sid: '',
+        firstName: '',
+        lastName: '',
+        gender: '',
+        email: '',
+        loaded: false
+      },
       isRegister: false
     }
   },
   computed: {
     fullName() {
-      return this.firstName + ' ' + this.lastName
+      return this.user.firstName + ' ' + this.user.lastName
+    }
+  },
+  watch: {
+    'user.sid': function(val) {
+      this.fetchUser(val)
+    }
+  },
+  methods: {
+    async fetchUser(sid) {
+      if (sid.length === 13) {
+        const response = await ApiService.fetchUser(sid)
+        this.user.loaded = true
+        console.log(response)
+        if (!response) {
+          this.isRegister = true
+        } else {
+          this.isRegister = false
+          this.user.firstName = response.firstName
+          this.user.lastName = response.lastName
+        }
+      } else {
+        this.user.loaded = false
+        this.user.firstName = ''
+        this.user.lastName = ''
+      }
     }
   }
 }
