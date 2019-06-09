@@ -5,15 +5,20 @@
     </b-field>
 
     <section v-if="isRegister">
-      <b-field grouped>
-        <b-input expanded placeholder="First Name"></b-input>
-        <b-input expanded placeholder="Last Name"></b-input>
-        <b-select v-if="isRegister" placeholder="Gender">
-          <option>Male</option>
-          <option>Female</option>
-        </b-select>
-      </b-field>
-
+      <div class="field is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <b-input expanded placeholder="First Name"></b-input>
+          </div>
+          <div class="field">
+            <b-input expanded placeholder="Last Name"></b-input>
+          </div>
+          <b-select placeholder="Gender">
+            <option>Male</option>
+            <option>Female</option>
+          </b-select>
+        </div>
+      </div>
       <b-field>
         <b-input placeholder="Email"></b-input>
       </b-field>
