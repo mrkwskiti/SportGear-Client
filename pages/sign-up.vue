@@ -74,6 +74,26 @@ export default {
         return 0
       }
     }
+  },
+  watch: {
+    'data.sport': function(val) {
+      this.data.competition = ''
+    },
+    'data.competition': function(val) {
+      this.data.team = ''
+    },
+    'data.team': function(val) {
+      if (val) this.fetch()
+    }
+  },
+  methods: {
+    fetch() {
+      this.$store.dispatch('sport/fetchSport', {
+        sport: this.data.sport,
+        competition: this.data.competition,
+        team: this.data.team
+      })
+    }
   }
 }
 </script>

@@ -19,5 +19,14 @@ export default {
       .catch(error => {
         throw error.message
       })
+  },
+  fetchUsers(sport, competition, team) {
+    return apiClient.get('/sports', {
+      params: {
+        sport,
+        competition,
+        team
+      }
+    })
   }
 }
