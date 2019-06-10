@@ -30,17 +30,33 @@
           </b-field>
         </b-field>
 
-        <div v-if="data.team != 0" class="columns">
-          <div class="column">
-            <label class="label">Team</label>
-            <UserCard
-              v-for="(user, index) in sport.users"
-              :key="index"
-              :sid="user.sid"
-              :first-name="user.firstName"
-              :last-name="user.lastName"
-            />
-            <UserCard v-if="eachTeam > sport.users.length" />
+        <div v-if="data.team != 0">
+          <div class="columns">
+            <div class="column">
+              <label class="label">Team</label>
+
+              <b-table :data="sport.users">
+                <template slot-scope="props">
+                  <b-table-column field="sid" label="SID" width="120" sortable>
+                    {{ props.row.sid }}
+                  </b-table-column>
+
+                  <b-table-column field="firstName" label="First Name" sortable>
+                    {{ props.row.firstName }}
+                  </b-table-column>
+
+                  <b-table-column field="lastName" label="Last Name" sortable>
+                    {{ props.row.lastName }}
+                  </b-table-column>
+                </template>
+              </b-table>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column">
+              <UserCard v-if="eachTeam > sport.users.length" />
+            </div>
           </div>
         </div>
       </div>
