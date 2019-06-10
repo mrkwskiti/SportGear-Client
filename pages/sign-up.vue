@@ -30,7 +30,7 @@
           </b-field>
         </b-field>
 
-        <div v-if="sport.users.length != 0" class="columns">
+        <div v-if="data.team != 0" class="columns">
           <div class="column">
             <label class="label">Team</label>
             <UserCard
@@ -40,6 +40,7 @@
               :first-name="user.firstName"
               :last-name="user.lastName"
             />
+            <UserCard v-if="eachTeam > sport.users.length" />
           </div>
         </div>
       </div>
@@ -78,6 +79,11 @@ export default {
     teams() {
       if (this.data.competition)
         return Sport.teams(this.data.sport, this.data.competition)
+      else return 0
+    },
+    eachTeam() {
+      if (this.data.competition)
+        return Sport.eachTeam(this.data.sport, this.data.competition)
       else return 0
     }
   },
