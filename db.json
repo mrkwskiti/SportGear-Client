@@ -16,5 +16,22 @@
       "university": "",
       "email": "test@mail.com"
     }
+  ],
+  "sports" : [
+    {
+      "sport": "badminton",
+      "competition": "singles men",
+      "team": "A",
+      "users": [
+        {
+          "id": 1,
+          "sid": "1234567890123",
+          "firstName": "mark",
+          "lastName": "kiti",
+          "university": "Chiang mai university",
+          "email": "mark@mail.co"
+        }
+      ]
+    }
   ]
 }
