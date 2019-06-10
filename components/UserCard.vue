@@ -82,8 +82,8 @@ export default {
     }
   },
   watch: {
+    user: {},
     'user.sid': function(val) {
-      console.log('Yay')
       this.fetchUser(val)
     }
   },
