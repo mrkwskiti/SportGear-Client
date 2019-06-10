@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'box hero is-light': isRegister }">
     <b-field :message="[!isRegister ? fullName : null]">
-      <b-input v-model="sid" expanded placeholder="SID">{{ sid }}</b-input>
+      <b-input v-model="user.sid" expanded placeholder="SID">{{ sid }}</b-input>
     </b-field>
 
     <section v-if="isRegister">
@@ -78,11 +78,12 @@ export default {
   },
   computed: {
     fullName() {
-      return this.firstName + ' ' + this.lastName
+      return this.user.firstName + ' ' + this.user.lastName
     }
   },
   watch: {
-    sid: function(val) {
+    'user.sid': function(val) {
+      console.log('Yay')
       this.fetchUser(val)
     }
   },
