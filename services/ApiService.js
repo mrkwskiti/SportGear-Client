@@ -28,5 +28,10 @@ export default {
         team
       }
     })
+  },
+  postUser(user) {
+    return apiClient.post('/users', user).then(res => {
+      return res.data
+    })
   }
 }

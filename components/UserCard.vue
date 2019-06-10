@@ -22,7 +22,7 @@
             ></b-input>
           </div>
           <b-select v-model="user.gender" placeholder="Gender">
-            <option v-for="gender in genders" :key="gender">
+            <option v-for="gender in genders" :key="gender" :value="gender">
               {{ gender | capitalize }}
             </option>
           </b-select>
@@ -33,9 +33,9 @@
       </b-field>
       <div class="field is-grouped is-grouped-right">
         <div class="control">
-          <a class="button is-primary is-right">
+          <button class="button is-primary is-right" @click="postUser">
             Submit new user
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -104,6 +104,13 @@ export default {
         this.user.firstName = ''
         this.user.lastName = ''
       }
+    },
+    postUser() {
+      ApiService.postUser(this.user).then(res => {
+        this.isRegister = false
+        this.user.firstName = res.firstName
+        this.user.lastName = res.lastName
+      })
     }
   }
 }
