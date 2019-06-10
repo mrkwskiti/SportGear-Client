@@ -3,7 +3,7 @@ import ApiService from '~/services/ApiService'
 export default {
   state() {
     return {
-      users: {}
+      users: []
     }
   },
   mutations: {
@@ -15,7 +15,7 @@ export default {
     fetchSport({ commit }, { sport, competition, team }) {
       return ApiService.fetchUsers(sport, competition, team).then(res => {
         console.log(res.data)
-        commit('SET_USERS', res.data)
+        commit('SET_USERS', res.data[0].users)
       })
     }
   }
