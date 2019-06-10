@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'box hero is-light': isRegister }">
     <b-field :message="[!isRegister ? fullName : null]">
-      <b-input v-model="user.sid" expanded placeholder="SID"></b-input>
+      <b-input v-model="sid" expanded placeholder="SID">{{ sid }}</b-input>
     </b-field>
 
     <section v-if="isRegister">
@@ -48,12 +48,26 @@ import Filter from '~/mixins/filter'
 
 export default {
   mixins: [Filter],
+  props: {
+    sid: {
+      type: String,
+      default: ''
+    },
+    firstName: {
+      type: String,
+      default: ''
+    },
+    lastName: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
       user: {
-        sid: '',
-        firstName: '',
-        lastName: '',
+        sid: this.sid,
+        firstName: this.firstName,
+        lastName: this.lastName,
         gender: '',
         email: '',
         loaded: false
@@ -64,11 +78,11 @@ export default {
   },
   computed: {
     fullName() {
-      return this.user.firstName + ' ' + this.user.lastName
+      return this.firstName + ' ' + this.lastName
     }
   },
   watch: {
-    'user.sid': function(val) {
+    sid: function(val) {
       this.fetchUser(val)
     }
   },

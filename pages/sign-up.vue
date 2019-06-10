@@ -30,10 +30,16 @@
           </b-field>
         </b-field>
 
-        <div class="columns">
+        <div v-if="sport.users.length != 0" class="columns">
           <div class="column">
             <label class="label">Team</label>
-            <UserCard />
+            <UserCard
+              v-for="(user, index) in sport.users"
+              :key="index"
+              :sid="user.sid"
+              :first-name="user.firstName"
+              :last-name="user.lastName"
+            />
           </div>
         </div>
       </div>
@@ -44,6 +50,7 @@
 <script>
 import UserCard from '~/components/UserCard'
 import Sport from '~/modules/sport'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   components: {
@@ -59,6 +66,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['sport']),
     sports() {
       return Sport.list()
     },
@@ -68,31 +76,35 @@ export default {
       } else return []
     },
     teams() {
-      try {
+      if (this.data.competition)
         return Sport.teams(this.data.sport, this.data.competition)
-      } catch {
-        return 0
-      }
+      else return 0
     }
   },
   watch: {
     'data.sport': function(val) {
       this.data.competition = ''
+      this.reset()
     },
     'data.competition': function(val) {
       this.data.team = ''
+      this.reset()
     },
     'data.team': function(val) {
       if (val) this.fetch()
     }
   },
   methods: {
+    ...mapActions('sport', ['fetchSport', 'resetUsers']),
     fetch() {
-      this.$store.dispatch('sport/fetchSport', {
+      this.fetchSport({
         sport: this.data.sport,
         competition: this.data.competition,
         team: this.data.team
       })
+    },
+    reset() {
+      this.resetUsers()
     }
   }
 }
