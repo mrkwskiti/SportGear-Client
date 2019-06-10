@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'box hero is-light': isRegister }">
+  <div>
     <b-field :message="[!isRegister ? fullName : null]">
       <b-input v-model="user.sid" expanded placeholder="SID">{{ sid }}</b-input>
     </b-field>
