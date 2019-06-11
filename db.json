@@ -77,6 +77,7 @@
   ],
   "sports": [
     {
+      "id": 1,
       "sport": "badminton",
       "competition": "singles men",
       "team": "A",
@@ -92,6 +93,7 @@
       ]
     },
     {
+      "id": 2,
       "sport": "basketball",
       "competition": "men",
       "team": "A",
@@ -111,6 +113,15 @@
           "lastName": "Test",
           "university": "",
           "email": "test@mail.com"
+        },
+        {
+          "sid": "1234567890124",
+          "firstName": "wasu",
+          "lastName": "wasu",
+          "gender": "male",
+          "email": "m@a",
+          "loaded": true,
+          "id": 3
         }
       ]
     }
