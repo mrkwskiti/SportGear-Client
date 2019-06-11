@@ -1,7 +1,22 @@
 <template>
   <div>
-    <b-field :message="[!isRegister ? fullName : null]">
-      <b-input v-model="user.sid" expanded placeholder="SID">{{ sid }}</b-input>
+    <b-field
+      class="field is-expanded"
+      :message="[!isRegister ? fullName : null]"
+    >
+      <div class="field has-addons">
+        <b-input v-model="user.sid" expanded placeholder="SID"></b-input>
+        <p class="control">
+          <a
+            v-if="!isRegister"
+            class="button is-primary"
+            :disabled="isFetch"
+            @click="add"
+          >
+            Add user
+          </a>
+        </p>
+      </div>
     </b-field>
 
     <section v-if="isRegister">
@@ -45,6 +60,7 @@
 <script>
 import ApiService from '~/services/ApiService'
 import Filter from '~/mixins/filter'
+import { mapActions } from 'vuex'
 
 export default {
   mixins: [Filter],
@@ -69,9 +85,9 @@ export default {
         firstName: this.firstName,
         lastName: this.lastName,
         gender: '',
-        email: '',
-        loaded: false
+        email: ''
       },
+      loaded: false,
       isRegister: false,
       genders: ['male', 'female']
     }
@@ -79,6 +95,9 @@ export default {
   computed: {
     fullName() {
       return this.user.firstName + ' ' + this.user.lastName
+    },
+    isFetch() {
+      return !this.loaded || this.isRegister
     }
   },
   watch: {
@@ -88,10 +107,24 @@ export default {
     }
   },
   methods: {
+    ...mapActions('sport', ['addUser']),
+    add() {
+      this.addUser({
+        sid: this.user.sid,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName
+      })
+      this.user.sid = ''
+      this.user.firstName = ''
+      this.user.lastName = ''
+      this.user.gender = ''
+      this.user.email = ''
+      this.load = false
+    },
     async fetchUser(sid) {
       if (sid.length === 13) {
         const response = await ApiService.fetchUser(sid)
-        this.user.loaded = true
+        this.loaded = true
         if (!response) {
           this.isRegister = true
         } else {
@@ -100,7 +133,7 @@ export default {
           this.user.lastName = response.lastName
         }
       } else {
-        this.user.loaded = false
+        this.loaded = false
         this.user.firstName = ''
         this.user.lastName = ''
       }
