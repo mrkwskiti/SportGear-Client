@@ -36,6 +36,16 @@ export default {
     },
     patchUsers({ commit, state }) {
       ApiService.patchUsers({ id: state.id, users: state.users })
+    },
+    postUsers({ commit, state }, { sport, competition, team }) {
+      // TODO: post at api
+      ApiService.postUsers({
+        id: state.id,
+        users: state.users,
+        sport,
+        competition,
+        team
+      })
     }
   }
 }

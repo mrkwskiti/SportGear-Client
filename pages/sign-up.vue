@@ -72,7 +72,7 @@
                 <b-button
                   :disabled="!sport.edited"
                   class="is-primary is-right"
-                  @click="patch"
+                  @click="push"
                 >
                   Commit team
                 </b-button>
@@ -138,7 +138,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('sport', ['fetchSport', 'resetUsers', 'patchUsers']),
+    ...mapActions('sport', [
+      'fetchSport',
+      'resetUsers',
+      'patchUsers',
+      'postUsers'
+    ]),
     fetch() {
       this.fetchSport({
         sport: this.data.sport,
@@ -149,8 +154,13 @@ export default {
     reset() {
       this.resetUsers()
     },
-    patch() {
-      if (this.sport.edited) this.patchUsers()
+    push() {
+      if (this.sport.edited) {
+        // post
+        if (this.sport.id === 0) this.postUsers(this.data)
+        // patch
+        else this.patchUsers()
+      }
     }
   }
 }
