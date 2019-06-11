@@ -10,7 +10,7 @@
           <a
             v-if="!isRegister"
             class="button is-primary"
-            :disabled="isFetch"
+            :disabled="!isFetched"
             @click="add"
           >
             Add user
@@ -96,8 +96,8 @@ export default {
     fullName() {
       return this.user.firstName + ' ' + this.user.lastName
     },
-    isFetch() {
-      return !this.loaded || this.isRegister
+    isFetched() {
+      return this.loaded && !this.isRegister
     }
   },
   watch: {
@@ -109,17 +109,20 @@ export default {
   methods: {
     ...mapActions('sport', ['addUser']),
     add() {
-      this.addUser({
-        sid: this.user.sid,
-        firstName: this.user.firstName,
-        lastName: this.user.lastName
-      })
-      this.user.sid = ''
-      this.user.firstName = ''
-      this.user.lastName = ''
-      this.user.gender = ''
-      this.user.email = ''
-      this.load = false
+      if (this.loaded && !this.isRegister) {
+        this.addUser({
+          sid: this.user.sid,
+          firstName: this.user.firstName,
+          lastName: this.user.lastName
+        })
+        // TODO: create check data has posted
+        this.user.sid = ''
+        this.user.firstName = ''
+        this.user.lastName = ''
+        this.user.gender = ''
+        this.user.email = ''
+        this.load = false
+      }
     },
     async fetchUser(sid) {
       if (sid.length === 13) {
