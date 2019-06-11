@@ -33,5 +33,15 @@ export default {
     return apiClient.post('/users', user).then(res => {
       return res.data
     })
+  },
+  // post users each team
+  postUsers(id, users) {
+    return apiClient.post('/sports', { id, users }).then(() => {
+      // TODO: fix post up in database
+      console.log('posted')
+    })
+  },
+  patchUsers({ id, users }) {
+    return apiClient.patch('/sports/' + id, { users: users })
   }
 }

@@ -4,31 +4,38 @@
       <div class="field">
         <h2 class="title is-1">Sign Up</h2>
 
-        <b-field grouped group-multiline>
-          <b-field label="Type of Sport">
-            <b-select v-model="data.sport">
-              <option v-for="sport in sports" :key="sport">
-                {{ sport }}
-              </option>
-            </b-select>
-          </b-field>
+        <div class="columns">
+          <div class="column">
+            <b-field grouped group-multiline>
+              <b-field label="Type of Sport">
+                <b-select v-model="data.sport">
+                  <option v-for="sport in sports" :key="sport">
+                    {{ sport }}
+                  </option>
+                </b-select>
+              </b-field>
 
-          <b-field v-if="competitions != ''" label="Type of Competition">
-            <b-select v-model="data.competition">
-              <option v-for="competition in competitions" :key="competition">
-                {{ competition }}
-              </option>
-            </b-select>
-          </b-field>
+              <b-field v-if="competitions != ''" label="Type of Competition">
+                <b-select v-model="data.competition">
+                  <option
+                    v-for="competition in competitions"
+                    :key="competition"
+                  >
+                    {{ competition }}
+                  </option>
+                </b-select>
+              </b-field>
 
-          <b-field v-if="teams" label="Teams">
-            <b-select v-model="data.team">
-              <option v-for="n in teams" :key="n">
-                {{ String.fromCharCode(64 + n) }}
-              </option>
-            </b-select>
-          </b-field>
-        </b-field>
+              <b-field v-if="teams" label="Teams">
+                <b-select v-model="data.team">
+                  <option v-for="n in teams" :key="n">
+                    {{ String.fromCharCode(64 + n) }}
+                  </option>
+                </b-select>
+              </b-field>
+            </b-field>
+          </div>
+        </div>
 
         <div v-if="data.team != 0">
           <div class="columns">
@@ -56,6 +63,20 @@
           <div class="columns">
             <div class="column">
               <UserCard v-if="eachTeam > sport.users.length" />
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column">
+              <b-field grouped position="is-right">
+                <b-button
+                  :disabled="!sport.edited"
+                  class="is-primary is-right"
+                  @click="patch"
+                >
+                  Commit team
+                </b-button>
+              </b-field>
             </div>
           </div>
         </div>
@@ -117,7 +138,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('sport', ['fetchSport', 'resetUsers']),
+    ...mapActions('sport', ['fetchSport', 'resetUsers', 'patchUsers']),
     fetch() {
       this.fetchSport({
         sport: this.data.sport,
@@ -127,6 +148,9 @@ export default {
     },
     reset() {
       this.resetUsers()
+    },
+    patch() {
+      if (this.sport.edited) this.patchUsers()
     }
   }
 }
