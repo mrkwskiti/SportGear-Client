@@ -64,26 +64,13 @@ import { mapActions } from 'vuex'
 
 export default {
   mixins: [Filter],
-  props: {
-    sid: {
-      type: String,
-      default: ''
-    },
-    firstName: {
-      type: String,
-      default: ''
-    },
-    lastName: {
-      type: String,
-      default: ''
-    }
-  },
   data() {
     return {
       user: {
-        sid: this.sid,
-        firstName: this.firstName,
-        lastName: this.lastName,
+        id: null,
+        sid: '',
+        firstName: '',
+        lastName: '',
         gender: '',
         email: ''
       },
@@ -111,11 +98,13 @@ export default {
     add() {
       if (this.loaded && !this.isRegister) {
         this.addUser({
+          id: this.user.id,
           sid: this.user.sid,
           firstName: this.user.firstName,
           lastName: this.user.lastName
         })
         // TODO: create check data has posted
+        this.user.id = null
         this.user.sid = ''
         this.user.firstName = ''
         this.user.lastName = ''
@@ -129,14 +118,18 @@ export default {
         const response = await ApiService.fetchUser(sid)
         this.loaded = true
         if (!response) {
+          // no user in database
           this.isRegister = true
         } else {
           this.isRegister = false
+          // replace on local
+          this.user.id = response.id
           this.user.firstName = response.firstName
           this.user.lastName = response.lastName
         }
       } else {
         this.loaded = false
+        this.user.id = null
         this.user.firstName = ''
         this.user.lastName = ''
       }
@@ -144,6 +137,7 @@ export default {
     postUser() {
       ApiService.postUser(this.user).then(res => {
         this.isRegister = false
+        this.user.id = res.id
         this.user.firstName = res.firstName
         this.user.lastName = res.lastName
       })
