@@ -55,6 +55,16 @@
                   <b-table-column field="lastName" label="Last Name" sortable>
                     {{ props.row.lastName }}
                   </b-table-column>
+
+                  <b-table-column>
+                    <b-button
+                      type="is-danger"
+                      size="is-small"
+                      style="border-radius: 9999px;"
+                    >
+                      <b-icon pack="fas" icon="times" size="is-small"></b-icon>
+                    </b-button>
+                  </b-table-column>
                 </template>
               </b-table>
             </div>
