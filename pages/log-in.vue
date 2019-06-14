@@ -1,29 +1,36 @@
 <template>
-  <div class="container grid">
-    <h2 class="title">Log in</h2>
-    <div class="columns">
-      <div class="column">
-        <b-input v-model="data.user" placeholder="User name"></b-input>
+  <div class="container grid-login">
+    <section id="login" class="contanier notification">
+      <div class="columns">
+        <div class="column has-text-centered">
+          <p class="title">Log in</p>
+        </div>
       </div>
-    </div>
+      <div class="columns">
+        <div class="column">
+          <section>
+            <b-field>
+              <b-input v-model="data.user" placeholder="User name"></b-input>
+            </b-field>
+            <b-field>
+              <b-input
+                v-model="data.password"
+                type="password"
+                placeholder="Password"
+              ></b-input>
+            </b-field>
+          </section>
+        </div>
+      </div>
 
-    <div class="columns">
-      <div class="column">
-        <b-input
-          v-model="data.password"
-          type="password"
-          placeholder="Password"
-        ></b-input>
+      <div class="columns">
+        <div class="column">
+          <b-button class="is-primary is-fullwidth" @click="login">
+            Login
+          </b-button>
+        </div>
       </div>
-    </div>
-
-    <div class="columns">
-      <div class="column">
-        <b-field grouped position="is-centered">
-          <b-button class="is-primary" @click="login">Login</b-button>
-        </b-field>
-      </div>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -52,17 +59,24 @@ export default {
 
 <style>
 h2 {
-  padding: 60px 0 0 0;
-}
-.grid {
-  display: grid;
-  grid-template-columns: [xl-start] 1fr 1.5rem [md-start] minmax(0, 259px) [md-end] 1.5rem 1fr [xl-end];
+  padding: 20px 0 20px 0;
 }
 
-.grid * {
+#login {
+  margin-top: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.grid-login {
+  display: grid;
+  grid-template-columns: [xl-start] 1fr 1.5rem [md-start] minmax(0, 300px) [md-end] 1.5rem 1fr [xl-end];
+}
+
+.grid-login * {
   grid-column: md;
 }
-.grid-xl {
+.grid-login-xl {
   grid-column: xl;
 }
 </style>
