@@ -20,11 +20,34 @@ export default {
     return apiClient
       .get('/users?sid=' + sid)
       .then(response => {
-        console.log(response)
         return response.data[0]
       })
       .catch(error => {
         throw error.message
       })
+  },
+  fetchUsers(sport, competition, team) {
+    return apiClient.get('/sports', {
+      params: {
+        sport,
+        competition,
+        team
+      }
+    })
+  },
+  postUser(user) {
+    return apiClient.post('/users', user).then(res => {
+      return res.data
+    })
+  },
+  // post users each team
+  postUsers(data) {
+    return apiClient.post('/sports', data).then(() => {
+      // TODO: fix post up in database
+      console.log('posted')
+    })
+  },
+  patchUsers({ id, users }) {
+    return apiClient.patch('/sports/' + id, { users: users })
   }
 }

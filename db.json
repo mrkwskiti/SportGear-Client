@@ -7,7 +7,7 @@
       "password": "1234"
     }
   ],
-  "users" : [
+  "users": [
     {
       "id": 1,
       "sid": "1234567890123",
@@ -23,6 +23,115 @@
       "lastName": "Test",
       "university": "",
       "email": "test@mail.com"
+    },
+    {
+      "sid": "1234567890124",
+      "firstName": "wasu",
+      "lastName": "wasu",
+      "gender": "male",
+      "email": "m@a",
+      "loaded": true,
+      "id": 3
+    },
+    {
+      "sid": "1234567890125",
+      "firstName": "pop",
+      "lastName": "popy",
+      "gender": "female",
+      "email": "p@m",
+      "loaded": true,
+      "id": 4
+    },
+    {
+      "sid": "123456666666",
+      "firstName": "nunu",
+      "lastName": "nunu",
+      "gender": "",
+      "email": "nunu@nunu",
+      "id": 5
+    },
+    {
+      "sid": "1234566666666",
+      "firstName": "nunu",
+      "lastName": "nunu",
+      "gender": "",
+      "email": "nunu@nunu.com",
+      "id": 6
+    },
+    {
+      "sid": "1234567890098",
+      "firstName": "nunu",
+      "lastName": "nunu",
+      "gender": "",
+      "email": "nunu",
+      "id": 7
+    },
+    {
+      "sid": "1234567890987",
+      "firstName": "nunu",
+      "lastName": "nunu",
+      "gender": "",
+      "email": "nunu",
+      "id": 8
+    },
+    {
+      "sid": "1234567890091",
+      "firstName": "dudu",
+      "lastName": "dudu",
+      "gender": "male",
+      "email": "dudu",
+      "id": 9
+    }
+  ],
+  "sports": [
+    {
+      "id": 1,
+      "sport": "badminton",
+      "competition": "singles men",
+      "team": "A",
+      "users": [
+        {
+          "id": 1,
+          "sid": "1234567890123",
+          "firstName": "mark",
+          "lastName": "kiti",
+          "university": "Chiang mai university",
+          "email": "mark@mail.co"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "sport": "basketball",
+      "competition": "men",
+      "team": "A",
+      "users": [
+        {
+          "id": 1,
+          "sid": "1234567890123",
+          "firstName": "mark",
+          "lastName": "kiti",
+          "university": "Chiang mai university",
+          "email": "mark@mail.co"
+        },
+        {
+          "id": 2,
+          "sid": "0123456789012",
+          "firstName": "Test",
+          "lastName": "Test",
+          "university": "",
+          "email": "test@mail.com"
+        },
+        {
+          "sid": "1234567890124",
+          "firstName": "wasu",
+          "lastName": "wasu",
+          "gender": "male",
+          "email": "m@a",
+          "loaded": true,
+          "id": 3
+        }
+      ]
     }
   ]
 }
