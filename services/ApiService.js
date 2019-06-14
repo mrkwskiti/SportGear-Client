@@ -10,11 +10,10 @@ const apiClient = axios.create({
 })
 
 export default {
-  login(username, password) {
-    // TODO: real server /user/login
-    return apiClient.post('/login', { username, password }).then(res => {
-      console.log(res.data.id)
-      return res.data
+  loginUniver(username, password) {
+    // TODO: this here must to config in real server
+    return apiClient.get('/univers', { username, password }).then(res => {
+      return res.data[0]
     })
   },
   fetchUser(sid) {

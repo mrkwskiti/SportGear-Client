@@ -3,14 +3,14 @@
     <h2 class="title">Log in</h2>
     <div class="columns">
       <div class="column">
-        <b-input v-model="user" placeholder="User name"></b-input>
+        <b-input v-model="data.user" placeholder="User name"></b-input>
       </div>
     </div>
 
     <div class="columns">
       <div class="column">
         <b-input
-          v-model="password"
+          v-model="data.password"
           type="password"
           placeholder="Password"
         ></b-input>
@@ -20,7 +20,7 @@
     <div class="columns">
       <div class="column">
         <b-field grouped position="is-centered">
-          <b-button class="is-primary">Login</b-button>
+          <b-button class="is-primary" @click="login">Login</b-button>
         </b-field>
       </div>
     </div>
@@ -28,11 +28,23 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data() {
     return {
-      user: '',
-      password: ''
+      data: {
+        user: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    ...mapActions('login', ['loginUniver']),
+    login() {
+      this.loginUniver(this.data).then(() => {
+        this.$router.push({ name: 'sign-up' })
+      })
     }
   }
 }
