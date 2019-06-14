@@ -61,6 +61,7 @@
                       type="is-danger"
                       size="is-small"
                       style="border-radius: 9999px;"
+                      @click="remove(props.row.id)"
                     >
                       <b-icon pack="fas" icon="times" size="is-small"></b-icon>
                     </b-button>
@@ -152,7 +153,8 @@ export default {
       'fetchSport',
       'resetUsers',
       'patchUsers',
-      'postUsers'
+      'postUsers',
+      'removeUser'
     ]),
     fetch() {
       this.fetchSport({
@@ -171,6 +173,9 @@ export default {
         // patch
         else this.patchUsers()
       }
+    },
+    remove(id) {
+      this.removeUser(id)
     }
   }
 }

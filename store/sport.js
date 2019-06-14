@@ -16,6 +16,11 @@ export default {
     SET_USERS(state, data) {
       state.id = data.id
       state.users = data.users
+    },
+    REMOVE_USER(state, id) {
+      const removeIndex = state.users.map(user => user.id).indexOf(id)
+      state.users.splice(removeIndex, 1)
+      state.edited = true
     }
   },
   actions: {
@@ -46,6 +51,9 @@ export default {
         competition,
         team
       })
+    },
+    removeUser({ commit }, id) {
+      commit('REMOVE_USER', id)
     }
   }
 }
