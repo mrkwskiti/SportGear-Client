@@ -1,4 +1,12 @@
 {
+  "univers": [
+    {
+      "id": 0,
+      "university": "cmu",
+      "username": "cmu",
+      "password": "1234"
+    }
+  ],
   "users" : [
     {
       "id": 1,
