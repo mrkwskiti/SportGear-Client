@@ -217,11 +217,22 @@ export default {
       return String.fromCharCode(64 + i)
     },
     fetch() {
+      const loadingComponent = this.$loading.open()
       this.fetchSport({
         sport: this.data.sport,
         competition: this.data.competition,
         team: this.data.team
       })
+        .then(() => {
+          console.log('fetch')
+        })
+        .catch(err => {
+          // TODO: create err component
+          console.log(err.message)
+        })
+        .finally(() => {
+          loadingComponent.close()
+        })
     },
     reset() {
       this.resetUsers()
