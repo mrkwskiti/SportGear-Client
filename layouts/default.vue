@@ -1,12 +1,6 @@
 <template>
   <div>
-    <nav
-      class="navbar header has-shadow is-primary"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand"></div>
-    </nav>
+    <nav-bar />
 
     <section class="main-content columns">
       <!-- <aside class="column is-2 section">
@@ -28,7 +22,12 @@
 </template>
 
 <script>
+import NavBar from '~/components/NavBar.vue'
+
 export default {
+  components: {
+    NavBar
+  },
   data() {
     return {
       items: [
