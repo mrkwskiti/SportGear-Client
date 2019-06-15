@@ -16,7 +16,8 @@
 
                 <b-dropdown v-model="data.sport" hoverable aria-role="list">
                   <button slot="trigger" class="button">
-                    <span>choose sport</span>
+                    <span v-if="data.sport == ''">choose sport</span>
+                    <span v-else>{{ data.sport }}</span>
                     <b-icon
                       pack="fas"
                       icon="chevron-down"
@@ -36,23 +37,79 @@
                 </b-dropdown>
               </b-field>
 
-              <b-field v-if="competitions != ''" label="Type of Competition">
-                <b-select v-model="data.competition">
+              <b-field label="Type of Competition">
+                <!-- <b-select v-model="data.competition">
                   <option
                     v-for="competition in competitions"
                     :key="competition"
                   >
                     {{ competition }}
                   </option>
-                </b-select>
+                </b-select> -->
+
+                <b-dropdown
+                  v-model="data.competition"
+                  :disabled="competitions == ''"
+                  hoverable
+                  aria-role="list"
+                >
+                  <button slot="trigger" class="button">
+                    <span v-if="data.competition == ''"
+                      >choose competition</span
+                    >
+                    <span v-else>{{ data.competition }}</span>
+                    <b-icon
+                      pack="fas"
+                      icon="chevron-down"
+                      size="is-small"
+                      class="has-text-primary"
+                    ></b-icon>
+                  </button>
+
+                  <b-dropdown-item
+                    v-for="competition in competitions"
+                    :key="competition"
+                    :value="competition"
+                    aria-role="listitem"
+                  >
+                    {{ competition }}
+                  </b-dropdown-item>
+                </b-dropdown>
               </b-field>
 
-              <b-field v-if="teams" label="Teams">
-                <b-select v-model="data.team">
+              <b-field label="Teams">
+                <!-- <b-select v-model="data.team">
                   <option v-for="n in teams" :key="n">
                     {{ String.fromCharCode(64 + n) }}
                   </option>
-                </b-select>
+                </b-select> -->
+
+                <b-dropdown
+                  v-model="data.team"
+                  :disabled="!teams"
+                  hoverable
+                  aria-role="list"
+                >
+                  <button slot="trigger" class="button">
+                    <span v-if="data.team == ''">choose team</span>
+                    <span v-else>{{ data.team }}</span>
+                    <b-icon
+                      pack="fas"
+                      icon="chevron-down"
+                      size="is-small"
+                      class="has-text-primary"
+                    ></b-icon>
+                  </button>
+
+                  <b-dropdown-item
+                    v-for="n in teams"
+                    :key="n"
+                    :value="convertIntToString(n)"
+                    aria-role="listitem"
+                  >
+                    {{ convertIntToString(n) }}
+                  </b-dropdown-item>
+                </b-dropdown>
               </b-field>
             </b-field>
           </div>
@@ -177,6 +234,9 @@ export default {
       'postUsers',
       'removeUser'
     ]),
+    convertIntToString(i) {
+      return String.fromCharCode(64 + i)
+    },
     fetch() {
       this.fetchSport({
         sport: this.data.sport,
