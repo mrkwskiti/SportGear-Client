@@ -60,7 +60,9 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <b-icon id="univer-icon" pack="fas" icon="university"></b-icon>
-            <p>Chiang mai University</p>
+            <span>
+              Chiang mai University
+            </span>
           </div>
         </div>
       </div>
