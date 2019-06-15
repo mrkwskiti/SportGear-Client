@@ -10,7 +10,11 @@
           <p class="subtitle is-3 has-text-white">Sport Gear</p>
         </a>
 
-        <a
+        <div id="univer" class="navbar-item is-hidden-desktop">
+          <user-label></user-label>
+        </div>
+
+        <!-- <a
           role="button"
           class="navbar-burger burger"
           aria-label="menu"
@@ -20,7 +24,7 @@
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-        </a>
+        </a> -->
       </div>
 
       <div id="navbarBasicExample" class="navbar-menu">
@@ -58,11 +62,8 @@
         </div> -->
 
         <div class="navbar-end">
-          <div class="navbar-item">
-            <b-icon id="univer-icon" pack="fas" icon="university"></b-icon>
-            <span>
-              Chiang mai University
-            </span>
+          <div class="navbar-item is-hidden-touch">
+            <user-label></user-label>
           </div>
         </div>
       </div>
@@ -70,12 +71,20 @@
   </div>
 </template>
 
+<script>
+import UserLabel from '~/components/UserLabel'
+export default {
+  components: {
+    UserLabel
+  }
+}
+</script>
+
 <style>
 nav {
   padding: 20px;
 }
-
-#univer-icon {
-  padding: 17px 20px 20px 20px;
+#univer {
+  margin-left: auto;
 }
 </style>
