@@ -8,11 +8,32 @@
           <div class="column">
             <b-field grouped group-multiline>
               <b-field label="Type of Sport">
-                <b-select v-model="data.sport">
+                <!-- <b-select v-model="data.sport">
                   <option v-for="sport in sports" :key="sport">
                     {{ sport }}
                   </option>
-                </b-select>
+                </b-select> -->
+
+                <b-dropdown v-model="data.sport" hoverable aria-role="list">
+                  <button slot="trigger" class="button">
+                    <span>choose sport</span>
+                    <b-icon
+                      pack="fas"
+                      icon="chevron-down"
+                      size="is-small"
+                      class="has-text-primary"
+                    ></b-icon>
+                  </button>
+
+                  <b-dropdown-item
+                    v-for="sport in sports"
+                    :key="sport"
+                    :value="sport"
+                    aria-role="listitem"
+                  >
+                    {{ sport }}
+                  </b-dropdown-item>
+                </b-dropdown>
               </b-field>
 
               <b-field v-if="competitions != ''" label="Type of Competition">
