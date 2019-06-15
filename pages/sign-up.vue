@@ -8,12 +8,6 @@
           <div class="column">
             <b-field grouped group-multiline>
               <b-field label="Type of Sport">
-                <!-- <b-select v-model="data.sport">
-                  <option v-for="sport in sports" :key="sport">
-                    {{ sport }}
-                  </option>
-                </b-select> -->
-
                 <b-dropdown v-model="data.sport" hoverable aria-role="list">
                   <button slot="trigger" class="button">
                     <span v-if="data.sport == ''">choose sport</span>
@@ -38,15 +32,6 @@
               </b-field>
 
               <b-field label="Type of Competition">
-                <!-- <b-select v-model="data.competition">
-                  <option
-                    v-for="competition in competitions"
-                    :key="competition"
-                  >
-                    {{ competition }}
-                  </option>
-                </b-select> -->
-
                 <b-dropdown
                   v-model="data.competition"
                   :disabled="competitions == ''"
@@ -78,12 +63,6 @@
               </b-field>
 
               <b-field label="Teams">
-                <!-- <b-select v-model="data.team">
-                  <option v-for="n in teams" :key="n">
-                    {{ String.fromCharCode(64 + n) }}
-                  </option>
-                </b-select> -->
-
                 <b-dropdown
                   v-model="data.team"
                   :disabled="!teams"
