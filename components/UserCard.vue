@@ -4,13 +4,19 @@
       class="field is-expanded"
       :message="[!isRegister ? fullName : null]"
     >
-      <div class="field has-addons">
-        <b-input v-model="user.sid" expanded placeholder="SID"></b-input>
+      <div ref="name" class="field has-addons">
+        <b-input
+          v-model="user.sid"
+          expanded
+          placeholder="SID"
+          :disabled="isLoading"
+        ></b-input>
         <p class="control">
           <a
             v-if="!isRegister"
             class="button is-primary"
             :disabled="!isFetched"
+            :class="[isLoading ? 'is-loading' : null]"
             @click="add"
           >
             Add user
@@ -74,6 +80,7 @@ export default {
         gender: '',
         email: ''
       },
+      isLoading: false,
       loaded: false,
       isRegister: false,
       genders: ['male', 'female']
@@ -115,6 +122,7 @@ export default {
     },
     async fetchUser(sid) {
       if (sid.length === 13) {
+        this.isLoading = true
         const response = await ApiService.fetchUser(sid)
         this.loaded = true
         if (!response) {
@@ -133,6 +141,7 @@ export default {
         this.user.firstName = ''
         this.user.lastName = ''
       }
+      this.isLoading = false
     },
     postUser() {
       ApiService.postUser(this.user).then(res => {
