@@ -9,6 +9,7 @@
           v-model="user.sid"
           expanded
           placeholder="SID"
+          :loading="isLoading && isRegister"
           :disabled="isLoading"
         ></b-input>
         <p class="control">
@@ -33,6 +34,7 @@
               v-model="user.firstName"
               expanded
               placeholder="First Name"
+              :disabled="isLoading"
             ></b-input>
           </div>
           <div class="field">
@@ -40,17 +42,44 @@
               v-model="user.lastName"
               expanded
               placeholder="Last Name"
+              :disabled="isLoading"
             ></b-input>
           </div>
-          <b-select v-model="user.gender" placeholder="Gender">
+          <!-- <b-select v-model="user.gender" placeholder="Gender">
             <option v-for="gender in genders" :key="gender" :value="gender">
               {{ gender | capitalize }}
             </option>
-          </b-select>
+          </b-select> -->
+
+          <b-dropdown v-model="user.gender" hoverable aria-role="list">
+            <button slot="trigger" class="button">
+              <span v-if="user.gender === ''">gender</span>
+              <span v-else>{{ user.gender }}</span>
+              <b-icon
+                pack="fas"
+                icon="chevron-down"
+                size="is-small"
+                class="has-text-primary"
+              ></b-icon>
+            </button>
+
+            <b-dropdown-item
+              v-for="gender in genders"
+              :key="gender"
+              :value="gender"
+              aria-role="listitem"
+            >
+              {{ gender }}
+            </b-dropdown-item>
+          </b-dropdown>
         </div>
       </div>
       <b-field>
-        <b-input v-model="user.email" placeholder="Email"></b-input>
+        <b-input
+          v-model="user.email"
+          placeholder="Email"
+          :disabled="isLoading"
+        ></b-input>
       </b-field>
       <div class="field is-grouped is-grouped-right">
         <div class="control">
