@@ -7,7 +7,7 @@ export default {
     id: 0,
     users: [],
     edited: false,
-    sports: {}
+    sports: []
   },
   mutations: {
     ADD_USER(state, user) {
@@ -29,17 +29,19 @@ export default {
   },
   getters: {
     sportId: state => (sportName, typeName) => {
-      const sports = state.sport.fillter(
+      const sports = state.sports.filter(
         sport => sport.sport_name === sportName
       )
-      return sports.fillter(sport => sport.sport_type === typeName)
+      return sports.filter(sport => sport.sport_type === typeName)[0].id
     }
   },
   actions: {
     addUser({ commit }, user) {
       commit('ADD_USER', user)
     },
-    fetchSport({ commit }, { sport, competition, team }) {
+    fetchSport({ commit, getters }, { sport, competition, team }) {
+      // console.log(getters)
+      // getters.sportId(sport, competition)
       return ApiService.fetchUsers(sport, competition, team)
         .then(res => {
           commit('SET_USERS', res.data[0])
