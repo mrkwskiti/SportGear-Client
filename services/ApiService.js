@@ -37,9 +37,11 @@ export default {
     })
   },
   fetchUser(sid) {
+    insertToken()
     return apiClient
-      .get('/users?sid=' + sid)
+      .get(_api1 + '/users/info?sid=' + sid)
       .then(response => {
+        console.log(response)
         return response.data[0]
       })
       .catch(error => {
@@ -63,9 +65,20 @@ export default {
       })
   },
   postUser(user) {
-    return apiClient.post('/users', user).then(res => {
-      return res.data
-    })
+    insertToken()
+    return apiClient
+      .post(_api1 + '/users', {
+        sid: user.sid,
+        uni: user.uni,
+        fname: user.firstName,
+        lname: user.lastName,
+        email: user.email,
+        // TODO: find way to generate password
+        password: '1234'
+      })
+      .then(res => {
+        return res.data
+      })
   },
   // post users each team
   postUsers(data) {

@@ -95,7 +95,7 @@
 <script>
 import ApiService from '~/services/ApiService'
 import Filter from '~/mixins/filter'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   mixins: [Filter],
@@ -116,6 +116,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({ uni: 'login/uniLogged' }),
     fullName() {
       return this.user.firstName + ' ' + this.user.lastName
     },
@@ -161,8 +162,8 @@ export default {
           this.isRegister = false
           // replace on local
           this.user.id = response.id
-          this.user.firstName = response.firstName
-          this.user.lastName = response.lastName
+          this.user.firstName = response.fname
+          this.user.lastName = response.lname
         }
       } else {
         this.loaded = false
@@ -173,11 +174,11 @@ export default {
       this.isLoading = false
     },
     postUser() {
-      ApiService.postUser(this.user).then(res => {
+      ApiService.postUser({ ...this.user, uni: this.uni }).then(res => {
         this.isRegister = false
         this.user.id = res.id
-        this.user.firstName = res.firstName
-        this.user.lastName = res.lastName
+        this.user.firstName = res.fname
+        this.user.lastName = res.lname
       })
     }
   }
