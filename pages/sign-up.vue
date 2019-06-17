@@ -205,6 +205,10 @@ export default {
       if (val) this.fetch()
     }
   },
+  beforeCreate() {
+    console.log(this.$store)
+    this.$store.dispatch('sport/getListSport')
+  },
   methods: {
     ...mapActions('sport', [
       'fetchSport',

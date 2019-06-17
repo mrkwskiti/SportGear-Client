@@ -23,6 +23,15 @@ export default {
         return res.data
       })
   },
+  getListSport() {
+    const authToken = Cookies.get('auth')
+    if (authToken !== undefined)
+      apiClient.defaults.headers.common.Authorization = authToken
+    return apiClient.get(_api1 + '/sport/list/info').then(res => {
+      console.log(res)
+      return res.data
+    })
+  },
   fetchUser(sid) {
     return apiClient
       .get('/users?sid=' + sid)
