@@ -4,13 +4,17 @@
       class="field is-expanded"
       :message="[!isRegister ? fullName : null]"
     >
-      <div ref="name" class="field has-addons">
+      <div ref="name" class="field has-addons form-group--error">
         <b-input
           v-model="user.sid"
+          type="number"
+          min="13"
+          max="13"
           expanded
           placeholder="SID"
           :loading="isLoading && isRegister"
           :disabled="isLoading"
+          class="form-group--error"
         ></b-input>
         <p class="control">
           <a
@@ -32,6 +36,7 @@
           <div class="field">
             <b-input
               v-model="user.firstName"
+              minlength="1"
               expanded
               placeholder="First Name"
               :disabled="isLoading"
@@ -40,6 +45,7 @@
           <div class="field">
             <b-input
               v-model="user.lastName"
+              minlength="1"
               expanded
               placeholder="Last Name"
               :disabled="isLoading"
@@ -78,12 +84,17 @@
         <b-input
           v-model="user.email"
           placeholder="Email"
+          type="email"
           :disabled="isLoading"
         ></b-input>
       </b-field>
       <div class="field is-grouped is-grouped-right">
         <div class="control">
-          <button class="button is-primary is-right" @click="postUser">
+          <button
+            class="button is-primary is-right"
+            :disabled="isValid"
+            @click="postUser"
+          >
             Submit new user
           </button>
         </div>
@@ -96,6 +107,8 @@
 import ApiService from '~/services/ApiService'
 import Filter from '~/mixins/filter'
 import { mapActions } from 'vuex'
+
+import { required, maxLength, email } from 'vuelidate/lib/validators'
 
 export default {
   mixins: [Filter],
@@ -115,12 +128,36 @@ export default {
       genders: ['male', 'female']
     }
   },
+  validations: {
+    user: {
+      sid: {
+        required,
+        maxLength: maxLength(13)
+      },
+      firstName: {
+        required
+      },
+      lastName: {
+        required
+      },
+      gender: {
+        required
+      },
+      email: {
+        required,
+        email
+      }
+    }
+  },
   computed: {
     fullName() {
       return this.user.firstName + ' ' + this.user.lastName
     },
     isFetched() {
       return this.loaded && !this.isRegister
+    },
+    isValid() {
+      return this.$v.user.$invalid
     }
   },
   watch: {
@@ -142,6 +179,7 @@ export default {
         // TODO: create check data has posted
         this.user.id = null
         this.user.sid = ''
+        this.$v.user.sid.$touch()
         this.user.firstName = ''
         this.user.lastName = ''
         this.user.gender = ''
@@ -149,6 +187,7 @@ export default {
         this.load = false
       }
     },
+
     async fetchUser(sid) {
       if (sid.length === 13) {
         this.isLoading = true
@@ -173,12 +212,14 @@ export default {
       this.isLoading = false
     },
     postUser() {
-      ApiService.postUser(this.user).then(res => {
-        this.isRegister = false
-        this.user.id = res.id
-        this.user.firstName = res.firstName
-        this.user.lastName = res.lastName
-      })
+      if (!this.isValid) {
+        ApiService.postUser(this.user).then(res => {
+          this.isRegister = false
+          this.user.id = res.id
+          this.user.firstName = res.firstName
+          this.user.lastName = res.lastName
+        })
+      }
     }
   }
 }
