@@ -15,8 +15,7 @@ export default {
       state.edited = true
     },
     SET_USERS(state, data) {
-      state.id = data.id
-      state.users = data.users
+      state.users = data
     },
     REMOVE_USER(state, id) {
       const removeIndex = state.users.map(user => user.id).indexOf(id)
@@ -47,7 +46,9 @@ export default {
         teamId: getters.sportId(sport, competition)
       })
         .then(res => {
-          commit('SET_USERS', res.data)
+          // TODO; debug
+          console.log(res)
+          commit('SET_USERS', res)
         })
         .catch(() => {
           commit('SET_USERS', init)
