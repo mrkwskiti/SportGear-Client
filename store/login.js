@@ -11,6 +11,9 @@ export default {
   getters: {
     uniLogged: state => {
       return state.univer.uni
+    },
+    uniFullnameLogged: state => {
+      return state.univer.fullname
     }
   },
   mutations: {
