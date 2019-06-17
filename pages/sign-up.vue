@@ -156,7 +156,7 @@
 <script>
 import UserCard from '~/components/UserCard'
 import Sport from '~/modules/sport'
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -173,6 +173,7 @@ export default {
   },
   computed: {
     ...mapState(['sport']),
+    ...mapGetters({ uni: 'login/uniLogged' }),
     sports() {
       return Sport.list()
     },
@@ -206,7 +207,6 @@ export default {
     }
   },
   beforeCreate() {
-    console.log(this.$store)
     this.$store.dispatch('sport/getListSport')
   },
   methods: {
@@ -222,10 +222,12 @@ export default {
     },
     fetch() {
       const loadingComponent = this.$loading.open()
+      console.log(this.uni)
       this.fetchSport({
         sport: this.data.sport,
         competition: this.data.competition,
-        team: this.data.team
+        team: this.data.team,
+        uni: this.uni
       })
         .then(() => {
           console.log('fetch')

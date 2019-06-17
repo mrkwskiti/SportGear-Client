@@ -8,6 +8,11 @@ export default {
       university: ''
     }
   },
+  getters: {
+    uniLogged: state => {
+      return state.univer.uni
+    }
+  },
   mutations: {
     ADD_UNIVER(state, credentials) {
       state.univer = credentials

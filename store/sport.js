@@ -1,10 +1,10 @@
 import ApiService from '~/services/ApiService'
 
-const init = { id: 0, users: [] }
+const init = { id: null, users: [] }
 
 export default {
   state: {
-    id: 0,
+    id: null,
     users: [],
     edited: false,
     sports: []
@@ -39,12 +39,15 @@ export default {
     addUser({ commit }, user) {
       commit('ADD_USER', user)
     },
-    fetchSport({ commit, getters }, { sport, competition, team }) {
-      // console.log(getters)
-      // getters.sportId(sport, competition)
-      return ApiService.fetchUsers(sport, competition, team)
+    fetchSport({ commit, getters }, { sport, competition, team, uni }) {
+      console.log(uni)
+      return ApiService.fetchUsers({
+        uni,
+        team,
+        teamId: getters.sportId(sport, competition)
+      })
         .then(res => {
-          commit('SET_USERS', res.data[0])
+          commit('SET_USERS', res.data)
         })
         .catch(() => {
           commit('SET_USERS', init)

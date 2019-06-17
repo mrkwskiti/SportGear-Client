@@ -12,6 +12,12 @@ const apiClient = axios.create({
   }
 })
 
+const insertToken = () => {
+  const authToken = Cookies.get('auth')
+  if (authToken !== undefined)
+    apiClient.defaults.headers.common.Authorization = authToken
+}
+
 export default {
   loginUniver({ user, password }) {
     return apiClient
@@ -24,9 +30,7 @@ export default {
       })
   },
   getListSport() {
-    const authToken = Cookies.get('auth')
-    if (authToken !== undefined)
-      apiClient.defaults.headers.common.Authorization = authToken
+    insertToken()
     return apiClient.get(_api1 + '/sport/list/info').then(res => {
       console.log(res)
       return res.data
@@ -42,14 +46,21 @@ export default {
         throw error.message
       })
   },
-  fetchUsers(sport, competition, team) {
-    return apiClient.get('/sports', {
-      params: {
-        sport,
-        competition,
-        team
-      }
-    })
+  fetchUsers({ uni, teamId, team }) {
+    insertToken()
+    return apiClient
+      .get(_api1 + '/sport/list/teamBytype', {
+        params: {
+          uni,
+          type: teamId, // id 1001
+          team_id: team // which team A or B
+        }
+      })
+      .then(res => {
+        // TODO: debug
+        console.log(res)
+        return res.data
+      })
   },
   postUser(user) {
     return apiClient.post('/users', user).then(res => {
