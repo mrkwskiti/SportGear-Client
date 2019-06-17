@@ -15,7 +15,7 @@ export default {
   },
   actions: {
     loginUniver({ commit }, credentials) {
-      ApiService.loginUniver(credentials).then(res => {
+      return ApiService.loginUniver(credentials).then(res => {
         commit('ADD_UNIVER', res)
       })
     }

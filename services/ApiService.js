@@ -1,4 +1,7 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
+
+const _api1 = '/api/v1'
 
 const apiClient = axios.create({
   baseURL: `http://localhost:3000`,
@@ -10,11 +13,15 @@ const apiClient = axios.create({
 })
 
 export default {
-  loginUniver(username, password) {
-    // TODO: this here must to config in real server
-    return apiClient.get('/univers', { username, password }).then(res => {
-      return res.data[0]
-    })
+  loginUniver({ user, password }) {
+    return apiClient
+      .post(_api1 + '/university/login', { uni: user, pwd: password })
+      .then(res => {
+        console.log(res)
+        // TODO: make it secure
+        Cookies.set('auth', res.headers.authorization)
+        return res.data
+      })
   },
   fetchUser(sid) {
     return apiClient
