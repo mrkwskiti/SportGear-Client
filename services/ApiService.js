@@ -65,8 +65,20 @@ export default {
           team_id: id.data.id // which team A or B
         }
       })
-      console.log(users)
-      return { ...id.data, users: users.data }
+
+      // TODO: Refactoring it
+      const nUsers = []
+      for (let i = 0; i < users.data.length; i++) {
+        nUsers.push({
+          id: users.data[i].account_id,
+          firstName: users.data[i].fname,
+          lastName: users.data[i].lname,
+          sid: users.data[i].sid,
+          team_id: users.data[i].team_id
+        })
+      }
+      console.log(nUsers)
+      return { ...id.data, users: nUsers }
     }
   },
   postUser(user) {
@@ -86,13 +98,31 @@ export default {
       })
   },
   // post users each team
-  postUsers(data) {
-    return apiClient.post('/sports', data).then(() => {
-      // TODO: fix post up in database
-      console.log('posted')
-    })
+  postUsers({ teamId, sportId, users }) {
+    insertToken()
+    return apiClient
+      .post(_api1 + '/sport/list/addPlayer', {
+        team_id: teamId,
+        sport_id: sportId,
+        account_id: users
+      })
+      .then(() => {
+        // TODO: fix post up in database
+      })
   },
   patchUsers({ id, users }) {
     return apiClient.patch('/sports/' + id, { users: users })
+  },
+  postTeam({ team, sportId, uni }) {
+    insertToken()
+    return apiClient
+      .post(_api1 + '/sport/list/addTeam', {
+        team_name: team,
+        sport_id: sportId,
+        uni
+      })
+      .then(res => {
+        return res.data.id
+      })
   }
 }

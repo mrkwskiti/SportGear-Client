@@ -65,18 +65,24 @@ export default {
     patchUsers({ commit, state }) {
       ApiService.patchUsers({ id: state.id, users: state.users })
     },
-    postUsers({ commit, state }, { sport, competition, team }) {
-      // TODO: post at api
-      ApiService.postUsers({
-        id: state.id,
-        users: state.users,
-        sport,
-        competition,
-        team
-      })
-    },
     removeUser({ commit }, id) {
       commit('REMOVE_USER', id)
+    },
+    // Add new team
+    async postTeam(
+      { state, commit, getters },
+      { sport, competition, team, uni }
+    ) {
+      const id = await ApiService.postTeam({
+        team,
+        sportId: getters.sportId(sport, competition),
+        uni
+      })
+      await ApiService.postUsers({
+        teamId: id,
+        users: state.users.map(user => user.id),
+        sportId: getters.sportId(sport, competition)
+      })
     }
   }
 }
