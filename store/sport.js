@@ -15,7 +15,8 @@ export default {
       state.edited = true
     },
     SET_USERS(state, data) {
-      state.users = data
+      state.id = data.id
+      state.users = data.users
     },
     REMOVE_USER(state, id) {
       const removeIndex = state.users.map(user => user.id).indexOf(id)
@@ -39,7 +40,6 @@ export default {
       commit('ADD_USER', user)
     },
     fetchSport({ commit, getters }, { sport, competition, team, uni }) {
-      console.log(uni)
       return ApiService.fetchUsers({
         uni,
         team,

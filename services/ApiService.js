@@ -48,21 +48,25 @@ export default {
         throw error.message
       })
   },
-  fetchUsers({ uni, teamId, team }) {
+  async fetchUsers({ uni, teamId, team }) {
     insertToken()
-    return apiClient
-      .get(_api1 + '/sport/list/teamBytype', {
+    const id = await apiClient.get(_api1 + '/sport/id', {
+      params: {
+        team_name: team,
+        sport_id: teamId,
+        uni: uni
+      }
+    })
+    if (id.data !== null) {
+      const users = await apiClient.get(_api1 + '/sport/list/teamBytype', {
         params: {
           uni,
           type: teamId, // id 1001
           team_id: team // which team A or B
         }
       })
-      .then(res => {
-        // TODO: debug
-        console.log(res)
-        return res.data
-      })
+      return { ...id.data, users: users.data }
+    }
   },
   postUser(user) {
     insertToken()
