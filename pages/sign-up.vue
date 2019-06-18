@@ -215,7 +215,8 @@ export default {
       'resetUsers',
       'patchUsers',
       'postUsers',
-      'removeUser'
+      'removeUser',
+      'postTeam'
     ]),
     convertIntToString(i) {
       return String.fromCharCode(64 + i)
@@ -246,7 +247,11 @@ export default {
     push() {
       if (this.sport.edited) {
         // post
-        if (this.sport.id === 0) this.postUsers(this.data)
+        if (this.sport.id === null) {
+          this.postTeam({ ...this.data, uni: this.uni }).then(() => {
+            this.$router.push({ name: 'index' })
+          })
+        }
         // patch
         else this.patchUsers()
       }
