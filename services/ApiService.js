@@ -62,9 +62,10 @@ export default {
         params: {
           uni,
           type: teamId, // id 1001
-          team_id: team // which team A or B
+          team_id: id.data.id // which team A or B
         }
       })
+      console.log(users)
       return { ...id.data, users: users.data }
     }
   },

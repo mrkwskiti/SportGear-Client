@@ -106,11 +106,11 @@
                   </b-table-column>
 
                   <b-table-column field="firstName" label="First Name" sortable>
-                    {{ props.row.firstName }}
+                    {{ props.row.fname }}
                   </b-table-column>
 
                   <b-table-column field="lastName" label="Last Name" sortable>
-                    {{ props.row.lastName }}
+                    {{ props.row.lname }}
                   </b-table-column>
 
                   <b-table-column>
