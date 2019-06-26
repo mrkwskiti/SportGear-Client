@@ -33,6 +33,9 @@ export default {
         sport => sport.sport_name === sportName
       )
       return sports.filter(sport => sport.sport_type === typeName)[0].id
+    },
+    usersId: state => {
+      return state.users.map(user => user.id)
     }
   },
   actions: {
@@ -62,8 +65,12 @@ export default {
     resetUsers({ commit }) {
       commit('SET_USERS', init)
     },
-    patchUsers({ commit, state }) {
-      ApiService.patchUsers({ id: state.id, users: state.users })
+    patchUsers({ commit, state, getters }, { sport, competition }) {
+      return ApiService.patchUsers({
+        teamId: state.id,
+        users: getters.usersId,
+        sportId: getters.sportId(sport, competition)
+      })
     },
     removeUser({ commit }, id) {
       commit('REMOVE_USER', id)
@@ -80,7 +87,7 @@ export default {
       })
       await ApiService.postUsers({
         teamId: id,
-        users: state.users.map(user => user.id),
+        users: getters.usersId,
         sportId: getters.sportId(sport, competition)
       })
     }

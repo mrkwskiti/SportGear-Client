@@ -253,7 +253,10 @@ export default {
           })
         }
         // patch
-        else this.patchUsers()
+        else
+          this.patchUsers(this.data).then(() => {
+            this.$router.push({ name: 'index' })
+          })
       }
     },
     remove(id) {

@@ -110,8 +110,15 @@ export default {
         // TODO: fix post up in database
       })
   },
-  patchUsers({ id, users }) {
-    return apiClient.patch('/sports/' + id, { users: users })
+  patchUsers({ teamId, sportId, users }) {
+    insertToken()
+    console.log(teamId + ' ' + sportId)
+    console.log(users)
+    return apiClient.post(_api1 + '/sport/list/patchPlayer', {
+      team_id: teamId,
+      sport_id: sportId,
+      account_id: users
+    })
   },
   postTeam({ team, sportId, uni }) {
     insertToken()
