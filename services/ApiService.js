@@ -1,4 +1,7 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
+
+const _api1 = '/api/v1'
 
 const apiClient = axios.create({
   baseURL: `http://localhost:3000`,
@@ -9,45 +12,124 @@ const apiClient = axios.create({
   }
 })
 
+const insertToken = () => {
+  const authToken = Cookies.get('auth')
+  if (authToken !== undefined)
+    apiClient.defaults.headers.common.Authorization = authToken
+}
+
 export default {
-  loginUniver(username, password) {
-    // TODO: this here must to config in real server
-    return apiClient.get('/univers', { username, password }).then(res => {
-      return res.data[0]
+  loginUniver({ user, password }) {
+    return apiClient
+      .post(_api1 + '/university/login', { uni: user, pwd: password })
+      .then(res => {
+        console.log(res)
+        // TODO: make it secure
+        Cookies.set('auth', res.headers.authorization)
+        return res.data
+      })
+  },
+  getListSport() {
+    insertToken()
+    return apiClient.get(_api1 + '/sport/list/info').then(res => {
+      console.log(res)
+      return res.data
     })
   },
   fetchUser(sid) {
+    insertToken()
     return apiClient
-      .get('/users?sid=' + sid)
+      .get(_api1 + '/users/info?sid=' + sid)
       .then(response => {
+        console.log(response)
         return response.data[0]
       })
       .catch(error => {
         throw error.message
       })
   },
-  fetchUsers(sport, competition, team) {
-    return apiClient.get('/sports', {
+  async fetchUsers({ uni, teamId, team }) {
+    insertToken()
+    const id = await apiClient.get(_api1 + '/sport/id', {
       params: {
-        sport,
-        competition,
-        team
+        team_name: team,
+        sport_id: teamId,
+        uni: uni
       }
     })
+    if (id.data !== null) {
+      const users = await apiClient.get(_api1 + '/sport/list/teamBytype', {
+        params: {
+          uni,
+          type: teamId, // id 1001
+          team_id: id.data.id // which team A or B
+        }
+      })
+
+      // TODO: Refactoring it
+      const nUsers = []
+      for (let i = 0; i < users.data.length; i++) {
+        nUsers.push({
+          id: users.data[i].account_id,
+          firstName: users.data[i].fname,
+          lastName: users.data[i].lname,
+          sid: users.data[i].sid,
+          team_id: users.data[i].team_id
+        })
+      }
+      console.log(nUsers)
+      return { ...id.data, users: nUsers }
+    }
   },
   postUser(user) {
-    return apiClient.post('/users', user).then(res => {
-      return res.data
-    })
+    insertToken()
+    return apiClient
+      .post(_api1 + '/users', {
+        sid: user.sid,
+        uni: user.uni,
+        fname: user.firstName,
+        lname: user.lastName,
+        email: user.email,
+        // TODO: find way to generate password
+        password: '1234'
+      })
+      .then(res => {
+        return res.data
+      })
   },
   // post users each team
-  postUsers(data) {
-    return apiClient.post('/sports', data).then(() => {
-      // TODO: fix post up in database
-      console.log('posted')
+  postUsers({ teamId, sportId, users }) {
+    insertToken()
+    return apiClient
+      .post(_api1 + '/sport/list/addPlayer', {
+        team_id: teamId,
+        sport_id: sportId,
+        account_id: users
+      })
+      .then(() => {
+        // TODO: fix post up in database
+      })
+  },
+  patchUsers({ teamId, sportId, users }) {
+    insertToken()
+    console.log(teamId + ' ' + sportId)
+    console.log(users)
+    return apiClient.post(_api1 + '/sport/list/patchPlayer', {
+      team_id: teamId,
+      sport_id: sportId,
+      account_id: users
     })
   },
-  patchUsers({ id, users }) {
-    return apiClient.patch('/sports/' + id, { users: users })
+  postTeam({ team, sportId, uni }) {
+    insertToken()
+    return apiClient
+      .post(_api1 + '/sport/list/addTeam', {
+        team_name: team,
+        sport_id: sportId,
+        uni
+      })
+      .then(res => {
+        return res.data.id
+      })
   }
 }

@@ -1,12 +1,13 @@
 import ApiService from '~/services/ApiService'
 
-const init = { id: 0, users: [] }
+const init = { id: null, users: [] }
 
 export default {
   state: {
-    id: 0,
+    id: null,
     users: [],
-    edited: false
+    edited: false,
+    sports: []
   },
   mutations: {
     ADD_USER(state, user) {
@@ -21,39 +22,74 @@ export default {
       const removeIndex = state.users.map(user => user.id).indexOf(id)
       state.users.splice(removeIndex, 1)
       state.edited = true
+    },
+    SET_SPORTS(state, sports) {
+      state.sports = sports
+    }
+  },
+  getters: {
+    sportId: state => (sportName, typeName) => {
+      const sports = state.sports.filter(
+        sport => sport.sport_name === sportName
+      )
+      return sports.filter(sport => sport.sport_type === typeName)[0].id
+    },
+    usersId: state => {
+      return state.users.map(user => user.id)
     }
   },
   actions: {
     addUser({ commit }, user) {
       commit('ADD_USER', user)
     },
-    fetchSport({ commit }, { sport, competition, team }) {
-      return ApiService.fetchUsers(sport, competition, team)
+    fetchSport({ commit, getters }, { sport, competition, team, uni }) {
+      return ApiService.fetchUsers({
+        uni,
+        team,
+        teamId: getters.sportId(sport, competition)
+      })
         .then(res => {
-          commit('SET_USERS', res.data[0])
+          // TODO; debug
+          console.log(res)
+          commit('SET_USERS', res)
         })
         .catch(() => {
           commit('SET_USERS', init)
         })
     },
+    getListSport({ commit }) {
+      return ApiService.getListSport().then(res => {
+        commit('SET_SPORTS', res)
+      })
+    },
     resetUsers({ commit }) {
       commit('SET_USERS', init)
     },
-    patchUsers({ commit, state }) {
-      ApiService.patchUsers({ id: state.id, users: state.users })
-    },
-    postUsers({ commit, state }, { sport, competition, team }) {
-      // TODO: post at api
-      ApiService.postUsers({
-        id: state.id,
-        users: state.users,
-        sport,
-        competition,
-        team
+    patchUsers({ commit, state, getters }, { sport, competition }) {
+      return ApiService.patchUsers({
+        teamId: state.id,
+        users: getters.usersId,
+        sportId: getters.sportId(sport, competition)
       })
     },
     removeUser({ commit }, id) {
       commit('REMOVE_USER', id)
+    },
+    // Add new team
+    async postTeam(
+      { state, commit, getters },
+      { sport, competition, team, uni }
+    ) {
+      const id = await ApiService.postTeam({
+        team,
+        sportId: getters.sportId(sport, competition),
+        uni
+      })
+      await ApiService.postUsers({
+        teamId: id,
+        users: getters.usersId,
+        sportId: getters.sportId(sport, competition)
+      })
     }
   }
 }

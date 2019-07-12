@@ -4,10 +4,20 @@
       <b-icon id="univer-icon" pack="fas" icon="university"></b-icon>
     </span>
     <span id="name-label" class="is-hidden-mobile">
-      Chiang mai University
+      {{ uni }}
     </span>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters({ uni: 'login/uniFullnameLogged' })
+  }
+}
+</script>
 
 <style>
 #univer-icon {

@@ -8,6 +8,14 @@ export default {
       university: ''
     }
   },
+  getters: {
+    uniLogged: state => {
+      return state.univer.uni
+    },
+    uniFullnameLogged: state => {
+      return state.univer.fullname
+    }
+  },
   mutations: {
     ADD_UNIVER(state, credentials) {
       state.univer = credentials
@@ -15,7 +23,7 @@ export default {
   },
   actions: {
     loginUniver({ commit }, credentials) {
-      ApiService.loginUniver(credentials).then(res => {
+      return ApiService.loginUniver(credentials).then(res => {
         commit('ADD_UNIVER', res)
       })
     }
