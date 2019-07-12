@@ -247,7 +247,7 @@ export default {
     push() {
       if (this.sport.edited) {
         // post
-        if (this.sport.id === null) {
+        if (this.sport.id === undefined) {
           this.postTeam({ ...this.data, uni: this.uni }).then(() => {
             this.$router.push({ name: 'index' })
           })
