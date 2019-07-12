@@ -154,7 +154,7 @@
 <script>
 import UserCard from '~/components/UserCard'
 import Sport from '~/modules/sport'
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -171,6 +171,7 @@ export default {
   },
   computed: {
     ...mapState(['sport']),
+    ...mapGetters({ uni: 'login/uniLogged' }),
     sports() {
       return Sport.list()
     },
@@ -203,23 +204,29 @@ export default {
       if (val) this.fetch()
     }
   },
+  beforeCreate() {
+    this.$store.dispatch('sport/getListSport')
+  },
   methods: {
     ...mapActions('sport', [
       'fetchSport',
       'resetUsers',
       'patchUsers',
       'postUsers',
-      'removeUser'
+      'removeUser',
+      'postTeam'
     ]),
     convertIntToString(i) {
       return String.fromCharCode(64 + i)
     },
     fetch() {
       const loadingComponent = this.$loading.open()
+      console.log(this.uni)
       this.fetchSport({
         sport: this.data.sport,
         competition: this.data.competition,
-        team: this.data.team
+        team: this.data.team,
+        uni: this.uni
       })
         .then(() => {
           console.log('fetch')
@@ -238,9 +245,16 @@ export default {
     push() {
       if (this.sport.edited) {
         // post
-        if (this.sport.id === 0) this.postUsers(this.data)
+        if (this.sport.id === undefined) {
+          this.postTeam({ ...this.data, uni: this.uni }).then(() => {
+            this.$router.push({ name: 'index' })
+          })
+        }
         // patch
-        else this.patchUsers()
+        else
+          this.patchUsers(this.data).then(() => {
+            this.$router.push({ name: 'index' })
+          })
       }
     },
     remove(id) {
