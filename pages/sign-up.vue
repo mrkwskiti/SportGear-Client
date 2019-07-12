@@ -8,7 +8,7 @@
           <div class="column">
             <b-field grouped group-multiline>
               <b-field label="Type of Sport">
-                <b-dropdown v-model="data.sport" hoverable aria-role="list">
+                <b-dropdown v-model="data.sport" aria-role="list">
                   <button slot="trigger" class="button">
                     <span v-if="data.sport == ''">choose sport</span>
                     <span v-else>{{ data.sport }}</span>
@@ -35,7 +35,6 @@
                 <b-dropdown
                   v-model="data.competition"
                   :disabled="competitions == ''"
-                  hoverable
                   aria-role="list"
                 >
                   <button slot="trigger" class="button">
@@ -66,7 +65,6 @@
                 <b-dropdown
                   v-model="data.team"
                   :disabled="!teams"
-                  hoverable
                   aria-role="list"
                 >
                   <button slot="trigger" class="button">
