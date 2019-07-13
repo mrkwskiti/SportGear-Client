@@ -51,7 +51,7 @@
             </option>
           </b-select> -->
 
-          <b-dropdown v-model="user.gender" hoverable aria-role="list">
+          <!-- <b-dropdown v-model="user.gender" hoverable aria-role="list">
             <button slot="trigger" class="button">
               <span v-if="user.gender === ''">gender</span>
               <span v-else>{{ user.gender }}</span>
@@ -71,7 +71,7 @@
             >
               {{ gender }}
             </b-dropdown-item>
-          </b-dropdown>
+          </b-dropdown> -->
         </div>
       </div>
       <b-field>

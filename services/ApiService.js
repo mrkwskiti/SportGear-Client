@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 const _api1 = '/api/v1'
 
 const apiClient = axios.create({
-  baseURL: `http://localhost:3000`,
+  baseURL: `https://geargame30.eng.cmu.ac.th/api`,
   withCredentials: false,
   headers: {
     Accept: 'application/json',

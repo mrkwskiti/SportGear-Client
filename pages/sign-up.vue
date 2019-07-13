@@ -8,30 +8,85 @@
           <div class="column">
             <b-field grouped group-multiline>
               <b-field label="Type of Sport">
-                <b-select v-model="data.sport">
-                  <option v-for="sport in sports" :key="sport">
+                <b-dropdown v-model="data.sport" aria-role="list">
+                  <button slot="trigger" class="button">
+                    <span v-if="data.sport == ''">choose sport</span>
+                    <span v-else>{{ data.sport }}</span>
+                    <b-icon
+                      pack="fas"
+                      icon="chevron-down"
+                      size="is-small"
+                      class="has-text-primary"
+                    ></b-icon>
+                  </button>
+
+                  <b-dropdown-item
+                    v-for="sport in sports"
+                    :key="sport"
+                    :value="sport"
+                    aria-role="listitem"
+                  >
                     {{ sport }}
-                  </option>
-                </b-select>
+                  </b-dropdown-item>
+                </b-dropdown>
               </b-field>
 
-              <b-field v-if="competitions != ''" label="Type of Competition">
-                <b-select v-model="data.competition">
-                  <option
+              <b-field label="Type of Competition">
+                <b-dropdown
+                  v-model="data.competition"
+                  :disabled="competitions == ''"
+                  aria-role="list"
+                >
+                  <button slot="trigger" class="button">
+                    <span v-if="data.competition == ''"
+                      >choose competition</span
+                    >
+                    <span v-else>{{ data.competition }}</span>
+                    <b-icon
+                      pack="fas"
+                      icon="chevron-down"
+                      size="is-small"
+                      class="has-text-primary"
+                    ></b-icon>
+                  </button>
+
+                  <b-dropdown-item
                     v-for="competition in competitions"
                     :key="competition"
+                    :value="competition"
+                    aria-role="listitem"
                   >
                     {{ competition }}
-                  </option>
-                </b-select>
+                  </b-dropdown-item>
+                </b-dropdown>
               </b-field>
 
-              <b-field v-if="teams" label="Teams">
-                <b-select v-model="data.team">
-                  <option v-for="n in teams" :key="n">
-                    {{ String.fromCharCode(64 + n) }}
-                  </option>
-                </b-select>
+              <b-field label="Teams">
+                <b-dropdown
+                  v-model="data.team"
+                  :disabled="!teams"
+                  aria-role="list"
+                >
+                  <button slot="trigger" class="button">
+                    <span v-if="data.team == ''">choose team</span>
+                    <span v-else>{{ data.team }}</span>
+                    <b-icon
+                      pack="fas"
+                      icon="chevron-down"
+                      size="is-small"
+                      class="has-text-primary"
+                    ></b-icon>
+                  </button>
+
+                  <b-dropdown-item
+                    v-for="n in teams"
+                    :key="n"
+                    :value="convertIntToString(n)"
+                    aria-role="listitem"
+                  >
+                    {{ convertIntToString(n) }}
+                  </b-dropdown-item>
+                </b-dropdown>
               </b-field>
             </b-field>
           </div>
@@ -161,6 +216,9 @@ export default {
       'removeUser',
       'postTeam'
     ]),
+    convertIntToString(i) {
+      return String.fromCharCode(64 + i)
+    },
     fetch() {
       const loadingComponent = this.$loading.open()
       console.log(this.uni)
@@ -187,7 +245,7 @@ export default {
     push() {
       if (this.sport.edited) {
         // post
-        if (this.sport.id === null) {
+        if (this.sport.id === undefined) {
           this.postTeam({ ...this.data, uni: this.uni }).then(() => {
             this.$router.push({ name: 'index' })
           })
