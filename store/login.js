@@ -5,7 +5,8 @@ export default {
     univer: {
       id: null,
       username: '',
-      university: ''
+      university: '',
+      sid: []
     }
   },
   getters: {
@@ -19,12 +20,18 @@ export default {
   mutations: {
     ADD_UNIVER(state, credentials) {
       state.univer = credentials
+    },
+    ADD_SIDLIST(state, list) {
+      state.univer.sid = list
     }
   },
   actions: {
-    loginUniver({ commit }, credentials) {
-      return ApiService.loginUniver(credentials).then(res => {
+    async loginUniver({ commit, state }, credentials) {
+      await ApiService.loginUniver(credentials).then(res => {
         commit('ADD_UNIVER', res)
+      })
+      await ApiService.sidList(state.univer.uni).then(res => {
+        commit('ADD_SIDLIST', res)
       })
     }
   }

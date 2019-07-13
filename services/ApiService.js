@@ -131,5 +131,11 @@ export default {
       .then(res => {
         return res.data.id
       })
+  },
+  sidList(uni) {
+    insertToken()
+    return apiClient
+      .get(_api1 + '/university/' + uni + '/sid')
+      .then(res => res.data)
   }
 }
