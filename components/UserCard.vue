@@ -5,13 +5,15 @@
       :message="[!isRegister ? fullName : null]"
     >
       <div ref="name" class="field has-addons">
-        <b-input
+        <b-autocomplete
           v-model="user.sid"
           expanded
           placeholder="SID"
           :loading="isLoading && isRegister"
           :disabled="isLoading"
-        ></b-input>
+          :data="filterSid"
+          @select="option => (selected = option)"
+        ></b-autocomplete>
         <p class="control">
           <a
             v-if="!isRegister"
@@ -122,6 +124,11 @@ export default {
     },
     isFetched() {
       return this.loaded && !this.isRegister
+    },
+    filterSid() {
+      return this.$store.state.login.univer.sid.filter(sid => {
+        return sid.toString().indexOf(this.user.sid) >= 0
+      })
     }
   },
   watch: {
