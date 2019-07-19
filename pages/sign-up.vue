@@ -221,12 +221,10 @@ export default {
     },
     fetch() {
       const loadingComponent = this.$loading.open()
-      console.log(this.uni)
       this.fetchSport({
         sport: this.data.sport,
         competition: this.data.competition,
-        team: this.data.team,
-        uni: this.uni
+        team: this.data.team
       })
         .then(() => {
           console.log('fetch')
@@ -245,7 +243,7 @@ export default {
     push() {
       if (this.sport.edited) {
         // post
-        if (this.sport.id === undefined) {
+        if (this.sport.id === null) {
           this.postTeam({ ...this.data, uni: this.uni }).then(() => {
             this.$router.push({ name: 'index' })
           })

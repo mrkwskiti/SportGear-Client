@@ -42,9 +42,8 @@ export default {
     addUser({ commit }, user) {
       commit('ADD_USER', user)
     },
-    fetchSport({ commit, getters }, { sport, competition, team, uni }) {
+    fetchSport({ commit, getters }, { sport, competition, team }) {
       return ApiService.fetchUsers({
-        uni,
         team,
         teamId: getters.sportId(sport, competition)
       })

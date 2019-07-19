@@ -48,37 +48,23 @@ export default {
         throw error.message
       })
   },
-  async fetchUsers({ uni, teamId, team }) {
+  async fetchUsers({ teamId, team }) {
     insertToken()
     const id = await apiClient.get(_api1 + '/sport/id', {
       params: {
         team_name: team,
-        sport_id: teamId,
-        uni: uni
+        sport_id: teamId
       }
     })
-    if (id.data !== null) {
+    if (id.status === 200) {
       const users = await apiClient.get(_api1 + '/sport/list/teamBytype', {
         params: {
-          uni,
+          // uni,
           type: teamId, // id 1001
           team_id: id.data.id // which team A or B
         }
       })
-
-      // TODO: Refactoring it
-      const nUsers = []
-      for (let i = 0; i < users.data.length; i++) {
-        nUsers.push({
-          id: users.data[i].account_id,
-          firstName: users.data[i].fname,
-          lastName: users.data[i].lname,
-          sid: users.data[i].sid,
-          team_id: users.data[i].team_id
-        })
-      }
-      console.log(nUsers)
-      return { ...id.data, users: nUsers }
+      return { ...id.data, users: users.data }
     }
   },
   postUser(user) {
@@ -125,8 +111,7 @@ export default {
     return apiClient
       .post(_api1 + '/sport/list/addTeam', {
         team_name: team,
-        sport_id: sportId,
-        uni
+        sport_id: sportId
       })
       .then(res => {
         return res.data.id
