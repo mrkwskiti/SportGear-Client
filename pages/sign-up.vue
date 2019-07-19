@@ -160,6 +160,7 @@ export default {
   components: {
     UserCard
   },
+  middleware: 'authenticated',
   data() {
     return {
       data: {
