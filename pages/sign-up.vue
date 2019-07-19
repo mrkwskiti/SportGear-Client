@@ -152,9 +152,9 @@
 </template>
 
 <script>
+import { mapActions, mapState, mapGetters } from 'vuex'
 import UserCard from '~/components/UserCard'
 import Sport from '~/modules/sport'
-import { mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
   components: {
