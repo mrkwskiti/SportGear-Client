@@ -34,12 +34,18 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['@fortawesome/fontawesome-svg-core/styles.css', '~/css/main.css'],
+  css: [
+    '@fortawesome/fontawesome-svg-core/styles.css', 
+    'node_modules/handsontable/dist/handsontable.full.css',
+    '~/css/main.css',
+  ],
 
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/vue-handsontable', srr: false }
+  ],
 
   /*
    ** Nuxt.js modules
@@ -93,6 +99,10 @@ export default {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+    vendor: [
+      'handsontable',
+      'vue-handsontable'
+    ]
   }
 }
