@@ -116,5 +116,9 @@ export default {
       .then(res => {
         return res.data.id
       })
+  },
+  fetchUsersInUni() {
+    insertToken()
+    return apiClient.get(_api1 + '/university/users/info').then(res => res.data)
   }
 }
