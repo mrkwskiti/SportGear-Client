@@ -1,6 +1,7 @@
 <template>
   <div>
     <hot-table
+      ref="usersTable"
       class="hot handsontable htColumnHeaders"
       :settings="hotSettings"
       :data="users"
@@ -31,12 +32,18 @@ export default {
       }
     }
   },
-  created() {
-    this.fetchUsers()
+  async mounted() {
+    await this.fetchUsers()
+    const instance = await this.$refs.usersTable.hotInstance
+    for (let i = 0; i < this.users.length; i++) {
+      for (let j = 0; j < 4; j++) {
+        instance.setCellMeta(i, j, 'readOnly', true)
+      }
+    }
   },
   methods: {
     fetchUsers() {
-      ApiServices.fetchUsersInUni().then(res => {
+      return ApiServices.fetchUsersInUni().then(res => {
         this.users = res.map(user => {
           return [user.sid, user.firstName, user.lastName, user.email]
         })
