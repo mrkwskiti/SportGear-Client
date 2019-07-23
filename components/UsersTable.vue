@@ -21,6 +21,8 @@ export default {
   data() {
     return {
       users: null,
+      update_users: [],
+      hotRef: null,
       hotSettings: {
         minRows: 300,
         startCols: 4,
@@ -28,10 +30,11 @@ export default {
         columns: [
           {
             validator: function(value, callback) {
-              if (value !== '') {
+              if (value !== null && value !== '') {
                 const instance = this.instance
                 const vals = instance.getDataAtCol(0)
-                console.log(vals.indexOf(value), vals)
+                vals[this.row] = ''
+                // console.log(vals.indexOf(value), vals)
 
                 if (vals.indexOf(value) < 0 && value !== null) {
                   console.log('You are OK')
@@ -49,6 +52,24 @@ export default {
           {},
           {}
         ],
+        afterChange: () => {
+          if (this.hotRef) {
+            this.hotRef.validateCells(valid => {
+              // this.valid = valid
+              this.$emit('isValid', valid)
+
+              const update = this.hotRef.getSourceData()
+              // clear new users
+              this.update_users = []
+              // clean empty row
+              for (let i = this.users.length; i < update.length; i++) {
+                if (!this.hotRef.isEmptyRow(i))
+                  this.update_users.push(update[i])
+              }
+              this.$emit('updateUsers', this.update_users)
+            })
+          }
+        },
         rowHeaders: true,
         stretchH: 'all',
         height: '340',
@@ -59,17 +80,17 @@ export default {
   },
   async mounted() {
     await this.fetchUsers()
-    const instance = await this.$refs.usersTable.hotInstance
+    this.hotRef = await this.$refs.usersTable.hotInstance
     for (let i = 0; i < this.users.length; i++) {
       for (let j = 0; j < 4; j++) {
-        instance.setCellMeta(i, j, 'readOnly', true)
+        this.hotRef.setCellMeta(i, j, 'readOnly', true)
       }
     }
   },
   methods: {
     fetchUsers() {
       return ApiServices.fetchUsersInUni().then(res => {
-        this.users = res.map(user => {
+        this.users = this.update_user = res.map(user => {
           return [user.sid, user.firstName, user.lastName, user.email]
         })
       })
