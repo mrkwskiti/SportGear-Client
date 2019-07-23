@@ -28,6 +28,7 @@ export default {
   components: {
     UsersTable
   },
+  middleware: 'authenticated',
   data: function() {
     return {
       valid: true,
