@@ -6,6 +6,14 @@
 
         <div class="columns">
           <div class="column">
+            <b-button tag="router-link" to="/import-users">
+              Import Users
+            </b-button>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column">
             <b-field grouped group-multiline>
               <b-field label="Type of Sport">
                 <b-dropdown v-model="data.sport" aria-role="list">

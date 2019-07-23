@@ -22,6 +22,7 @@
 
 <script>
 import UsersTable from '~/components/UsersTable'
+import ApiServices from '~/services/ApiService'
 
 export default {
   components: {
@@ -48,6 +49,15 @@ export default {
     push() {
       if (this.hasUpdate) {
         // TODO: push new users
+        this.update_users.forEach(user => {
+          ApiServices.postUser({
+            sid: user[0],
+            firstName: user[1],
+            lastName: user[2],
+            email: user[3]
+          })
+        })
+        this.$router.push({ name: 'sign-up' })
       }
     }
   }

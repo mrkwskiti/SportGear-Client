@@ -72,7 +72,7 @@ export default {
     return apiClient
       .post(_api1 + '/users', {
         sid: user.sid,
-        uni: user.uni,
+        // uni: user.uni,
         fname: user.firstName,
         lname: user.lastName,
         email: user.email,
