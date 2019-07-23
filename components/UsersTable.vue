@@ -10,6 +10,7 @@
 </template>
 
 <script>
+/* eslint-disable standard/no-callback-literal */
 import HotTable from '~/plugins/vue-handsontable'
 import ApiServices from '~/services/ApiService'
 
@@ -24,6 +25,26 @@ export default {
         minRows: 300,
         startCols: 4,
         colHeaders: ['SID', 'First Name', 'Last Name', 'E-mail'],
+        columns: [
+          {
+            validator: function(value, callback) {
+              const instance = this.instance
+              const vals = instance.getDataAtCol(instance.getSelectedLast()[1])
+              console.log(vals.indexOf(value), vals)
+
+              if (vals.indexOf(value) < 0 && value !== null) {
+                console.log('You are OK')
+                callback(true)
+              } else {
+                console.log('I already have this value')
+                callback(false)
+              }
+            }
+          },
+          {},
+          {},
+          {}
+        ],
         rowHeaders: true,
         stretchH: 'all',
         height: '340',
