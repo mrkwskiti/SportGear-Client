@@ -24,7 +24,7 @@ export default {
       update_users: [],
       hotRef: null,
       hotSettings: {
-        minRows: 300,
+        // minRows: 300,
         startCols: 4,
         colHeaders: ['SID', 'First Name', 'Last Name', 'E-mail'],
         columns: [
@@ -72,7 +72,8 @@ export default {
         },
         rowHeaders: true,
         stretchH: 'all',
-        height: '340',
+        // height: '340',
+        minSpareRows: 7,
         manualColumnMove: true,
         licenseKey: 'non-commercial-and-evaluation'
       }
