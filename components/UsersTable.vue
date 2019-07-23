@@ -28,16 +28,20 @@ export default {
         columns: [
           {
             validator: function(value, callback) {
-              const instance = this.instance
-              const vals = instance.getDataAtCol(instance.getSelectedLast()[1])
-              console.log(vals.indexOf(value), vals)
+              if (value !== '') {
+                const instance = this.instance
+                const vals = instance.getDataAtCol(0)
+                console.log(vals.indexOf(value), vals)
 
-              if (vals.indexOf(value) < 0 && value !== null) {
-                console.log('You are OK')
-                callback(true)
+                if (vals.indexOf(value) < 0 && value !== null) {
+                  console.log('You are OK')
+                  callback(true)
+                } else {
+                  console.log('I already have this value')
+                  callback(false)
+                }
               } else {
-                console.log('I already have this value')
-                callback(false)
+                callback(true)
               }
             }
           },
