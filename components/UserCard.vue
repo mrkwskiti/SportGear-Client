@@ -95,9 +95,9 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import ApiService from '~/services/ApiService'
 import Filter from '~/mixins/filter'
-import { mapActions, mapGetters } from 'vuex'
 
 export default {
   mixins: [Filter],

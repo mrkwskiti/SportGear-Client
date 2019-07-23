@@ -34,12 +34,16 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['@fortawesome/fontawesome-svg-core/styles.css', '~/css/main.css'],
+  css: [
+    '@fortawesome/fontawesome-svg-core/styles.css',
+    'node_modules/handsontable/dist/handsontable.full.css',
+    '~/css/main.css'
+  ],
 
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~/plugins/vue-handsontable', ssr: false }],
 
   /*
    ** Nuxt.js modules
@@ -81,6 +85,9 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+      }
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
@@ -90,6 +97,7 @@ export default {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+    vendor: ['handsontable', 'vue-handsontable']
   }
 }
