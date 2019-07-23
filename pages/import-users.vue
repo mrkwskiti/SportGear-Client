@@ -2,7 +2,20 @@
   <div class="contrainer grid">
     <div class="field">
       <h2 class="title is-1">Import users</h2>
-      <users-table></users-table>
+      <users-table @isValid="isValid" @updateUsers="updateUsers"></users-table>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <b-field grouped position="is-right">
+          <b-button
+            :disabled="!hasUpdate"
+            class="is-primary is-right"
+            @click="push"
+          >
+            Update users
+          </b-button>
+        </b-field>
+      </div>
     </div>
   </div>
 </template>
@@ -16,12 +29,26 @@ export default {
   },
   data: function() {
     return {
-      // data: [
-      //   ['', 'Tesla', 'Mercedes', 'Toyota', 'Volvo'],
-      //   ['2019', 10, 11, 12, 13],
-      //   ['2020', 20, 11, 14, 13],
-      //   ['2021', 30, 15, 12, 13]
-      // ]
+      valid: true,
+      update_users: []
+    }
+  },
+  computed: {
+    hasUpdate() {
+      return this.valid && this.update_users.length !== 0
+    }
+  },
+  methods: {
+    isValid(value) {
+      this.valid = value
+    },
+    updateUsers(value) {
+      this.update_users = value
+    },
+    push() {
+      if (this.hasUpdate) {
+        // TODO: push new users
+      }
     }
   }
 }
