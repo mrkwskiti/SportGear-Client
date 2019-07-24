@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div class="container">
     <nav
-      class="navbar is-primary"
+      class="navbar is-spaced has-shadow"
       role="navigation"
       aria-label="main navigation"
     >
       <div class="navbar-brand">
         <a class="navbar-item" href="https://bulma.io">
-          <p class="subtitle is-3 has-text-white">Sport Gear</p>
+          <!-- <p class="subtitle is-3">Sport Gear</p> -->
+          <img id="logo-name" src="~/assets/logo-name-line.png" />
         </a>
 
         <div id="univer" class="navbar-item is-hidden-desktop">
@@ -84,6 +85,12 @@ export default {
 nav {
   padding: 20px;
 }
+
+/* #logo-name {
+  height: 40px;
+  width: auto;
+} */
+
 #univer {
   margin-left: auto;
 }

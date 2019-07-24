@@ -1,9 +1,14 @@
 <template>
   <div>
     <span>
-      <b-icon id="univer-icon" pack="fas" icon="university"></b-icon>
+      <b-icon
+        id="univer-icon"
+        type="is-dark"
+        pack="fas"
+        icon="university"
+      ></b-icon>
     </span>
-    <span id="name-label" class="is-hidden-mobile">
+    <span id="name-label" class="has-text-dark is-hidden-mobile">
       {{ uni }}
     </span>
   </div>
