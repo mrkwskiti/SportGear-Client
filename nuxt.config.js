@@ -16,8 +16,8 @@ export default {
     link: [
       {
         rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
+        type: 'image/png',
+        href: '_nuxt/assets/logo.png'
       },
       {
         rel: 'stylesheet',
