@@ -5,7 +5,7 @@
         <div class="columns is-vcentered">
           <div id="logo-figure" class="column is-flex is-half">
             <figure>
-              <img id="logo" src="~/assets/logo.png" alt="" />
+              <img id="logo" src="~/static/logo.png" alt="" />
             </figure>
           </div>
           <div class="column is-half">
