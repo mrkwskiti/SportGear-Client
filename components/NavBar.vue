@@ -6,7 +6,7 @@
       aria-label="main navigation"
     >
       <div class="navbar-brand">
-        <a class="navbar-item" href="https://bulma.io">
+        <a class="navbar-item" href="/">
           <!-- <p class="subtitle is-3">Sport Gear</p> -->
           <img id="logo-name" src="~/assets/logo-name-line.png" />
         </a>
