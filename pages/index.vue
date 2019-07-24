@@ -4,7 +4,9 @@
       <div class="container">
         <div class="columns is-vcentered">
           <div id="logo-figure" class="column is-flex is-half">
-            <img id="logo" src="~/assets/logo.png" alt="" />
+            <figure>
+              <img id="logo" src="~/assets/logo.png" alt="" />
+            </figure>
           </div>
           <div class="column is-half">
             <div class="content">
@@ -36,9 +38,7 @@ export default {
 }
 
 #logo {
-  max-width: 75%;
   height: auto;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 100%;
 }
 </style>
