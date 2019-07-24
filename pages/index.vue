@@ -1,22 +1,20 @@
 <template>
-  <section class="section">
-    <div class="columns is-mobile">
-      <!-- <card title="Free" icon="github-circle">
-        Open source on <a href="https://github.com/buefy/buefy"> GitHub</a>
-      </card>
-
-      <card title="Responsive" icon="cellphone-link">
-        <b class="has-text-grey">Every</b> component is responsive
-      </card>
-
-      <card title="Modern" icon="alert-decagram">
-        Built with <a href="https://vuejs.org/">Vue.js</a> and
-        <a href="http://bulma.io/">Bulma</a>
-      </card>
-
-      <card title="Lightweight" icon="arrange-bring-to-front">
-        No other internal dependency
-      </card> -->
+  <section class="hero is-medium">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-vcentered">
+          <div id="logo-figure" class="column is-flex is-half">
+            <img id="logo" src="~/assets/logo.png" alt="" />
+          </div>
+          <div class="column is-half">
+            <div class="content">
+              <p class="subtitle is-2">
+                lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -32,3 +30,15 @@ export default {
   }
 }
 </script>
+
+<style>
+#logo-figure {
+}
+
+#logo {
+  max-width: 75%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
