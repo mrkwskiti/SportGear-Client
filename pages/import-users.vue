@@ -48,17 +48,18 @@ export default {
     updateUsers(value) {
       this.update_users = value
     },
-    push() {
+    async push() {
       if (this.hasUpdate) {
-        // TODO: push new users
-        this.update_users.forEach(user => {
-          ApiServices.postUser({
+        const promises = this.update_users.map(async user => {
+          await ApiServices.postUser({
             sid: user[0],
             firstName: user[1],
             lastName: user[2],
             email: user[3]
           })
         })
+
+        await Promise.all(promises)
         this.$router.push({ name: 'sign-up' })
       }
     }

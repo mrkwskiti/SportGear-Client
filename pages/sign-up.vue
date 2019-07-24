@@ -214,6 +214,10 @@ export default {
       if (val) this.fetch()
     }
   },
+  fetch({ store }) {
+    console.log('ya')
+    store.dispatch('login/fetchUsers')
+  },
   beforeCreate() {
     this.$store.dispatch('sport/getListSport')
   },

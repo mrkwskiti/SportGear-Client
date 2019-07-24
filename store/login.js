@@ -6,7 +6,8 @@ export default {
       id: null,
       username: '',
       university: '',
-      sid: []
+      sid: [],
+      users: []
     }
   },
   getters: {
@@ -23,6 +24,9 @@ export default {
     },
     ADD_SIDLIST(state, list) {
       state.univer.sid = list
+    },
+    ADD_USERS(state, users) {
+      state.univer.users = users
     }
   },
   actions: {
@@ -32,6 +36,11 @@ export default {
       })
       await ApiService.sidList().then(res => {
         commit('ADD_SIDLIST', res)
+      })
+    },
+    fetchUsers({ commit, state }) {
+      return ApiService.fetchUsersInUni().then(res => {
+        commit('ADD_USERS', res)
       })
     }
   }
