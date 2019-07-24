@@ -30,11 +30,13 @@ export default {
     }
   },
   actions: {
-    async loginUniver({ commit, state }, credentials) {
-      await ApiService.loginUniver(credentials).then(res => {
+    loginUniver({ commit, state }, credentials) {
+      return ApiService.loginUniver(credentials).then(res => {
         commit('ADD_UNIVER', res)
       })
-      await ApiService.sidList().then(res => {
+    },
+    fetchSid({ commit }) {
+      return ApiService.sidList().then(res => {
         commit('ADD_SIDLIST', res)
       })
     },
