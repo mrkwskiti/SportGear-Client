@@ -14,15 +14,18 @@
       </aside> -->
 
     <nuxt />
+    <footer-bar />
   </div>
 </template>
 
 <script>
 import NavBar from '~/components/NavBar.vue'
+import FooterBar from '~/components/Footer.vue'
 
 export default {
   components: {
-    NavBar
+    NavBar,
+    FooterBar
   },
   data() {
     return {

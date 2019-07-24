@@ -38,6 +38,7 @@
 import { mapActions } from 'vuex'
 
 export default {
+  layout: 'register',
   data() {
     return {
       data: {

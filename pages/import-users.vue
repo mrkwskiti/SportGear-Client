@@ -28,6 +28,7 @@ export default {
   components: {
     UsersTable
   },
+  layout: 'register',
   middleware: 'authenticated',
   data: function() {
     return {

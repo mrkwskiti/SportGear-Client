@@ -169,6 +169,7 @@ export default {
     UserCard
   },
   middleware: 'authenticated',
+  layout: 'register',
   data() {
     return {
       data: {
