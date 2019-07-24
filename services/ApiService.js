@@ -117,11 +117,9 @@ export default {
         return res.data.id
       })
   },
-  sidList(uni) {
+  sidList() {
     insertToken()
-    return apiClient
-      .get(_api1 + '/university/' + uni + '/sid')
-      .then(res => res.data)
+    return apiClient.get(_api1 + '/university/sid').then(res => res.data)
   },
   fetchUsersInUni() {
     insertToken()

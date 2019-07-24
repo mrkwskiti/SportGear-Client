@@ -30,7 +30,7 @@ export default {
       await ApiService.loginUniver(credentials).then(res => {
         commit('ADD_UNIVER', res)
       })
-      await ApiService.sidList(state.univer.uni).then(res => {
+      await ApiService.sidList().then(res => {
         commit('ADD_SIDLIST', res)
       })
     }
