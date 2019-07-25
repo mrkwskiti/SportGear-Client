@@ -1,6 +1,13 @@
 <template>
   <div class="container grid-login">
-    <section id="login" class="contanier notification">
+    <section id="login" class="contanier">
+      <div class="columns is-centered">
+        <div class="column" style="max-width: 190px;">
+          <figure>
+            <img src="~/static/logo.png" alt="" />
+          </figure>
+        </div>
+      </div>
       <div class="columns">
         <div class="column has-text-centered">
           <p class="title">Log in</p>
