@@ -9,10 +9,19 @@
             </figure>
           </div>
           <div class="column is-half">
-            <div class="content">
-              <p class="subtitle is-2">
-                lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
-              </p>
+            <div class="columns">
+              <div class="column has-text-centered" style="max-width: 520px;">
+                <h1 class="is-size-3-mobile is-size-1 has-text-weight-bold">
+                  Jhanglek Games
+                </h1>
+                <p class="is-size-4 padding-top-1x">
+                  23-28 December 2019
+                </p>
+                <p class="is-size-5">
+                  Faculty of Engineering, Chiang mai University
+                </p>
+                <div class="has-padding-2x"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -35,6 +44,7 @@ export default {
 
 <style>
 #logo-figure {
+  max-width: 500px;
 }
 
 #logo {
