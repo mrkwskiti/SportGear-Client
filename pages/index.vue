@@ -3,13 +3,17 @@
     <div class="hero-body">
       <div class="container">
         <div class="columns is-vcentered">
-          <div id="logo-figure" class="column is-flex is-half">
-            <figure>
-              <img id="logo" src="~/static/logo.png" alt="" />
-            </figure>
+          <div class="column is-flex is-half">
+            <div class="columns is-mobile is-centered">
+              <div id="logo-figure" class="column">
+                <figure>
+                  <img id="logo" src="~/static/logo.png" alt="" />
+                </figure>
+              </div>
+            </div>
           </div>
           <div class="column is-half">
-            <div class="columns">
+            <div class="columns is-mobile is-centered">
               <div class="column has-text-centered" style="max-width: 520px;">
                 <h1 class="is-size-3-mobile is-size-1 has-text-weight-bold">
                   Jhanglek Games
