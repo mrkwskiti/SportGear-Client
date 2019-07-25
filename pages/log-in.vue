@@ -1,7 +1,7 @@
 <template>
   <div class="container grid-login">
     <section id="login" class="contanier">
-      <div class="columns is-centered">
+      <div class="columns is-mobile is-centered">
         <div class="column" style="max-width: 190px;">
           <figure>
             <img src="~/static/logo.png" alt="" />
