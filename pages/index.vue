@@ -17,9 +17,17 @@
                 <p class="is-size-4 padding-top-1x">
                   23-28 December 2019
                 </p>
-                <p class="is-size-5">
-                  Faculty of Engineering, Chiang mai University
-                </p>
+                <div class="content">
+                  <b-icon
+                    id="univer-icon"
+                    type="is-primary"
+                    pack="fas"
+                    icon="map-marker-alt"
+                  ></b-icon>
+                  <span>
+                    Faculty of Engineering, Chiang mai University
+                  </span>
+                </div>
                 <div class="has-padding-2x"></div>
               </div>
             </div>
