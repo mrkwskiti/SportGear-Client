@@ -7,7 +7,7 @@
         <div class="columns">
           <div class="column">
             <b-button tag="router-link" to="/import-users">
-              Import Users
+              Import athletes
             </b-button>
           </div>
         </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="contrainer grid">
     <div class="field">
-      <h2 class="title is-1">Import users</h2>
+      <h2 class="title is-1">Import athletes</h2>
       <users-table @isValid="isValid" @updateUsers="updateUsers"></users-table>
     </div>
     <div class="columns">
@@ -12,7 +12,7 @@
             class="is-primary is-right"
             @click="push"
           >
-            Update users
+            Update athletes
           </b-button>
           <b-button tag="router-link" type="is-primary" outlined to="sign-up">
             Cancel
