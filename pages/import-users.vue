@@ -6,13 +6,16 @@
     </div>
     <div class="columns">
       <div class="column">
-        <b-field grouped position="is-right">
+        <b-field class="buttons" grouped position="is-right">
           <b-button
             :disabled="!hasUpdate"
             class="is-primary is-right"
             @click="push"
           >
             Update users
+          </b-button>
+          <b-button tag="router-link" type="is-primary" outlined to="sign-up">
+            Cancle
           </b-button>
         </b-field>
       </div>
@@ -60,6 +63,13 @@ export default {
         })
 
         await Promise.all(promises)
+        this.$notification.open({
+          duration: 5000,
+          message: `Imported users`,
+          position: 'is-bottom-right',
+          type: 'is-success',
+          hasIcon: true
+        })
         this.$router.push({ name: 'sign-up' })
       }
     }
