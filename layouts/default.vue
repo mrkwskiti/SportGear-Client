@@ -42,6 +42,9 @@ export default {
         }
       ]
     }
+  },
+  head: {
+    title: 'Jhanglek Games'
   }
 }
 </script>
