@@ -15,7 +15,7 @@
             Update users
           </b-button>
           <b-button tag="router-link" type="is-primary" outlined to="sign-up">
-            Cancle
+            Cancel
           </b-button>
         </b-field>
       </div>
