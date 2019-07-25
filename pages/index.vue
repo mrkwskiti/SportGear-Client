@@ -19,10 +19,10 @@
                 </p>
                 <div class="content">
                   <b-icon
-                    id="univer-icon"
                     type="is-primary"
                     pack="fas"
                     icon="map-marker-alt"
+                    style="position: relative; top: 5px;"
                   ></b-icon>
                   <span>
                     Faculty of Engineering, Chiang mai University
