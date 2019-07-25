@@ -3,7 +3,7 @@
     <div class="hero-body">
       <div class="container">
         <div class="columns is-vcentered">
-          <div class="column is-flex is-half">
+          <div class="column is-half">
             <div class="columns is-mobile is-centered">
               <div id="logo-figure" class="column">
                 <figure>
