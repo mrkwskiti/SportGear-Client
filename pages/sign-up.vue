@@ -123,7 +123,7 @@
                     <b-button
                       type="is-danger"
                       size="is-small"
-                      style="border-radius: 9999px;"
+                      style="border-radius: 9999px; width: 28px"
                       @click="remove(props.row.id)"
                     >
                       <b-icon pack="fas" icon="times" size="is-small"></b-icon>

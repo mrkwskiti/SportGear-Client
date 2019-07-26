@@ -26,8 +26,12 @@ $link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
 
-// container
+// web container
 $fullhd: 1152px;
+
+// dropdown
+// $dropdown-content-radius: 4px;
+// $dropdown-content-offset: 10px;
 
 // Import Bulma and Buefy styles
 @import "~bulma";

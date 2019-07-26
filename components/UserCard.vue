@@ -4,7 +4,7 @@
       class="field is-expanded"
       :message="[!isRegister ? fullName : null]"
     >
-      <div ref="name" class="field has-addons">
+      <div ref="name" class="field" :class="{ 'has-addons': !isRegister }">
         <b-autocomplete
           v-model="user.sid"
           expanded
