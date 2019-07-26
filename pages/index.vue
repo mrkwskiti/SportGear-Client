@@ -18,10 +18,10 @@
                 <h1 class="is-size-3-mobile is-size-1 has-text-weight-bold">
                   Jhanglek Games
                 </h1>
-                <p class="is-size-4 padding-top-1x">
+                <p class="is-size-4">
                   23-28 December 2019
                 </p>
-                <div class="content">
+                <div class="container">
                   <b-icon
                     type="is-primary"
                     pack="fas"
@@ -32,6 +32,13 @@
                     Faculty of Engineering, Chiang mai University
                   </span>
                 </div>
+                <b-button
+                  tag="router-link"
+                  to="/log-in"
+                  class="is-primary has-padding-top-5"
+                  style="margin: 1em"
+                  >Register athletes/teams</b-button
+                >
                 <div class="has-padding-2x"></div>
               </div>
             </div>
