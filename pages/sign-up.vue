@@ -6,7 +6,7 @@
 
         <div class="columns">
           <div class="column">
-            <b-button tag="router-link" to="/import-users">
+            <b-button class="is-fullwidth" tag="router-link" to="/import-users">
               Import athletes
             </b-button>
           </div>
