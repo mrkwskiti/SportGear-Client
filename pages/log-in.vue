@@ -57,9 +57,23 @@ export default {
   methods: {
     ...mapActions('login', ['loginUniver']),
     login() {
-      this.loginUniver(this.data).then(() => {
-        this.$router.push({ name: 'sign-up' })
-      })
+      const loadingComponent = this.$loading.open()
+      this.loginUniver(this.data)
+        .then(() => {
+          this.$router.push({ name: 'sign-up' })
+        })
+        .catch(e => {
+          this.$notification.open({
+            duration: 5000,
+            message: `Log-in failed ` + '</br>' + e,
+            position: 'is-bottom-right',
+            type: 'is-danger',
+            hasIcon: true
+          })
+        })
+        .finally(() => {
+          loadingComponent.close()
+        })
     }
   }
 }
