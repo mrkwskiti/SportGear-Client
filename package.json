@@ -23,7 +23,8 @@
     "js-cookie": "^2.2.0",
     "nuxt": "^2.4.0",
     "nuxt-buefy": "^0.3.2",
-    "nuxt-fontawesome": "^0.4.0"
+    "nuxt-fontawesome": "^0.4.0",
+    "validator": "^11.1.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",
