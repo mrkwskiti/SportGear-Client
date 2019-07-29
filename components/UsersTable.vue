@@ -61,14 +61,22 @@ export default {
               }
             }
           },
-          {},
-          {},
+          {
+            validator: function(value, callback) {
+              callback((value !== null && value !== '') || !isRowFilled(this))
+            }
+          },
+          {
+            validator: function(value, callback) {
+              callback((value !== null && value !== '') || !isRowFilled(this))
+            }
+          },
           {
             validator: function(value, callback) {
               if (value !== null && value !== '') {
                 callback(duplicateValues(this, value) && isEmail(value))
               } else {
-                callback(true)
+                callback(!isRowFilled(this))
               }
             }
           }
