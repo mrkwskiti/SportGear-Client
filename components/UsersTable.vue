@@ -57,7 +57,11 @@ export default {
           {
             validator: function(value, callback) {
               if (isFilled(value)) {
-                callback(duplicateValues(this, value) && isNumeric(value))
+                callback(
+                  duplicateValues(this, value) &&
+                    isNumeric(value) &&
+                    value.length === 13
+                )
               } else {
                 callback(!isRowFilled(this))
               }
