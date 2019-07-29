@@ -38,6 +38,8 @@ const isRowFilled = _this => {
   })
 }
 
+const isFilled = value => value !== null && value !== ''
+
 export default {
   components: {
     HotTable
@@ -54,7 +56,7 @@ export default {
         columns: [
           {
             validator: function(value, callback) {
-              if (value !== null && value !== '') {
+              if (isFilled(value)) {
                 callback(duplicateValues(this, value) && isNumeric(value))
               } else {
                 callback(!isRowFilled(this))
@@ -63,17 +65,17 @@ export default {
           },
           {
             validator: function(value, callback) {
-              callback((value !== null && value !== '') || !isRowFilled(this))
+              callback(isFilled(value) || !isRowFilled(this))
             }
           },
           {
             validator: function(value, callback) {
-              callback((value !== null && value !== '') || !isRowFilled(this))
+              callback(isFilled(value) || !isRowFilled(this))
             }
           },
           {
             validator: function(value, callback) {
-              if (value !== null && value !== '') {
+              if (isFilled(value)) {
                 callback(duplicateValues(this, value) && isEmail(value))
               } else {
                 callback(!isRowFilled(this))
