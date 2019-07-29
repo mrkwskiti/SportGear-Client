@@ -30,6 +30,14 @@ const duplicateValues = (_this, value) => {
   }
 }
 
+const isRowFilled = _this => {
+  const vals = _this.instance.getDataAtRow(_this.row)
+  vals[_this.col] = ''
+  return vals.some(val => {
+    return val !== null && val !== ''
+  })
+}
+
 export default {
   components: {
     HotTable
@@ -49,7 +57,7 @@ export default {
               if (value !== null && value !== '') {
                 callback(duplicateValues(this, value) && isNumeric(value))
               } else {
-                callback(true)
+                callback(!isRowFilled(this))
               }
             }
           },
