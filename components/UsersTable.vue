@@ -19,15 +19,8 @@ const duplicateValues = (_this, value) => {
   const instance = _this.instance
   const vals = instance.getDataAtCol(_this.col)
   vals[_this.row] = ''
-  // console.log(vals.indexOf(value), vals)
 
-  if (vals.indexOf(value) < 0 && value !== null) {
-    console.log('You are OK')
-    return true
-  } else {
-    console.log('I already have this value')
-    return false
-  }
+  return vals.indexOf(value) < 0 && value !== null
 }
 
 const isRowFilled = _this => {
@@ -50,7 +43,6 @@ export default {
       update_users: [],
       hotRef: null,
       hotSettings: {
-        // minRows: 300,
         startCols: 4,
         colHeaders: ['SID', 'First Name', 'Last Name', 'E-mail'],
         columns: [
@@ -107,7 +99,6 @@ export default {
         },
         rowHeaders: true,
         stretchH: 'all',
-        // height: '340',
         minSpareRows: 7,
         manualColumnMove: true,
         licenseKey: 'non-commercial-and-evaluation'
