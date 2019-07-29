@@ -12,6 +12,7 @@
 <script>
 /* eslint-disable standard/no-callback-literal */
 import HotTable from '~/plugins/vue-handsontable'
+import { isNumeric } from 'validator'
 import ApiServices from '~/services/ApiService'
 
 const duplicateValues = (_this, value) => {
@@ -46,7 +47,7 @@ export default {
           {
             validator: function(value, callback) {
               if (value !== null && value !== '') {
-                callback(duplicateValues(this, value))
+                callback(duplicateValues(this, value) && isNumeric(value))
               } else {
                 callback(true)
               }
