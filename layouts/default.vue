@@ -27,22 +27,6 @@ export default {
     NavBar,
     FooterBar
   },
-  data() {
-    return {
-      items: [
-        {
-          title: 'Home',
-          icon: 'home',
-          to: { name: 'index' }
-        },
-        {
-          title: 'Inspire',
-          icon: 'lightbulb',
-          to: { name: 'inspire' }
-        }
-      ]
-    }
-  },
   head: {
     title: 'Jhanglek Games'
   }
