@@ -14,6 +14,21 @@
 import HotTable from '~/plugins/vue-handsontable'
 import ApiServices from '~/services/ApiService'
 
+const duplicateValues = (_this, value) => {
+  const instance = _this.instance
+  const vals = instance.getDataAtCol(_this.col)
+  vals[_this.row] = ''
+  // console.log(vals.indexOf(value), vals)
+
+  if (vals.indexOf(value) < 0 && value !== null) {
+    console.log('You are OK')
+    return true
+  } else {
+    console.log('I already have this value')
+    return false
+  }
+}
+
 export default {
   components: {
     HotTable
@@ -31,18 +46,7 @@ export default {
           {
             validator: function(value, callback) {
               if (value !== null && value !== '') {
-                const instance = this.instance
-                const vals = instance.getDataAtCol(0)
-                vals[this.row] = ''
-                // console.log(vals.indexOf(value), vals)
-
-                if (vals.indexOf(value) < 0 && value !== null) {
-                  console.log('You are OK')
-                  callback(true)
-                } else {
-                  console.log('I already have this value')
-                  callback(false)
-                }
+                callback(duplicateValues(this, value))
               } else {
                 callback(true)
               }
@@ -50,7 +54,15 @@ export default {
           },
           {},
           {},
-          {}
+          {
+            validator: function(value, callback) {
+              if (value !== null && value !== '') {
+                callback(duplicateValues(this, value))
+              } else {
+                callback(true)
+              }
+            }
+          }
         ],
         afterChange: () => {
           if (this.hotRef) {
