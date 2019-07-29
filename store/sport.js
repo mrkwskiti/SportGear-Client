@@ -3,11 +3,13 @@ import ApiService from '~/services/ApiService'
 const init = { id: null, users: [] }
 
 export default {
-  state: {
-    id: null,
-    users: [],
-    edited: false,
-    sports: []
+  state() {
+    return {
+      id: null,
+      users: [],
+      edited: false,
+      sports: []
+    }
   },
   mutations: {
     ADD_USER(state, user) {

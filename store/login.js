@@ -1,13 +1,15 @@
 import ApiService from '~/services/ApiService'
 
 export default {
-  state: {
-    univer: {
-      id: null,
-      username: '',
-      university: '',
-      sid: [],
-      users: []
+  state() {
+    return {
+      univer: {
+        id: null,
+        username: '',
+        university: '',
+        sid: [],
+        users: []
+      }
     }
   },
   getters: {
