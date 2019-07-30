@@ -32,7 +32,7 @@ export default {
     UsersTable
   },
   layout: 'register',
-  middleware: 'authenticated',
+  // middleware: 'authenticated',
   data: function() {
     return {
       valid: true,

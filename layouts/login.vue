@@ -7,22 +7,12 @@
 
 <script>
 import NavBar from '~/components/NavBar.vue'
-
 export default {
   components: {
     NavBar
   },
   head: {
     title: 'Jhanglek Games'
-  },
-  async beforeCreate() {
-    const loadingComponent = this.$loading.open()
-    try {
-      await this.$store.dispatch('login/checkSession')
-    } catch {
-      this.$router.push({ name: 'log-in' })
-    }
-    loadingComponent.close()
   }
 }
 </script>

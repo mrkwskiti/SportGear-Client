@@ -45,7 +45,7 @@
 import { mapActions } from 'vuex'
 
 export default {
-  layout: 'register',
+  layout: 'login',
   data() {
     return {
       data: {
