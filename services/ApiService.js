@@ -124,18 +124,5 @@ export default {
   fetchUsersInUni() {
     insertToken()
     return apiClient.get(_api1 + '/university/users/info').then(res => res.data)
-  },
-  session() {
-    insertToken()
-    return new Promise((resolve, reject) => {
-      apiClient
-        .get(_api1 + '/university')
-        .then(res => {
-          resolve(res.data)
-        })
-        .catch(err => {
-          reject(err)
-        })
-    })
   }
 }

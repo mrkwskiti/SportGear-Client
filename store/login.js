@@ -46,18 +46,6 @@ export default {
       return ApiService.fetchUsersInUni().then(res => {
         commit('ADD_USERS', res)
       })
-    },
-    checkSession({ commit }) {
-      return new Promise((resolve, reject) => {
-        ApiService.session()
-          .then(res => {
-            commit('ADD_UNIVER', res)
-            resolve(true)
-          })
-          .catch(err => {
-            reject(err)
-          })
-      })
     }
   }
 }

@@ -168,7 +168,7 @@ export default {
   components: {
     UserCard
   },
-  // middleware: 'authenticated',
+  middleware: 'authenticated',
   layout: 'register',
   data() {
     return {
