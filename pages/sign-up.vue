@@ -269,7 +269,7 @@ export default {
           })
         }
         // patch
-        else
+        else {
           this.patchUsers(this.data).then(() => {
             this.$notification.open({
               duration: 5000,
@@ -279,6 +279,8 @@ export default {
               hasIcon: true
             })
           })
+        }
+        this.$router.push({ name: 'log-in' })
       }
     },
     remove(id) {
