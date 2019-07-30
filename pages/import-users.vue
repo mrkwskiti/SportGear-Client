@@ -2,7 +2,12 @@
   <div class="contrainer grid">
     <div class="field">
       <h2 class="title is-1">Import athletes</h2>
-      <users-table @isValid="isValid" @updateUsers="updateUsers"></users-table>
+      <no-ssr>
+        <users-table
+          @isValid="isValid"
+          @updateUsers="updateUsers"
+        ></users-table>
+      </no-ssr>
     </div>
     <div class="columns">
       <div class="column">
