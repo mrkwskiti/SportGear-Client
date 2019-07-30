@@ -24,7 +24,8 @@
                 v-model="data.password"
                 type="password"
                 placeholder="Password"
-              ></b-input>
+                @keypress.native.enter="login"
+              />
             </b-field>
           </section>
         </div>
