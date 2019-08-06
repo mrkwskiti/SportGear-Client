@@ -192,21 +192,6 @@ export default {
       teams: 'sport/teams',
       eachTeam: 'sport/eachTeam'
     })
-    // competitions() {
-    //   if (this.data.sport) {
-    //     return this.competitionList(this.data.sport)
-    //   } else return []
-    // },
-    // teams() {
-    //   if (this.data.competition)
-    //     return Sport.teams(this.data.sport, this.data.competition)
-    //   else return 0
-    // },
-    // eachTeam() {
-    //   if (this.data.competition)
-    //     return Sport.eachTeam(this.data.sport, this.data.competition)
-    //   else return 0
-    // }
   },
   watch: {
     'data.sport': function(val) {
