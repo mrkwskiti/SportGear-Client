@@ -42,7 +42,7 @@
               <b-field label="Type of Competition">
                 <b-dropdown
                   v-model="data.competition"
-                  :disabled="competitions == ''"
+                  :disabled="data.sport === ''"
                   aria-role="list"
                 >
                   <button slot="trigger" class="button">
@@ -59,7 +59,7 @@
                   </button>
 
                   <b-dropdown-item
-                    v-for="competition in competitions"
+                    v-for="competition in competitions(data.sport)"
                     :key="competition"
                     :value="competition"
                     aria-role="listitem"
@@ -72,7 +72,7 @@
               <b-field label="Teams">
                 <b-dropdown
                   v-model="data.team"
-                  :disabled="!teams"
+                  :disabled="data.competition === ''"
                   aria-role="list"
                 >
                   <button slot="trigger" class="button">
@@ -87,7 +87,7 @@
                   </button>
 
                   <b-dropdown-item
-                    v-for="n in teams"
+                    v-for="n in teams(data.sport, data.competition)"
                     :key="n"
                     :value="convertIntToString(n)"
                     aria-role="listitem"
@@ -136,7 +136,11 @@
 
           <div class="columns">
             <div class="column">
-              <UserCard v-if="eachTeam > sport.users.length" />
+              <UserCard
+                v-if="
+                  eachTeam(data.sport, data.competition) > sport.users.length
+                "
+              />
             </div>
           </div>
 
@@ -162,7 +166,7 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
 import UserCard from '~/components/UserCard'
-import Sport from '~/modules/sport'
+// import Sport from '~/modules/sport'
 
 export default {
   components: {
@@ -181,25 +185,28 @@ export default {
   },
   computed: {
     ...mapState(['sport']),
-    ...mapGetters({ uni: 'login/uniLogged' }),
-    sports() {
-      return Sport.list()
-    },
-    competitions() {
-      if (this.data.sport) {
-        return Sport.listCompetition(this.data.sport)
-      } else return []
-    },
-    teams() {
-      if (this.data.competition)
-        return Sport.teams(this.data.sport, this.data.competition)
-      else return 0
-    },
-    eachTeam() {
-      if (this.data.competition)
-        return Sport.eachTeam(this.data.sport, this.data.competition)
-      else return 0
-    }
+    ...mapGetters({
+      uni: 'login/uniLogged',
+      sports: 'sport/sportList',
+      competitions: 'sport/competitionList',
+      teams: 'sport/teams',
+      eachTeam: 'sport/eachTeam'
+    })
+    // competitions() {
+    //   if (this.data.sport) {
+    //     return this.competitionList(this.data.sport)
+    //   } else return []
+    // },
+    // teams() {
+    //   if (this.data.competition)
+    //     return Sport.teams(this.data.sport, this.data.competition)
+    //   else return 0
+    // },
+    // eachTeam() {
+    //   if (this.data.competition)
+    //     return Sport.eachTeam(this.data.sport, this.data.competition)
+    //   else return 0
+    // }
   },
   watch: {
     'data.sport': function(val) {

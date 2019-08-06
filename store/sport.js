@@ -8,7 +8,7 @@ export default {
       id: null,
       users: [],
       edited: false,
-      sports: []
+      sports: null
     }
   },
   mutations: {
@@ -30,6 +30,22 @@ export default {
     }
   },
   getters: {
+    sportList: state => {
+      return state.sports ? Object.keys(state.sports) : []
+    },
+    competitionList: state => sport => {
+      return sport ? Object.keys(state.sports[sport].type) : 0
+    },
+    teams: state => (sport, competition) => {
+      return sport && competition
+        ? state.sports[sport].type[competition].teams
+        : 0
+    },
+    eachTeam: state => (sport, competition) => {
+      return sport && competition
+        ? state.sport[sport].type[competition].eachTeam
+        : 0
+    },
     sportId: state => (sportName, typeName) => {
       const sports = state.sports.filter(
         sport => sport.sport_name === sportName
