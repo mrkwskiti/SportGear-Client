@@ -43,14 +43,11 @@ export default {
     },
     eachTeam: state => (sport, competition) => {
       return sport && competition
-        ? state.sport[sport].type[competition].eachTeam
+        ? state.sports[sport].type[competition].eachTeam
         : 0
     },
-    sportId: state => (sportName, typeName) => {
-      const sports = state.sports.filter(
-        sport => sport.sport_name === sportName
-      )
-      return sports.filter(sport => sport.sport_type === typeName)[0].id
+    sportId: state => (sport, competition) => {
+      return state.sports[sport].type[competition]._id
     },
     usersId: state => {
       return state.users.map(user => user.id)
