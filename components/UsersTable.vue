@@ -44,7 +44,6 @@ export default {
       update_users: [],
       hotRef: null,
       hotSettings: {
-        startCols: 4,
         dataSchema: {
           sid: null,
           firstName: null,
