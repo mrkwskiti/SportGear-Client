@@ -12,6 +12,7 @@
 <script>
 /* eslint-disable standard/no-callback-literal */
 import HotTable from '~/plugins/vue-handsontable'
+import 'handsontable-key-value'
 import { isNumeric, isEmail } from 'validator'
 import ApiServices from '~/services/ApiService'
 
@@ -51,7 +52,8 @@ export default {
           email: null,
           gender: null
         },
-        colHeaders: ['SID', 'First Name', 'Last Name', 'E-mail'],
+        // filtersKeyValue: true,
+        colHeaders: ['SID', 'First Name', 'Last Name', 'Gender', 'E-mail'],
         columns: [
           {
             data: 'sid',
@@ -75,6 +77,25 @@ export default {
           },
           {
             data: 'lastName',
+            validator: function(value, callback) {
+              callback(isFilled(value) || !isRowFilled(this))
+            }
+          },
+          {
+            type: 'key-value',
+            data: 'gender',
+            source: [
+              {
+                id: 1,
+                name: 'Male'
+              },
+              {
+                id: 2,
+                name: 'Female'
+              }
+            ],
+            keyProperty: 'id',
+            valueProperty: 'name',
             validator: function(value, callback) {
               callback(isFilled(value) || !isRowFilled(this))
             }
