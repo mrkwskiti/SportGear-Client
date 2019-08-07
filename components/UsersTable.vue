@@ -44,9 +44,17 @@ export default {
       hotRef: null,
       hotSettings: {
         startCols: 4,
+        dataSchema: {
+          sid: null,
+          firstName: null,
+          lastName: null,
+          email: null,
+          gender: null
+        },
         colHeaders: ['SID', 'First Name', 'Last Name', 'E-mail'],
         columns: [
           {
+            data: 'sid',
             validator: function(value, callback) {
               if (isFilled(value)) {
                 callback(
@@ -60,16 +68,19 @@ export default {
             }
           },
           {
+            data: 'firstName',
             validator: function(value, callback) {
               callback(isFilled(value) || !isRowFilled(this))
             }
           },
           {
+            data: 'lastName',
             validator: function(value, callback) {
               callback(isFilled(value) || !isRowFilled(this))
             }
           },
           {
+            data: 'email',
             validator: function(value, callback) {
               if (isFilled(value)) {
                 callback(duplicateValues(this, value) && isEmail(value))
@@ -117,9 +128,7 @@ export default {
   methods: {
     fetchUsers() {
       return ApiServices.fetchUsersInUni().then(res => {
-        this.users = this.update_user = res.map(user => {
-          return [user.sid, user.firstName, user.lastName, user.email]
-        })
+        this.users = res
       })
     }
   }

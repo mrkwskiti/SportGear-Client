@@ -77,7 +77,8 @@ export default {
         lname: user.lastName,
         email: user.email,
         // TODO: find way to generate password
-        password: '1234'
+        password: '1234',
+        gender: user.gender
       })
       .then(res => {
         return res.data

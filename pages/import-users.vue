@@ -59,12 +59,7 @@ export default {
     async push() {
       if (this.hasUpdate) {
         const promises = this.update_users.map(async user => {
-          await ApiServices.postUser({
-            sid: user[0],
-            firstName: user[1],
-            lastName: user[2],
-            email: user[3]
-          })
+          await ApiServices.postUser(user)
         })
 
         await Promise.all(promises)
