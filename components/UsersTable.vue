@@ -4,7 +4,6 @@
       ref="usersTable"
       class="hot handsontable htColumnHeaders"
       :settings="hotSettings"
-      :data="users"
     ></hot-table>
   </div>
 </template>
@@ -126,10 +125,16 @@ export default {
               }
               this.$emit('updateUsers', this.update_users)
             })
+
+            this.hotRef.updateSettings({
+              height: this.hotRef.getData().length * 25 + 2
+            })
           }
         },
         rowHeaders: true,
         stretchH: 'all',
+        width: '100%',
+        rowHeight: 25,
         minSpareRows: 7,
         manualColumnMove: true,
         licenseKey: 'non-commercial-and-evaluation'
@@ -137,19 +142,15 @@ export default {
     }
   },
   async mounted() {
-    await this.fetchUsers()
     this.hotRef = await this.$refs.usersTable.hotInstance
+    const users = await ApiServices.fetchUsersInUni()
+    this.users = [...users] // make duplicate users
+    this.hotRef.loadData(users)
+    // set fetch old data to read-only
     for (let i = 0; i < this.users.length; i++) {
-      for (let j = 0; j < 4; j++) {
+      for (let j = 0; j < 5; j++) {
         this.hotRef.setCellMeta(i, j, 'readOnly', true)
       }
-    }
-  },
-  methods: {
-    fetchUsers() {
-      return ApiServices.fetchUsersInUni().then(res => {
-        this.users = res
-      })
     }
   }
 }
