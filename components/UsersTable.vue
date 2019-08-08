@@ -141,6 +141,7 @@ export default {
     }
   },
   async mounted() {
+    const loadingComponent = this.$loading.open()
     this.hotRef = await this.$refs.usersTable.hotInstance
     const users = await ApiServices.fetchUsersInUni()
     this.users = [...users] // make duplicate users
@@ -151,6 +152,7 @@ export default {
         this.hotRef.setCellMeta(i, j, 'readOnly', true)
       }
     }
+    loadingComponent.close()
   }
 }
 </script>
