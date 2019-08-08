@@ -58,6 +58,7 @@ export default {
     },
     async push() {
       if (this.hasUpdate) {
+        const loadingComponent = this.$loading.open()
         const promises = this.update_users.map(async user => {
           await ApiServices.postUser(user)
         })
@@ -70,6 +71,7 @@ export default {
           type: 'is-success',
           hasIcon: true
         })
+        loadingComponent.close()
         this.$router.push({ name: 'sign-up' })
       }
     }
