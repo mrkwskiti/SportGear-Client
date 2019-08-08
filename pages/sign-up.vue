@@ -248,9 +248,11 @@ export default {
     },
     push() {
       if (this.sport.edited) {
+        const loadingComponent = this.$loading.open()
         // post
         if (this.sport.id === null) {
           this.postTeam({ ...this.data, uni: this.uni }).then(() => {
+            loadingComponent.close()
             this.$notification.open({
               duration: 5000,
               message: `Commited team`,
@@ -263,6 +265,7 @@ export default {
         // patch
         else {
           this.patchUsers(this.data).then(() => {
+            loadingComponent.close()
             this.$notification.open({
               duration: 5000,
               message: `Commited team`,
