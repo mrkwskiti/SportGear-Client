@@ -127,14 +127,13 @@ export default {
             })
 
             this.hotRef.updateSettings({
-              height: this.hotRef.getData().length * 25 + 2
+              height: this.hotRef.getData().length * 24 + 26
             })
           }
         },
         rowHeaders: true,
         stretchH: 'all',
         width: '100%',
-        rowHeight: 25,
         minSpareRows: 7,
         manualColumnMove: true,
         licenseKey: 'non-commercial-and-evaluation'
