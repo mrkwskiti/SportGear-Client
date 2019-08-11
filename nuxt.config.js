@@ -1,3 +1,5 @@
+import bodyParser from 'body-parser'
+import session from 'express-session'
 import pkg from './package'
 
 export default {
@@ -77,6 +79,21 @@ export default {
       }
     ]
   },
+
+  serverMiddleware: [
+    // body-parser middleware
+    bodyParser.json(),
+    // session middleware
+    session({
+      secret: 'super-secret-key',
+      resave: false,
+      saveUninitialized: false,
+      cookie: { maxAge: 60000 }
+    }),
+    // Api middleware
+    // We add /api/login & /api/logout routes
+    '~/session'
+  ],
 
   /*
    ** Build configuration
