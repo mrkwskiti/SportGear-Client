@@ -87,12 +87,11 @@ export default {
     session({
       secret: 'super-secret-key',
       resave: false,
-      saveUninitialized: false,
-      cookie: { maxAge: 60000 }
+      saveUninitialized: false
     }),
     // Api middleware
     // We add /api/login & /api/logout routes
-    '~/session'
+    '~/services'
   ],
 
   /*
