@@ -1,4 +1,4 @@
-import { api, insertToken } from '../config/api'
+import { api } from '../config/api'
 
 export default {
   login: async (req, res, next) => {
@@ -6,13 +6,15 @@ export default {
     req.session.token = headers.authorization
     res.json(data)
   },
-  logout: (req, res, next) => {
-    req.session.destroy()
+  logout: async (req, res, next) => {
+    await req.session.destroy()
+    api.removeToken()
     res.json({ message: 'logged out' })
   },
   session: async (req, res, next) => {
     try {
-      insertToken(req.session.token)
+      await api.setToken(req.session.token)
+      console.log(api)
       const { data } = await api.get('/university')
       res.json(data)
     } catch {
@@ -20,7 +22,8 @@ export default {
     }
   },
   sid: async (req, res, next) => {
-    insertToken(req.session.token)
+    // insertToken(req.session.token)
+    api.setToken(req.session.token)
     const { data } = await api.get('/university/sid')
     res.json(data)
   }

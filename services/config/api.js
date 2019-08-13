@@ -1,4 +1,4 @@
-import axios from 'axios'
+const axios = require('axios')
 
 export const api = axios.create({
   baseURL: `https://geargame30.eng.cmu.ac.th/api/api/v1`,
@@ -9,6 +9,15 @@ export const api = axios.create({
   }
 })
 
-export const insertToken = token => {
+api.setToken = token => {
   if (token !== undefined) api.defaults.headers.common.Authorization = token
 }
+
+api.removeToken = () => {
+  if (api.defaults.headers.common.Authorization !== undefined)
+    delete api.defaults.headers.common.Authorization
+}
+
+// export const insertToken = token => {
+//   if (token !== undefined) api.defaults.headers.common.Authorization = token
+// }
