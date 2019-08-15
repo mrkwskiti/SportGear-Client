@@ -72,8 +72,12 @@ export default {
         })
     },
     getListSport({ commit }) {
-      return ApiService.getListSport().then(res => {
-        commit('SET_SPORTS', res)
+      // return ApiService.getListSport().then(res => {
+      //   commit('SET_SPORTS', res)
+      // })
+      return this.$axios.get('/services/sport').then(res => {
+        console.log(res)
+        commit('SET_SPORTS', res.data)
       })
     },
     resetUsers({ commit }) {
