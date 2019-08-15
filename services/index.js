@@ -1,6 +1,7 @@
 import express from 'express'
 
-import university from './routers/university'
+// import university from './routers/university'
+import routers from './routers/routers'
 
 // Create express router
 const router = express.Router()
@@ -17,7 +18,8 @@ router.use((req, res, next) => {
 })
 
 // routers to /session/university
-router.use('/university', university)
+router.use('/university', routers.university)
+router.use('/sport', routers.sport)
 
 // Export the server middleware
 export default {
