@@ -26,5 +26,14 @@ export default {
     api.setToken(req.session.token)
     const { data } = await api.get('/university/sid')
     res.json(data)
+  },
+  users: async (req, res, next) => {
+    try {
+      api.setToken(req.session.token)
+      const { data } = await api.get('/university/users/info')
+      res.json(data)
+    } catch (e) {
+      res.status(500).json({ message: e.message })
+    }
   }
 }
