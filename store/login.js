@@ -32,10 +32,12 @@ export default {
     }
   },
   actions: {
-    loginUniver({ commit, state }, credentials) {
-      return ApiService.loginUniver(credentials).then(res => {
-        commit('ADD_UNIVER', res)
-      })
+    loginUniver({ commit, state }, { user, password }) {
+      return this.$axios
+        .post('/services/university/login', { uni: user, pwd: password })
+        .then(res => {
+          commit('ADD_UNIVER', res.data)
+        })
     },
     fetchSid({ commit }) {
       return ApiService.sidList().then(res => {
@@ -45,6 +47,11 @@ export default {
     fetchUsers({ commit, state }) {
       return ApiService.fetchUsersInUni().then(res => {
         commit('ADD_USERS', res)
+      })
+    },
+    fetchUni({ commit }, token) {
+      return this.$axios.get('/services/university').then(res => {
+        commit('ADD_UNIVER', res.data)
       })
     }
   }
