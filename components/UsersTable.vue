@@ -13,7 +13,7 @@
 import HotTable from '~/plugins/vue-handsontable'
 import 'handsontable-key-value'
 import { isNumeric, isEmail } from 'validator'
-import ApiServices from '~/services/ApiService'
+// import ApiServices from '~/services/ApiService'
 
 const duplicateValues = (_this, value) => {
   const instance = _this.instance
@@ -143,9 +143,9 @@ export default {
   async mounted() {
     const loadingComponent = this.$loading.open()
     this.hotRef = await this.$refs.usersTable.hotInstance
-    const users = await ApiServices.fetchUsersInUni()
-    this.users = [...users] // make duplicate users
-    this.hotRef.loadData(users)
+    const { data } = await this.$axios.get('/services/university/users')
+    this.users = [...data] // make duplicate users
+    this.hotRef.loadData(data)
     // set fetch old data to read-only
     for (let i = 0; i < this.users.length; i++) {
       for (let j = 0; j < 5; j++) {
