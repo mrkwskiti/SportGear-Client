@@ -30,7 +30,6 @@
 
 <script>
 import UsersTable from '~/components/UsersTable'
-import ApiServices from '~/services/ApiService'
 
 export default {
   components: {
@@ -58,21 +57,32 @@ export default {
     },
     async push() {
       if (this.hasUpdate) {
-        const loadingComponent = this.$loading.open()
-        const promises = this.update_users.map(async user => {
-          await ApiServices.postUser(user)
-        })
+        try {
+          const loadingComponent = this.$loading.open()
 
-        await Promise.all(promises)
-        this.$notification.open({
-          duration: 5000,
-          message: `Imported users`,
-          position: 'is-bottom-right',
-          type: 'is-success',
-          hasIcon: true
-        })
-        loadingComponent.close()
-        this.$router.push({ name: 'sign-up' })
+          await this.$axios.post(
+            '/services/university/users',
+            this.update_users
+          )
+
+          this.$notification.open({
+            duration: 5000,
+            message: `Imported users`,
+            position: 'is-bottom-right',
+            type: 'is-success',
+            hasIcon: true
+          })
+          loadingComponent.close()
+          this.$router.push({ name: 'sign-up' })
+        } catch (e) {
+          this.$notification.open({
+            duration: 5000,
+            message: `Import users fail</br>Please try again.`,
+            position: 'is-bottom-right',
+            type: 'is-danger',
+            hasIcon: true
+          })
+        }
       }
     }
   }
