@@ -4,6 +4,7 @@ export default {
   login: async (req, res, next) => {
     const { data, headers } = await api.post('/university/login', req.body)
     req.session.token = headers.authorization
+    api.setToken(req.session.token)
     res.json(data)
   },
   logout: async (req, res, next) => {
@@ -51,6 +52,32 @@ export default {
       api.setToken(req.session.token)
       await api.post('/users', params)
       res.status(200).json({ message: 'Insert complete' })
+    } catch (e) {
+      res.status(500).json({ message: e.message })
+    }
+  },
+  fetchTeam: async (req, res, next) => {
+    try {
+      const { status, data } = await api.get('/sport/id', {
+        params: {
+          team_name: req.params.team,
+          sport_id: req.params.id
+        }
+      })
+      if (status === 200) {
+        req.session.university = {
+          team_id: data.id
+        }
+        const users = await api.get('/sport/list/teamBytype', {
+          params: {
+            type: req.params.id,
+            team_id: data.id
+          }
+        })
+        res.json({ users: users.data })
+      } else {
+        res.json({ users: [] })
+      }
     } catch (e) {
       res.status(500).json({ message: e.message })
     }

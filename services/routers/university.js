@@ -15,4 +15,6 @@ router.get('/users', controllers.university.users)
 
 router.post('/users', controllers.university.addUsers)
 
+router.get('/sport/:id/:team/users', controllers.university.fetchTeam)
+
 export default router
