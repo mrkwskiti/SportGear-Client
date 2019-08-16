@@ -13,4 +13,6 @@ router.get('/sid', controllers.university.sid)
 
 router.get('/users', controllers.university.users)
 
+router.post('/users', controllers.university.addUsers)
+
 export default router

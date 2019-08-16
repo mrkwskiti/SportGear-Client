@@ -35,5 +35,24 @@ export default {
     } catch (e) {
       res.status(500).json({ message: e.message })
     }
+  },
+  addUsers: async (req, res, next) => {
+    try {
+      const params = req.body.map(user => {
+        return {
+          sid: user.sid,
+          fname: user.firstName,
+          lname: user.lastName,
+          email: user.email,
+          password: '1234',
+          gender: user.gender
+        }
+      })
+      api.setToken(req.session.token)
+      await api.post('/users', params)
+      res.status(200).json({ message: 'Insert complete' })
+    } catch (e) {
+      res.status(500).json({ message: e.message })
+    }
   }
 }
