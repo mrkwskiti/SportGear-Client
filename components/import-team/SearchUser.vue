@@ -76,6 +76,8 @@ export default {
     push() {
       if (this.selected) {
         this.$emit('user', this.selected)
+        // clear search
+        this.sid = ''
       }
     }
   }
