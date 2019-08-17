@@ -130,7 +130,9 @@ export default {
     }
   },
   async mounted() {
+    const loadingComponent = this.$loading.open()
     this.sports = await this.$axios.get('/services/sport').then(res => res.data)
+    loadingComponent.close()
   },
   methods: {
     convertIntToString(i) {
