@@ -5,6 +5,10 @@ import pkg from './package'
 export default {
   mode: 'universal',
 
+  env: {
+    // baseURL: 'geargame30.eng.cmu.ac.th'
+  },
+
   /*
    ** Headers of the page
    */
@@ -63,6 +67,7 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL: process.env.baseURL || 'http://localhost:3000'
   },
 
   buefy: {
