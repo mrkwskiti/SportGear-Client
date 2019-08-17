@@ -11,14 +11,14 @@
         </div>
 
         <!-- <div v-if="data.team != 0"> -->
-        <div>
-          <div class="columns">
-            <div class="column">
-              <label class="label">Team</label>
-              <team-table v-model="users" />
-            </div>
+        <div class="columns">
+          <div class="column">
+            <label class="label">Team</label>
+            <team-table v-model="users" />
           </div>
+        </div>
 
+        <div v-if="users">
           <div class="columns">
             <div class="column">
               <search-user @user="addUser" />
@@ -59,7 +59,7 @@ export default {
   layout: 'register',
   data() {
     return {
-      users: [],
+      users: null,
       edited: false
     }
   },

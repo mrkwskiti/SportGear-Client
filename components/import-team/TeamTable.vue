@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-table :data="value">
+    <b-table v-if="value" :data="value">
       <template slot-scope="props">
         <b-table-column field="sid" label="SID" width="120" sortable>
           {{ props.row.sid }}
@@ -26,6 +26,11 @@
         </b-table-column>
       </template>
     </b-table>
+    <div v-else class="columns">
+      <div class="column has-text-centered">
+        Please select upper options first.
+      </div>
+    </div>
   </div>
 </template>
 
