@@ -19,7 +19,7 @@
                   Jhanglek Games
                 </h1>
                 <p class="is-size-4">
-                  23-28 December 2019
+                  23-27 December 2019
                 </p>
                 <div class="container">
                   <b-icon
