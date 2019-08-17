@@ -6,6 +6,7 @@
           v-model="sid"
           expanded
           placeholder="SID"
+          :disabled="disabled"
           :data="filteredUsers"
           field="sid"
           @select="user => (selected = user)"
@@ -41,6 +42,12 @@
 
 <script>
 export default {
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       users: [],

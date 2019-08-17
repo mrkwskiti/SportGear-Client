@@ -19,7 +19,7 @@
       <div v-if="isHidden">
         <div class="columns">
           <div class="column">
-            <search-user @user="addUser" />
+            <search-user :disabled="!canAddUser" @user="addUser" />
           </div>
         </div>
       </div>
@@ -66,6 +66,9 @@ export default {
   computed: {
     isHidden() {
       return this.users
+    },
+    canAddUser() {
+      return this.sport ? this.sport.eachTeam > this.users.length : false
     }
   },
   watch: {
