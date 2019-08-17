@@ -37,6 +37,7 @@
 <script>
 export default {
   props: {
+    // eslint-disable-next-line vue/require-default-prop
     value: Array
   },
   methods: {
