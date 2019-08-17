@@ -78,6 +78,7 @@ export default {
             )
             .then(res => res.data)
         : []
+      this.edited = await false
       loadingComponent.close()
     },
     addUser(user) {
