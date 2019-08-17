@@ -1,52 +1,43 @@
 <template>
-  <div>
-    <div class="contrainer grid">
-      <div class="field">
-        <h2 class="title is-1">Import teams</h2>
+  <div class="contrainer grid">
+    <div class="field">
+      <h2 class="title is-1">Import teams</h2>
 
+      <div class="columns">
+        <div class="column">
+          <selection @data="fetch" />
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+          <label class="label">Team</label>
+          <team-table v-model="users" />
+        </div>
+      </div>
+
+      <div v-if="isHidden">
         <div class="columns">
           <div class="column">
-            <selection @data="fetch" />
+            <search-user @user="addUser" />
           </div>
         </div>
-
-        <!-- <div v-if="data.team != 0"> -->
-        <div class="columns">
-          <div class="column">
-            <label class="label">Team</label>
-            <team-table v-model="users" />
-          </div>
-        </div>
-
-        <div v-if="isHidden">
-          <div class="columns">
-            <div class="column">
-              <search-user @user="addUser" />
-            </div>
-          </div>
-        </div>
-
-        <div class="columns">
-          <div class="column">
-            <b-field class="buttons" grouped position="is-right">
-              <b-button
-                :disabled="!edited"
-                class="is-primary is-right"
-                @click="push"
-              >
-                Commit team
-              </b-button>
-              <b-button
-                tag="router-link"
-                type="is-primary"
-                outlined
-                to="sign-up"
-              >
-                Cancel
-              </b-button>
-            </b-field>
-          </div>
-        </div>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <b-field class="buttons" grouped position="is-right">
+          <b-button
+            :disabled="!edited"
+            class="is-primary is-right"
+            @click="push"
+          >
+            Commit team
+          </b-button>
+          <b-button tag="router-link" type="is-primary" outlined to="sign-up">
+            Cancel
+          </b-button>
+        </b-field>
       </div>
     </div>
   </div>

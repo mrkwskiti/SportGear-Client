@@ -57,7 +57,7 @@ export default {
     fullName() {
       if (this.selected)
         return this.selected.firstName + '\t' + this.selected.lastName
-      else return ''
+      else return ' '
     }
   },
   async mounted() {
