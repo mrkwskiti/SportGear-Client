@@ -86,10 +86,27 @@ export default {
     async push() {
       if (this.edited) {
         const loadingComponent = this.$loading.open()
-        await this.$axios.post(
-          '/services/university/sport/users',
-          this.users.map(user => user.id)
-        )
+        try {
+          await this.$axios.post(
+            '/services/university/sport/users',
+            this.users.map(user => user.id)
+          )
+          this.$notification.open({
+            duration: 5000,
+            message: `Commited team`,
+            position: 'is-bottom-right',
+            type: 'is-success',
+            hasIcon: true
+          })
+        } catch (e) {
+          this.$notification.open({
+            duration: 5000,
+            message: `Fail to commit team<br/>${e}<br/>Please try again`,
+            position: 'is-bottom-right',
+            type: 'is-danger',
+            hasIcon: true
+          })
+        }
         loadingComponent.close()
       }
     }
