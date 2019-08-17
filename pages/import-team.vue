@@ -5,7 +5,7 @@
 
       <div class="columns">
         <div class="column">
-          <selection @data="fetch" />
+          <selection v-model="sport" @data="fetch" />
         </div>
       </div>
 
@@ -58,6 +58,7 @@ export default {
   layout: 'register',
   data() {
     return {
+      sport: null,
       users: null,
       edited: false
     }

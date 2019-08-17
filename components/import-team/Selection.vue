@@ -88,6 +88,12 @@
 
 <script>
 export default {
+  props: {
+    value: {
+      type: Object,
+      default: null
+    }
+  },
   data() {
     return {
       sports: null,
@@ -126,6 +132,10 @@ export default {
         this.data.team
           ? { sportId: this.sportId(), team: this.data.team }
           : null
+      )
+      this.$emit(
+        'input',
+        this.sports[this.data.sport].type[this.data.competition]
       )
     }
   },
