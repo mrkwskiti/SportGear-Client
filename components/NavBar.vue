@@ -63,9 +63,7 @@
         </div> -->
 
         <div class="navbar-end">
-          <div class="navbar-item is-hidden-touch">
-            <user-label></user-label>
-          </div>
+          <user-label></user-label>
         </div>
       </div>
     </nav>

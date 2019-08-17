@@ -1,24 +1,37 @@
 <template>
-  <div class="navbar-item">
-    <b-icon
-      id="univer-icon"
-      type="is-dark"
-      size="is-small"
-      pack="fas"
-      icon="university"
-    ></b-icon>
-    <span id="uni-label" class="has-text-dark is-hidden-mobile">
-      {{ uni }}
-    </span>
+  <div v-if="uni" class="navbar-item">
+    <div class="navbar-item is-hidden-touch">
+      <b-icon
+        id="univer-icon"
+        type="is-dark"
+        size="is-small"
+        pack="fas"
+        icon="university"
+      ></b-icon>
+      <span id="uni-label" class="has-text-dark is-hidden-mobile">
+        {{ uni }}
+      </span>
+    </div>
+    <div class="navbar-item" style="padding-right: 0">
+      <b-button rounded type="is-light" @click="logout">log out</b-button>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters({ uni: 'login/uniFullnameLogged' })
+  },
+  methods: {
+    ...mapActions({ removeUni: 'login/logoutUniver' }),
+    async logout() {
+      this.$loading.open()
+      await this.removeUni()
+      await window.location.reload(true)
+    }
   }
 }
 </script>
