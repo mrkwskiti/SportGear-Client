@@ -64,10 +64,10 @@ export default {
           sport_id: req.params.id
         }
       })
+      // init university obj in session
+      req.session.university = { sport: { sport_id: req.params.id } }
       if (status === 200) {
-        req.session.university = {
-          team_id: data.id
-        }
+        req.session.university.sport.team_id = data.id
         const users = await api.get('/sport/list/teamBytype', {
           params: {
             type: req.params.id,
@@ -79,6 +79,31 @@ export default {
         res.json([])
       }
     } catch (e) {
+      res.status(500).json({ message: e.message })
+    }
+  },
+  addUsersInTeam: async (req, res, next) => {
+    try {
+      if (req.session.university.sport.team_id) {
+        // patch
+        await api.post('/sport/list/patchPlayer', {
+          ...req.session.university.sport,
+          account_id: req.body
+        })
+      } else {
+        // posts
+        const id = await api
+          .post('/sport/list/addTeam', { ...req.session.university.sport })
+          .then(res => res.data.id)
+        await api.post('/sport/list/addPlayer', {
+          team_id: id,
+          sport_id: req.session.university.sport.sport_id,
+          account_id: req.body
+        })
+      }
+      res.json({ message: 'Add users in team complete' })
+    } catch (e) {
+      console.log(e)
       res.status(500).json({ message: e.message })
     }
   }
