@@ -19,6 +19,9 @@ export default {
   mutations: {
     ADD_UNIVER(state, credentials) {
       state.univer = credentials
+    },
+    REMOVE_UNIVER(state) {
+      state.univer = {}
     }
   },
   actions: {
@@ -32,6 +35,11 @@ export default {
     fetchUni({ commit }) {
       return this.$axios.get('/services/university').then(res => {
         commit('ADD_UNIVER', res.data)
+      })
+    },
+    logoutUniver({ commit }) {
+      return this.$axios.post('/services/university/logout').then(res => {
+        commit('REMOVE_UNIVER')
       })
     }
   }
