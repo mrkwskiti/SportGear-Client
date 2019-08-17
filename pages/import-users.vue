@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import UsersTable from '~/components/UsersTable'
+import UsersTable from '~/components/import-users/UsersTable'
 
 export default {
   components: {
