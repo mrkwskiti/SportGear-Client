@@ -15,7 +15,7 @@
           <div class="columns">
             <div class="column">
               <label class="label">Team</label>
-              <team-table :users="users" />
+              <team-table v-model="users" />
             </div>
           </div>
 
@@ -63,6 +63,11 @@ export default {
       edited: false
     }
   },
+  watch: {
+    users() {
+      this.edited = true
+    }
+  },
   methods: {
     async fetch(value) {
       const loadingComponent = this.$loading.open()
@@ -76,11 +81,17 @@ export default {
       loadingComponent.close()
     },
     addUser(user) {
-      this.hasEdit()
       this.users.push(user)
     },
-    hasEdit() {
-      this.edited = true
+    async push() {
+      if (this.edited) {
+        const loadingComponent = this.$loading.open()
+        await this.$axios.post(
+          '/services/university/sport/users',
+          this.users.map(user => user.id)
+        )
+        loadingComponent.close()
+      }
     }
   }
 }

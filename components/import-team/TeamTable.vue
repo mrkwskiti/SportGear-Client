@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-table :data="users">
+    <b-table :data="value">
       <template slot-scope="props">
         <b-table-column field="sid" label="SID" width="120" sortable>
           {{ props.row.sid }}
@@ -32,7 +32,12 @@
 <script>
 export default {
   props: {
-    users: Array
+    value: Array
+  },
+  methods: {
+    remove(id) {
+      this.$emit('input', this.value.filter(user => user.id !== id))
+    }
   }
 }
 </script>
