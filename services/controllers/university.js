@@ -74,9 +74,9 @@ export default {
             team_id: data.id
           }
         })
-        res.json({ users: users.data })
+        res.json(users.data)
       } else {
-        res.json({ users: [] })
+        res.json([])
       }
     } catch (e) {
       res.status(500).json({ message: e.message })
