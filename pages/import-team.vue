@@ -21,7 +21,7 @@
 
           <div class="columns">
             <div class="column">
-              <search-user @user="test" />
+              <search-user @user="addUser" />
             </div>
           </div>
 
@@ -64,9 +64,6 @@ export default {
     }
   },
   methods: {
-    test(value) {
-      console.log(value)
-    },
     async fetch(value) {
       const loadingComponent = this.$loading.open()
       this.users = value
@@ -77,6 +74,13 @@ export default {
             .then(res => res.data)
         : []
       loadingComponent.close()
+    },
+    addUser(user) {
+      this.hasEdit()
+      this.users.push(user)
+    },
+    hasEdit() {
+      this.edited = true
     }
   }
 }
