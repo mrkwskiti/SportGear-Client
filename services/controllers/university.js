@@ -73,8 +73,8 @@ export default {
         req.session.university.sport.team_id = data.id
         const users = await api.get('/sport/list/teamBytype', {
           params: {
-            type: req.params.id,
-            team_id: data.id
+            team_id: data.id,
+            type: req.params.sport_id
           }
         })
         res.json(users.data)
