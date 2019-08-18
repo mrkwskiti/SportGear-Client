@@ -2,10 +2,14 @@ import { api } from '../config/api'
 
 export default {
   login: async (req, res, next) => {
-    const { data, headers } = await api.post('/university/login', req.body)
-    req.session.token = headers.authorization
-    api.setToken(req.session.token)
-    res.json(data)
+    try {
+      const { data, headers } = await api.post('/university/login', req.body)
+      req.session.token = headers.authorization
+      api.setToken(req.session.token)
+      res.json(data)
+    } catch (e) {
+      res.status(401).json({ message: e.message })
+    }
   },
   logout: async (req, res, next) => {
     await req.session.destroy()
