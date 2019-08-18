@@ -111,6 +111,7 @@ export default {
             type: 'is-success',
             hasIcon: true
           })
+          this.edited = false
         } catch (e) {
           this.$notification.open({
             duration: 5000,
