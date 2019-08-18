@@ -6,6 +6,8 @@ export default {
       const { data, headers } = await api.post('/university/login', req.body)
       req.session.token = headers.authorization
       api.setToken(req.session.token)
+      // init university var in session
+      req.session.university = {}
       res.json(data)
     } catch (e) {
       res.status(401).json({ message: e.message })
@@ -63,13 +65,10 @@ export default {
   fetchTeam: async (req, res, next) => {
     try {
       const { status, data } = await api.get('/sport/id', {
-        params: {
-          team_name: req.params.team,
-          sport_id: req.params.id
-        }
+        params: req.params
       })
       // init university obj in session
-      req.session.university = { sport: { sport_id: req.params.id } }
+      req.session.university.sport = req.params
       if (status === 200) {
         req.session.university.sport.team_id = data.id
         const users = await api.get('/sport/list/teamBytype', {
