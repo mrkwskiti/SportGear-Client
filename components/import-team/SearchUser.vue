@@ -9,6 +9,7 @@
           :disabled="disabled"
           :data="filteredUsers"
           field="sid"
+          @typing="fetchUser"
           @select="user => (selected = user)"
         >
           <template slot-scope="props">
@@ -73,6 +74,13 @@ export default {
       .then(res => res.data)
   },
   methods: {
+    fetchUser() {
+      if (this.sid.length === 12) {
+        this.selected = this.filteredUsers[0]
+      } else {
+        this.selected = null
+      }
+    },
     push() {
       if (this.selected) {
         this.$emit('user', this.selected)
