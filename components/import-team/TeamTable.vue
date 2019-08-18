@@ -15,14 +15,21 @@
         </b-table-column>
 
         <b-table-column>
-          <b-button
+          <b-tooltip
+            label="Delete athlete"
+            position="is-right"
+            animated
             type="is-danger"
-            size="is-small"
-            style="border-radius: 9999px; width: 28px"
-            @click="remove(props.row.id)"
           >
-            <b-icon pack="fas" icon="times" size="is-small"></b-icon>
-          </b-button>
+            <b-button
+              type="is-danger"
+              size="is-small"
+              style="border-radius: 9999px; width: 28px"
+              @click="remove(props.row.id)"
+            >
+              <b-icon pack="fas" icon="times" size="is-small"></b-icon>
+            </b-button>
+          </b-tooltip>
         </b-table-column>
       </template>
     </b-table>
