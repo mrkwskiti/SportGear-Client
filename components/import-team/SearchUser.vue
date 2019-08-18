@@ -48,6 +48,10 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    team: {
+      type: Array,
+      default: null
     }
   },
   data() {
@@ -58,8 +62,13 @@ export default {
     }
   },
   computed: {
-    filteredUsers() {
+    diff() {
       return this.users.filter(user => {
+        return !this.team.find(el => el.id === user.id)
+      })
+    },
+    filteredUsers() {
+      return this.diff.filter(user => {
         return user.sid.toString().indexOf(this.sid) >= 0
       })
     },

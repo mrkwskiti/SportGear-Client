@@ -19,7 +19,11 @@
       <div v-if="isHidden">
         <div class="columns">
           <div class="column">
-            <search-user :disabled="!canAddUser" @user="addUser" />
+            <search-user
+              :disabled="!canAddUser"
+              :team="users"
+              @user="addUser"
+            />
           </div>
         </div>
       </div>
