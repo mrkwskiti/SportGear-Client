@@ -3,7 +3,12 @@
 
 // Set your colors
 $primary: #DF503E;
+// $primary: #1B5782;
 $primary-invert: findColorInvert($primary);
+$danger: #DF503E;
+$danger-invert: findColorInvert($danger);
+$success: #61E893;
+$success-invert: findColorInvert($success);
 $twitter: #4099FF;
 $twitter-invert: findColorInvert($twitter);
 
