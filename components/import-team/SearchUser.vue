@@ -22,7 +22,7 @@
                   {{ props.option.lastName }}
                 </small>
               </div>
-              <div class="column">
+              <div class="column is-hidden-mobile">
                 {{ props.option.firstName }}
                 &#09;
                 {{ props.option.lastName }}
