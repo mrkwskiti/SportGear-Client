@@ -11,6 +11,7 @@
           field="sid"
           @typing="fetchUser"
           @select="user => (selected = user)"
+          @keydown.native.enter="push"
         >
           <template slot-scope="props">
             <div class="columns">
