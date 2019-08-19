@@ -28,9 +28,10 @@ export default {
   methods: {
     ...mapActions({ removeUni: 'login/logoutUniver' }),
     async logout() {
-      this.$loading.open()
+      const loadingComponent = this.$loading.open()
       await this.removeUni()
-      await window.location.reload(true)
+      this.$router.push({ name: 'index' })
+      loadingComponent.close()
     }
   }
 }
