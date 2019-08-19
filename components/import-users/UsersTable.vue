@@ -9,11 +9,9 @@
 </template>
 
 <script>
-/* eslint-disable standard/no-callback-literal */
 import HotTable from '~/plugins/vue-handsontable'
 import 'handsontable-key-value'
 import { isNumeric, isEmail } from 'validator'
-// import ApiServices from '~/services/ApiService'
 
 const duplicateValues = (_this, value) => {
   const instance = _this.instance
@@ -56,15 +54,13 @@ export default {
           {
             data: 'sid',
             validator: function(value, callback) {
-              if (isFilled(value)) {
-                callback(
-                  duplicateValues(this, value) &&
-                    isNumeric(value) &&
-                    value.length === 13
-                )
-              } else {
-                callback(!isRowFilled(this))
-              }
+              callback(
+                isFilled(value)
+                  ? duplicateValues(this, value) &&
+                      isNumeric(value) &&
+                      value.length === 13
+                  : !isRowFilled(this)
+              )
             }
           },
           {
@@ -101,11 +97,11 @@ export default {
           {
             data: 'email',
             validator: function(value, callback) {
-              if (isFilled(value)) {
-                callback(duplicateValues(this, value) && isEmail(value))
-              } else {
-                callback(!isRowFilled(this))
-              }
+              callback(
+                isFilled(value)
+                  ? callback(duplicateValues(this, value) && isEmail(value))
+                  : !isRowFilled(this)
+              )
             }
           }
         ],
@@ -156,5 +152,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped></style>
