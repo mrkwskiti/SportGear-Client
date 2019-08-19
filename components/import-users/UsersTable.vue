@@ -49,7 +49,9 @@ export default {
           lastName: null,
           email: null,
           gender: null,
-          blood: null
+          details: {
+            blood: null
+          }
         },
         // filtersKeyValue: true,
         colHeaders: [
@@ -118,7 +120,7 @@ export default {
           },
           {
             type: 'key-value',
-            data: 'blood',
+            data: 'details.blood',
             source: [
               {
                 id: 1,
@@ -137,7 +139,7 @@ export default {
                 name: 'AB'
               }
             ],
-            keyProperty: 'id',
+            keyProperty: 'name',
             valueProperty: 'name',
             validator: function(value, callback) {
               callback(isFilled(value) || !isRowFilled(this))
@@ -183,7 +185,7 @@ export default {
     this.hotRef.loadData(data)
     // set fetch old data to read-only
     for (let i = 0; i < this.users.length; i++) {
-      for (let j = 0; j < 5; j++) {
+      for (let j = 0; j < 6; j++) {
         this.hotRef.setCellMeta(i, j, 'readOnly', true)
       }
     }

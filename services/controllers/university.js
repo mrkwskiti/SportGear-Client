@@ -52,7 +52,8 @@ export default {
           lname: user.lastName,
           email: user.email,
           password: '1234',
-          gender: user.gender
+          gender: user.gender,
+          details: JSON.stringify(user.details)
         }
       })
       api.setToken(req.session.token)
