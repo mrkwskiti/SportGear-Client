@@ -10,7 +10,6 @@
 
 <script>
 import HotTable from '~/plugins/vue-handsontable'
-import 'handsontable-key-value'
 import { isNumeric, isEmail } from 'validator'
 
 const duplicateValues = (_this, value) => {
