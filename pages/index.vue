@@ -34,7 +34,7 @@
                 </div>
                 <b-button
                   tag="router-link"
-                  to="/log-in"
+                  :to="localePath('log-in')"
                   class="is-primary has-padding-top-5"
                   style="margin: 1em"
                 >
