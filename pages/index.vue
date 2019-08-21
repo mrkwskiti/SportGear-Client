@@ -16,10 +16,10 @@
             <div class="columns is-mobile is-centered">
               <div class="column has-text-centered" style="max-width: 520px;">
                 <h1 class="is-size-3-mobile is-size-1 has-text-weight-bold">
-                  Jhanglek Games
+                  {{ $t('index.welcome') }}
                 </h1>
                 <p class="is-size-4">
-                  23-27 December 2019
+                  {{ $t('index.date') }}
                 </p>
                 <div class="container">
                   <b-icon
@@ -29,7 +29,7 @@
                     style="position: relative; top: 5px;"
                   ></b-icon>
                   <span>
-                    Faculty of Engineering, Chiang mai University
+                    {{ $t('index.where') }}
                   </span>
                 </div>
                 <b-button
@@ -37,8 +37,9 @@
                   to="/log-in"
                   class="is-primary has-padding-top-5"
                   style="margin: 1em"
-                  >Register athletes/teams</b-button
                 >
+                  {{ $t('index.registerButton') }}
+                </b-button>
                 <div class="has-padding-2x"></div>
               </div>
             </div>
