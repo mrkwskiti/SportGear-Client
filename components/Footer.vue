@@ -6,9 +6,19 @@
         <div class="columns">
           <div class="column">
             <div class="level has-padding-2x">
-              <div class="level-right">
+              <div class="level-left">
                 <div class="content has-text-centered-mobile">
                   Faculty of Engineering, Chiang Mai University
+                </div>
+              </div>
+              <div class="level-right">
+                <div class="has-text-right">
+                  <nuxt-link
+                    v-for="locale in availableLocales"
+                    :key="locale.code"
+                    :to="switchLocalePath(locale.code)"
+                    >{{ locale.name }}</nuxt-link
+                  >
                 </div>
               </div>
             </div>
@@ -43,7 +53,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    availableLocales() {
+      return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
