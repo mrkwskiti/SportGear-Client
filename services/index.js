@@ -1,7 +1,7 @@
 import express from 'express'
 
 // import university from './routers/university'
-import routers from './routers/routers'
+import routers from './routers'
 
 // Create express router
 const router = express.Router()
