@@ -45,10 +45,20 @@ export default {
           firstName: null,
           lastName: null,
           email: null,
-          gender: null
+          gender: null,
+          details: {
+            blood: null
+          }
         },
         // filtersKeyValue: true,
-        colHeaders: ['SID', 'First Name', 'Last Name', 'Gender', 'E-mail'],
+        colHeaders: [
+          'SID',
+          'First Name',
+          'Last Name',
+          'Gender',
+          'E-mail',
+          'Blood Type'
+        ],
         columns: [
           {
             data: 'sid',
@@ -102,6 +112,33 @@ export default {
                   : !isRowFilled(this)
               )
             }
+          },
+          {
+            type: 'key-value',
+            data: 'details.blood',
+            source: [
+              {
+                id: 1,
+                name: 'O'
+              },
+              {
+                id: 2,
+                name: 'A'
+              },
+              {
+                id: 3,
+                name: 'B'
+              },
+              {
+                id: 4,
+                name: 'AB'
+              }
+            ],
+            keyProperty: 'name',
+            valueProperty: 'name',
+            validator: function(value, callback) {
+              callback(isFilled(value) || !isRowFilled(this))
+            }
           }
         ],
         afterChange: () => {
@@ -143,7 +180,7 @@ export default {
     this.hotRef.loadData(data)
     // set fetch old data to read-only
     for (let i = 0; i < this.users.length; i++) {
-      for (let j = 0; j < 5; j++) {
+      for (let j = 0; j < 6; j++) {
         this.hotRef.setCellMeta(i, j, 'readOnly', true)
       }
     }
