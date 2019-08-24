@@ -1,3 +1,4 @@
+import url from 'url'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 import pkg from './package'
@@ -88,6 +89,12 @@ export default {
   serverMiddleware: [
     // body-parser middleware
     bodyParser.json(),
+    // parse query in req.query
+    (req, res, next) => {
+      // eslint-disable-next-line node/no-deprecated-api
+      req.query = url.parse(req.url, true).query
+      next()
+    },
     // session middleware
     session({
       secret: 'super-secret-key',
