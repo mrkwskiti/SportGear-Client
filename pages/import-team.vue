@@ -21,6 +21,7 @@
           <div class="column">
             <search-user
               :disabled="!canAddUser"
+              :gender="gender"
               :team="users"
               @user="addUser"
             />
@@ -73,6 +74,11 @@ export default {
     },
     canAddUser() {
       return this.sport ? this.sport.eachTeam > this.users.length : false
+    },
+    gender() {
+      return this.sport && this.sport.gender !== 'Male&Female'
+        ? this.sport.gender
+        : null
     }
   },
   watch: {
