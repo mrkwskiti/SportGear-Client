@@ -161,13 +161,14 @@ export default {
               this.$emit('updateUsers', this.update_users)
             })
 
-            this.hotRef.updateSettings({
-              height: this.hotRef.getData().length * 24 + 26
-            })
+            // this.hotRef.updateSettings({
+            //   height: this.hotRef.getData().length * 24 + 26
+            // })
           }
         },
         rowHeaders: true,
         stretchH: 'all',
+        height: 600,
         width: '100%',
         minSpareRows: 7,
         manualColumnMove: true,
