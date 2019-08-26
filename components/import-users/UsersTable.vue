@@ -131,31 +131,9 @@ export default {
             }
           },
           {
-            type: 'key-value',
+            type: 'dropdown',
             data: 'details.blood',
-            source: [
-              {
-                id: 1,
-                name: 'O'
-              },
-              {
-                id: 2,
-                name: 'A'
-              },
-              {
-                id: 3,
-                name: 'B'
-              },
-              {
-                id: 4,
-                name: 'AB'
-              }
-            ],
-            keyProperty: 'name',
-            valueProperty: 'name',
-            validator: function(value, callback) {
-              callback(isFilled(value) || !isRowFilled(this))
-            }
+            source: ['O', 'A', 'B', 'AB']
           }
         ],
         afterChange: () => {
