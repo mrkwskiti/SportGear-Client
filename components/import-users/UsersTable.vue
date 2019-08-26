@@ -170,7 +170,7 @@ export default {
         stretchH: 'all',
         height: 600,
         width: '100%',
-        minSpareRows: 7,
+        minSpareRows: 50,
         manualColumnMove: true,
         licenseKey: 'non-commercial-and-evaluation'
       }
