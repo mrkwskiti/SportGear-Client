@@ -60,7 +60,8 @@ export default {
           'Gender',
           'E-mail',
           'Blood Type',
-          'Congenital Diseases'
+          'Congenital Diseases',
+          'Food Allergy'
         ],
         columns: [
           {
@@ -138,6 +139,9 @@ export default {
           },
           {
             data: 'details.congenitalDiseases'
+          },
+          {
+            data: 'details.foodAllergy'
           }
         ],
         afterChange: () => {
@@ -179,7 +183,7 @@ export default {
     this.hotRef.loadData(data)
     // set fetch old data to read-only
     for (let i = 0; i < this.users.length; i++) {
-      for (let j = 0; j < 7; j++) {
+      for (let j = 0; j < 8; j++) {
         this.hotRef.setCellMeta(i, j, 'readOnly', true)
       }
     }
