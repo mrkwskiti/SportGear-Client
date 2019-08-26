@@ -10,7 +10,7 @@
 
 <script>
 /* eslint-disable standard/no-callback-literal */
-import HotTable from '~/plugins/vue-handsontable'
+import { HotTable, getSourceItem } from '~/plugins/vue-handsontable'
 import { isNumeric, isEmail } from 'validator'
 // import ApiServices from '~/services/ApiService'
 
@@ -93,18 +93,31 @@ export default {
             data: 'gender',
             source: [
               {
-                id: 1,
+                id: 'Male',
                 name: 'Male'
               },
               {
-                id: 2,
+                id: 'Female',
                 name: 'Female'
               }
             ],
             keyProperty: 'id',
             valueProperty: 'name',
             validator: function(value, callback) {
-              callback(isFilled(value) || !isRowFilled(this))
+              // callback(isFilled(value) || !isRowFilled(this))
+              if (isFilled(value)) {
+                getSourceItem.call(
+                  this,
+                  this.source,
+                  this.keyProperty,
+                  value,
+                  item => {
+                    return item ? callback(true) : callback(false)
+                  }
+                )
+              } else {
+                callback(!isRowFilled(this))
+              }
             }
           },
           {
