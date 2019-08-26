@@ -62,7 +62,7 @@ export default {
       const loadingComponent = this.$loading.open()
       this.loginUniver(this.data)
         .then(() => {
-          this.$router.push({ name: 'sign-up' })
+          this.$router.push(this.localePath({ name: 'sign-up' }))
         })
         .catch(e => {
           this.$notification.open({
