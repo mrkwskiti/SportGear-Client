@@ -1,7 +1,7 @@
 <template>
   <div class="contrainer grid">
     <div class="field">
-      <h2 class="title is-1">Import athletes</h2>
+      <h2 class="title is-1">{{ $t('ImportUser.ImportAthletes') }}</h2>
       <no-ssr>
         <users-table
           @isValid="isValid"
@@ -17,10 +17,10 @@
             class="is-primary is-right"
             @click="push"
           >
-            Update athletes
+            {{ $t('ImportUser.Update') }}
           </b-button>
           <b-button tag="router-link" type="is-primary" outlined to="sign-up">
-            Cancel
+            {{ $t('ImportUser.Cancel') }}
           </b-button>
         </b-field>
       </div>

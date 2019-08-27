@@ -8,7 +8,7 @@
             <div class="level has-padding-2x">
               <div class="level-left">
                 <div class="content has-text-centered-mobile">
-                  Faculty of Engineering, Chiang Mai University
+                  {{ $t('Footer.where') }}
                 </div>
               </div>
               <div class="level-right">
