@@ -28,7 +28,14 @@ export default {
   ImportUser: {
     ImportAthletes: 'เพิ่มนักกีฬา',
     Update: 'อัพเดทนักกีฬา',
-    Cancel: 'ยกเลิก'
+    Cancel: 'ยกเลิก',
+    UsersTable: {
+      SID: 'รหัสบัตรประชาชน',
+      Firstname: 'ชื่อ',
+      Lastname: 'นามสกุล',
+      Gender: 'เพศ',
+      Email: 'อีเมล'
+    }
   },
   Footer: {
     where: 'คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่'

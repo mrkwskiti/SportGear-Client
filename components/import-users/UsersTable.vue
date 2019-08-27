@@ -48,7 +48,13 @@ export default {
           gender: null
         },
         // filtersKeyValue: true,
-        colHeaders: ['SID', 'First Name', 'Last Name', 'Gender', 'E-mail'],
+        colHeaders: [
+          this.$t('ImportUser.UsersTable.SID'),
+          this.$t('ImportUser.UsersTable.Firstname'),
+          this.$t('ImportUser.UsersTable.Lastname'),
+          this.$t('ImportUser.UsersTable.Gender'),
+          this.$t('ImportUser.UsersTable.Email')
+        ],
         columns: [
           {
             data: 'sid',
