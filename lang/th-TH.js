@@ -23,7 +23,13 @@ export default {
     Importteam: 'เพิ่มทีม',
     Team: 'ทีม',
     CommitTeam: 'บันทึกทีม',
-    Cancel: 'ยกเลิก'
+    Cancel: 'ยกเลิก',
+    TeamTable: {
+      Selected: 'โปรดเลือกประเภทกีฬา',
+      SID: 'รหัสประชาชน',
+      Firstname: 'ชื่อ',
+      Lastname: 'นามสกุล'
+    }
   },
   ImportUser: {
     ImportAthletes: 'เพิ่มนักกีฬา',

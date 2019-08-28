@@ -23,7 +23,13 @@ export default {
     Importteam: 'Import teams',
     Team: 'ทีม',
     CommitTeam: 'Commit team',
-    Cancel: 'Cancel'
+    Cancel: 'Cancel',
+    TeamTable: {
+      Selected: 'Please select upper options first.',
+      SID: 'SID',
+      Firstname: 'Firstname',
+      Lastname: 'Lastname'
+    }
   },
   ImportUser: {
     ImportAthletes: 'Import athletes',
