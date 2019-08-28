@@ -54,6 +54,6 @@ export default {
     }
   },
   Footer: {
-    where: 'คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่'
+    where: 'Faculty of Engineering, Chiang mai University'
   }
 }
