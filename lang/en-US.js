@@ -29,6 +29,16 @@ export default {
       SID: 'SID',
       Firstname: 'Firstname',
       Lastname: 'Lastname'
+    },
+    Selection: {
+      SportChoose: 'Choose Sport',
+      CompeChoose: 'Choose Competition',
+      teamChoose: 'Choose team',
+      Type: {
+        sportType: 'Type of Sport',
+        CompeType: 'Type of Competition',
+        Teams: 'Teams'
+      }
     }
   },
   ImportUser: {

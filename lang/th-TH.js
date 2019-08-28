@@ -25,10 +25,20 @@ export default {
     CommitTeam: 'บันทึกทีม',
     Cancel: 'ยกเลิก',
     TeamTable: {
-      Selected: 'โปรดเลือกประเภทกีฬา',
+      Selected: 'กรุณาเลือกหัวข้อ',
       SID: 'รหัสประชาชน',
       Firstname: 'ชื่อ',
       Lastname: 'นามสกุล'
+    },
+    Selection: {
+      SportChoose: 'เลือกกีฬา',
+      CompeChoose: 'เลือกประเภทการแข่งขัน',
+      teamChoose: 'เลือกทีม',
+      Type: {
+        sportType: 'กีฬา',
+        CompeType: 'ประเภทการแข่งขัน',
+        Teams: 'ทีม'
+      }
     }
   },
   ImportUser: {
