@@ -49,7 +49,7 @@ export default {
     '@fortawesome/fontawesome-svg-core/styles.css',
     'node_modules/handsontable/dist/handsontable.full.css',
     { src: '~/assets/buefy-overrides.scss', lang: 'scss' },
-    '~/css/main.css',
+    '~/assets/main.css',
     // aos
     'aos/dist/aos.css'
   ],
