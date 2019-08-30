@@ -61,7 +61,30 @@ export default {
     '@nuxtjs/axios',
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
-    'nuxt-fontawesome'
+    'nuxt-fontawesome',
+    // Doc: https://nuxt-community.github.io/nuxt-i18n/
+    [
+      'nuxt-i18n',
+      {
+        locales: [
+          {
+            name: 'English',
+            code: 'en',
+            iso: 'en-US',
+            file: 'en-US.js'
+          },
+          {
+            name: 'ไทย',
+            code: 'th',
+            iso: 'th-TH',
+            file: 'th-TH.js'
+          }
+        ],
+        langDir: 'lang/',
+        defaultLocale: 'en',
+        lazy: true
+      }
+    ]
   ],
   /*
    ** Axios module configuration

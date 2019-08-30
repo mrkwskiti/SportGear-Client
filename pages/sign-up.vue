@@ -3,7 +3,7 @@
     <div class="contrainer grid">
       <div class="columns">
         <div class="column">
-          <h2 class="title is-1">Sign Up</h2>
+          <h2 class="title is-1">{{ $t('SignUp.Signup') }}</h2>
         </div>
       </div>
       <div class="field">
@@ -11,9 +11,9 @@
           id="main-button"
           class="is-fullwidth"
           tag="router-link"
-          to="/import-users"
+          :to="localePath('import-users')"
         >
-          <p class="subtitle is-3">Import athletes</p>
+          <p class="subtitle is-3">{{ $t('SignUp.ImportAthletes') }}</p>
         </b-button>
       </div>
       <div class="field">
@@ -21,9 +21,9 @@
           id="main-button"
           class="is-fullwidth"
           tag="router-link"
-          to="/import-team"
+          :to="localePath('import-team')"
         >
-          <p class="subtitle is-3">Import/edit teams</p>
+          <p class="subtitle is-3">{{ $t('SignUp.ImportTeam') }}</p>
         </b-button>
       </div>
     </div>
