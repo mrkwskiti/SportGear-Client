@@ -45,13 +45,18 @@ export default {
     '@fortawesome/fontawesome-svg-core/styles.css',
     'node_modules/handsontable/dist/handsontable.full.css',
     { src: '~/assets/buefy-overrides.scss', lang: 'scss' },
-    '~/css/main.css'
+    '~/css/main.css',
+    // aos
+    'aos/dist/aos.css'
   ],
 
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/vue-handsontable', ssr: false }],
+  plugins: [
+    { src: '~/plugins/vue-handsontable', ssr: false },
+    { src: '~/plugins/aos', ssr: false }
+  ],
 
   /*
    ** Nuxt.js modules
