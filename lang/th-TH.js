@@ -55,5 +55,8 @@ export default {
   },
   Footer: {
     where: 'คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่'
+  },
+  UserCard: {
+    Adduser: 'เพิ่มนักกีฬา'
   }
 }

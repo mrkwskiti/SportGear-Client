@@ -55,5 +55,8 @@ export default {
   },
   Footer: {
     where: 'Faculty of Engineering, Chiang mai University'
+  },
+  UserCard: {
+    Adduser: 'เพิ่มนักกีฬา'
   }
 }

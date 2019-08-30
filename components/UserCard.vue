@@ -8,7 +8,7 @@
         <b-autocomplete
           v-model="user.sid"
           expanded
-          placeholder="SID"
+          :placeholder="$t('SID')"
           :loading="isLoading && isRegister"
           :disabled="isLoading"
           :data="filterSid"
@@ -22,7 +22,7 @@
             :class="[isLoading ? 'is-loading' : null]"
             @click="add"
           >
-            Add user
+            {{ $t('UserCard.Adduser') }}
           </a>
         </p>
       </div>
