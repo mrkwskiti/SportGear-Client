@@ -32,7 +32,7 @@ export default {
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Mitr&display=swap'
+        href: 'https://fonts.googleapis.com/css?family=Mitr:300&display=swap'
       }
     ]
   },
