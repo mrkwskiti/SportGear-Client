@@ -70,8 +70,6 @@
 export default {
   name: 'HomePage',
 
-  transitions: 'bounce',
-
   components: {
     // Card
   }
