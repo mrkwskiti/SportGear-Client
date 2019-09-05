@@ -3,10 +3,7 @@
     <div class="field">
       <h2 class="title is-1">{{ $t('ImportUser.ImportAthletes') }}</h2>
       <no-ssr>
-        <users-table
-          @isValid="isValid"
-          @updateUsers="updateUsers"
-        ></users-table>
+        <users-table @isValid="isValid" @newUsers="updateUsers"></users-table>
       </no-ssr>
     </div>
     <div class="columns">
@@ -40,12 +37,12 @@ export default {
   data: function() {
     return {
       valid: true,
-      update_users: []
+      new_users: []
     }
   },
   computed: {
     hasUpdate() {
-      return this.valid && this.update_users.length !== 0
+      return this.valid && this.new_users.length !== 0
     }
   },
   methods: {
@@ -53,17 +50,14 @@ export default {
       this.valid = value
     },
     updateUsers(value) {
-      this.update_users = value
+      this.new_users = value
     },
     async push() {
       if (this.hasUpdate) {
         try {
           const loadingComponent = this.$loading.open()
 
-          await this.$axios.post(
-            '/services/university/users',
-            this.update_users
-          )
+          await this.$axios.post('/services/university/users', this.new_users)
 
           this.$notification.open({
             duration: 5000,
