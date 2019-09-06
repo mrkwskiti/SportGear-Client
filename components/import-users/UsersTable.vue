@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import HotTable from '~/plugins/vue-handsontable'
+import { HotTable, Handsontable } from '~/plugins/vue-handsontable'
 import { isNumeric, isEmail } from 'validator'
 
 const duplicateValues = (_this, value) => {
@@ -36,11 +36,13 @@ export default {
   },
   data() {
     return {
-      users: null,
+      users: [], // old users
+      all_users: [],
       new_users: [],
       hotRef: null,
       hotSettings: {
         dataSchema: {
+          id: null,
           sid: null,
           firstName: null,
           lastName: null,
@@ -108,15 +110,56 @@ export default {
                   : !isRowFilled(this)
               )
             }
+          },
+          {
+            readOnly: true,
+            renderer: function(
+              instance,
+              td,
+              row,
+              col,
+              prop,
+              value,
+              cellProperties
+            ) {
+              Handsontable.default.renderers.TextRenderer.apply(this, arguments)
+              td.innerHTML = '<button class="del">Delete</button>'
+            }
           }
         ],
-        afterChange: () => {
+        cells: (row, columns, prop) => {
+          const cellProperties = {}
+          // set old users is read-only
+          if (this.hotRef) {
+            // read-only old users
+            const user = this.users.find(user => {
+              return this.hotRef.getSourceDataAtRow(row).sid === user.sid
+            })
+            cellProperties.readOnly = !!user
+          }
+          return cellProperties
+        },
+        afterOnCellMouseDown: function(e, coords, TD) {
+          if (coords.col === 5) {
+            // console.log(this)
+            // console.log(this.getSourceDataAtRow(coords.row))
+            this.alter('remove_row', coords.row)
+          }
+        },
+        beforeRemoveRow: (index, amount, physicalRows, source) => {
+          // console.log('removed')
+          // console.log(this.hotRef.getSourceDataAtRow(index))
+          // console.log(physicalRows)
+        },
+        afterChange: (change, source) => {
+          console.log('change')
           if (this.hotRef) {
             this.hotRef.validateCells(valid => {
               // this.valid = valid
               this.$emit('isValid', valid)
 
               const update = this.hotRef.getSourceData()
+              this.all_users = update
 
               // clear new users
               this.new_users = []
@@ -147,12 +190,6 @@ export default {
     const { data } = await this.$axios.get('/services/university/users')
     this.users = [...data] // make duplicate users
     this.hotRef.loadData(data)
-    // set fetch old data to read-only
-    for (let i = 0; i < this.users.length; i++) {
-      for (let j = 0; j < 5; j++) {
-        this.hotRef.setCellMeta(i, j, 'readOnly', true)
-      }
-    }
     loadingComponent.close()
   }
 }

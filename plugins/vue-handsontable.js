@@ -1,7 +1,9 @@
-// eslint-disable-next-line import/no-mutable-exports
+/* eslint-disable import/no-mutable-exports */
 let HotTable = null
+let Handsontable = null
 if (process.client) {
   HotTable = require('@handsontable/vue').HotTable
   require('handsontable-key-value')
+  Handsontable = require('handsontable')
 }
-export default HotTable
+module.exports = { HotTable, Handsontable }
