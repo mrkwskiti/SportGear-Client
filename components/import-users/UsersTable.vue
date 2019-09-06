@@ -38,6 +38,7 @@ export default {
     return {
       users: [], // old users
       all_users: [],
+      delete_users: [],
       new_users: [],
       hotRef: null,
       hotSettings: {
@@ -130,7 +131,10 @@ export default {
         cells: (row, columns, prop) => {
           const cellProperties = {}
           // set old users is read-only
-          if (this.hotRef) {
+          if (
+            this.hotRef &&
+            this.users.length - this.delete_users.length > row
+          ) {
             // read-only old users
             const user = this.users.find(user => {
               return this.hotRef.getSourceDataAtRow(row).sid === user.sid
@@ -141,15 +145,27 @@ export default {
         },
         afterOnCellMouseDown: function(e, coords, TD) {
           if (coords.col === 5) {
-            // console.log(this)
-            // console.log(this.getSourceDataAtRow(coords.row))
             this.alter('remove_row', coords.row)
           }
         },
         beforeRemoveRow: (index, amount, physicalRows, source) => {
-          // console.log('removed')
-          // console.log(this.hotRef.getSourceDataAtRow(index))
-          // console.log(physicalRows)
+          this.hotRef.validateCells(valid => {
+            this.$emit('isValid', valid)
+            if (index < this.users.length - this.delete_users.length) {
+              const user = this.hotRef.getSourceDataAtRow(index)
+              this.delete_users.push(user)
+            }
+          })
+        },
+        beforeUndo: action => {
+          if (action.actionType !== 'remove_row') {
+            return
+          }
+          if (this.users.length - this.delete_users.length >= action.index) {
+            this.delete_users = this.delete_users.filter(
+              user => user.sid !== action.data[0][0]
+            )
+          }
         },
         afterChange: (change, source) => {
           console.log('change')
@@ -164,7 +180,11 @@ export default {
               // clear new users
               this.new_users = []
               // clean empty row
-              for (let i = this.users.length; i < update.length; i++) {
+              for (
+                let i = this.users.length - this.delete_users.length;
+                i < update.length;
+                i++
+              ) {
                 if (!this.hotRef.isEmptyRow(i)) this.new_users.push(update[i])
               }
               this.$emit('newUsers', this.new_users)
