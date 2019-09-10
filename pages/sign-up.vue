@@ -1,29 +1,31 @@
 <template>
-  <div class="contrainer grid">
-    <div class="columns">
-      <div class="column">
-        <h2 class="title is-1">Sign Up</h2>
+  <div>
+    <div class="contrainer grid">
+      <div class="columns">
+        <div class="column">
+          <h2 class="title is-1">Sign Up</h2>
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <b-button
-        id="main-button"
-        class="is-fullwidth"
-        tag="router-link"
-        to="/import-users"
-      >
-        <p class="subtitle is-3">Import athletes</p>
-      </b-button>
-    </div>
-    <div class="field">
-      <b-button
-        id="main-button"
-        class="is-fullwidth"
-        tag="router-link"
-        to="/import-team"
-      >
-        <p class="subtitle is-3">Import/edit teams</p>
-      </b-button>
+      <div class="field">
+        <b-button
+          id="main-button"
+          class="is-fullwidth"
+          tag="router-link"
+          to="/import-users"
+        >
+          <p class="subtitle is-3">Import athletes</p>
+        </b-button>
+      </div>
+      <div class="field">
+        <b-button
+          id="main-button"
+          class="is-fullwidth"
+          tag="router-link"
+          to="/import-team"
+        >
+          <p class="subtitle is-3">Import/edit teams</p>
+        </b-button>
+      </div>
     </div>
   </div>
 </template>

@@ -1,5 +1,10 @@
 <template>
   <div v-if="uni" class="navbar-item">
+    <div class="has-text-right">
+      <b-button tag="router-link" to="/change-password"
+        >Change password</b-button
+      >
+    </div>
     <div class="navbar-item is-hidden-touch">
       <b-icon
         id="univer-icon"
