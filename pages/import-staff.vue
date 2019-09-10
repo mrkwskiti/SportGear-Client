@@ -2,7 +2,28 @@
   <div class="contrainer graid">
     <div class="field">
       <h2 class="title is-1">Import Staff</h2>
-      <no-ssr> <staff-table> </staff-table> </no-ssr>
+      <no-ssr>
+        <staff-table>
+          <!--  @isValid="isValid"
+                @updateUsers="updateUsers"-->
+        </staff-table>
+      </no-ssr>
+    </div>
+    <div class="columns">
+      <div class="column">
+        <b-field class="buttons" grouped position="is-right">
+          <b-button
+            :disabled="!hasUpdate"
+            class="is-primary is-right"
+            @click="push"
+          >
+            Update Staff
+          </b-button>
+          <b-button tag="router-link" type="is-primary" outlined to="sign-up">
+            Cancel
+          </b-button>
+        </b-field>
+      </div>
     </div>
   </div>
 </template>
