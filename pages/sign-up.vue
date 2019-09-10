@@ -26,6 +26,16 @@
           <p class="subtitle is-3">Import/edit teams</p>
         </b-button>
       </div>
+      <div class="field">
+        <b-button
+          id="main-button"
+          class="is-fullwidth"
+          tag="router-link"
+          to="/import-staff"
+        >
+          <p class="subtitle is-3">Import/edit staff</p>
+        </b-button>
+      </div>
     </div>
   </div>
 </template>
