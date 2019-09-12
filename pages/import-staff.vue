@@ -32,6 +32,52 @@ import StaffTable from '~/components/import-staff/StaffTable'
 export default {
   components: {
     StaffTable
+  },
+  layout: 'register',
+  middleware: 'authenticated',
+  data: function() {
+    return {
+      valid: true,
+      update_users: []
+    }
+  },
+  computed: {
+    hasUpdate() {
+      return this.valid && this.update_users.length !== 0
+    }
+  },
+  methods: {
+    isValid(value) {
+      this.valid = value
+    },
+    async push() {
+      if (this.hasUpdate) {
+        try {
+          const loadingComponent = this.$loading.open()
+          await this.$axios.post(
+            '/services/university/users',
+            this.update_users
+          )
+          this.$notification.open({
+            duration: 5000,
+            message: `Imported users`,
+            position: 'is-bottom-right',
+            type: 'is-success',
+            hasIcon: true
+          })
+          loadingComponent.close()
+          this.$router.push({ name: 'sign-up ' })
+        } catch (e) {
+          this.$notification.open({
+            duration: 5000,
+            message: `Import users fail</br>Please try again.`,
+            position: 'is-bottom-right',
+            type: 'is-danger',
+            hasIcon: true
+          })
+        }
+      }
+    }
   }
 }
 </script>
