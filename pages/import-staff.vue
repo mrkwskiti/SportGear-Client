@@ -1,5 +1,5 @@
 <template>
-  <div class="contrainer graid">
+  <div class="contrainer grid">
     <div class="field">
       <h2 class="title is-1">Import Staff</h2>
       <no-ssr>

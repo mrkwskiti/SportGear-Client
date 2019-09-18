@@ -44,10 +44,18 @@ export default {
           firstName: null,
           lastName: null,
           email: null,
-          gender: null
+          gender: null,
+          type: null
         },
         // filtersKeyValue: true,
-        colHeaders: ['SID', 'First Name', 'Last Name', 'Gender', 'E-mail'],
+        colHeaders: [
+          'SID',
+          'First Name',
+          'Last Name',
+          'Gender',
+          'E-mail',
+          'Type'
+        ],
         columns: [
           {
             data: 'sid',
@@ -100,6 +108,42 @@ export default {
                   ? callback(duplicateValues(this, value) && isEmail(value))
                   : !isRowFilled(this)
               )
+            }
+          },
+          {
+            // unofficialword
+            type: 'key-value',
+            data: 'type',
+            source: [
+              {
+                id: 1,
+                name: 'korkorbo'
+              },
+              {
+                id: 2,
+                name: 'HeadGear'
+              },
+              {
+                id: 3,
+                name: 'Ambassador'
+              },
+              {
+                id: 4,
+                name: 'Ambassador Staff'
+              },
+              {
+                id: 5,
+                name: 'Faculty Member'
+              },
+              {
+                id: 6,
+                name: 'Staff'
+              }
+            ],
+            keyProperty: 'id',
+            valueProperty: 'name',
+            validator: function(value, callback) {
+              callback(isFilled(value) || !isRowFilled(this))
             }
           }
         ],
