@@ -1,51 +1,4 @@
 <template>
-  <!--<div class="container grid">
-    <div class="column has-text-centered">
-      <p class="title">Change password</p>
-      <div class="columns">
-        <div class="column">
-          <section>
-            <b-field>
-              <b-input
-                v.model="data.password"
-                placeholder="old password"
-                type="password"
-              >
-              </b-input>
-            </b-field>
-            <b-field>
-              <b-input
-                v-model="data.newpassword"
-                placeholder="new password"
-                type="new-password"
-              ></b-input
-            ></b-field>
-            <b-field>
-              <b-input
-                v-model="data.reEnternewpassword"
-                placeholder="re-enter new password"
-                type="new-password"
-                @keypress.native.enter="changePass"
-              ></b-input
-            ></b-field>
-            <b-button class="is-primary">
-              Submit new password
-            </b-button>
-            <br />
-            <b-button
-              rounded
-              type="is-light"
-              style="margin-top : 10px"
-              tag="router-link"
-              to="/sign-up"
-            >
-              Cancle
-            </b-button>
-          </section>
-        </div>
-      </div>
-    </div>
-  </div>-->
   <div class="container grid">
     <div class="columns">
       <div class=" column has-text-centered">
@@ -53,27 +6,47 @@
         <div class="field">
           <div class="control">
             <input
+              v-model="data.password"
               class="input is-medium "
               type="password"
               placeholder="old password"
             />
             <input
+              id="check"
+              v-model="data.newpassword"
               class="input is-medium"
               type="password"
               placeholder="new password"
             />
             <input
+              v-model="data.reEnternewpassword"
               class="input is-medium"
               type="password"
               placeholder="re-enter new password"
             />
+            <div class="content">
+              <div v-show="ishidden">
+                <p v-if="data.newpassword === data.reEnternewpassword">
+                  Password match
+                </p>
+                <!-- how to change color to this paragraph ???-->
+                <p v-else>
+                  Password Doesn't match
+                </p>
+              </div>
+            </div>
           </div>
-          <button class="button is-primary is-fullwidth">
+          <b-button class="is-primary is-fullwidth" @click="ishidden = true">
             Change Password
-          </button>
-          <button class="button is-light is-fullwidth">
+          </b-button>
+          <b-button
+            class="is-fullwidth"
+            tag="router-link"
+            outlined
+            to="sign-up"
+          >
             Cancle
-          </button>
+          </b-button>
         </div>
       </div>
     </div>
@@ -84,14 +57,14 @@
 export default {
   data() {
     return {
+      ishidden: false,
       data: {
         password: '',
         newpassword: '',
         reEnternewpassword: ''
       }
     }
-  },
-  methods: {}
+  }
 }
 </script>
 
@@ -103,6 +76,7 @@ export default {
   margin-bottom: 10px;
 }
 .button {
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 </style>
