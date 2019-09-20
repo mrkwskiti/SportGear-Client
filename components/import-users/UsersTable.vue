@@ -36,10 +36,12 @@ export default {
   },
   data() {
     return {
+      users: [],
       hotRef: null,
       hotSettings: {
         dataSchema: {
           id: null,
+          edited: null,
           sid: null,
           firstName: null,
           lastName: null,
@@ -49,6 +51,7 @@ export default {
         // filtersKeyValue: true,
         colHeaders: [
           'id',
+          'edited',
           this.$t('ImportUser.UsersTable.SID'),
           this.$t('ImportUser.UsersTable.Firstname'),
           this.$t('ImportUser.UsersTable.Lastname'),
@@ -57,13 +60,16 @@ export default {
           ''
         ],
         hiddenColumns: {
-          columns: [0],
+          columns: [0, 1],
           indicators: false
         },
         columns: [
           {
-            data: 'id',
-            readOnly: true
+            data: 'id'
+          },
+          {
+            data: 'edited',
+            type: 'checkbox'
           },
           {
             data: 'sid',
@@ -137,28 +143,44 @@ export default {
         cells: (row, columns, prop) => {
           const cellProperties = {}
           // set old users is read-only
-          if (this.hotRef) {
+          if (this.hotRef && prop === 'sid') {
             // read-only old users
             cellProperties.readOnly = !!this.hotRef.getSourceDataAtRow(row).id
           }
           return cellProperties
         },
         afterOnCellMouseDown: function(e, coords, TD) {
-          if (coords.col === 6) {
+          if (coords.col === 7) {
             this.alter('remove_row', coords.row)
           }
         },
         afterChange: (change, source) => {
-          if (this.hotRef) {
+          if (this.hotRef && change) {
             this.hotRef.validateCells(valid => {
               // this.valid = valid
+              if (source !== 'UndoRedo.undo') {
+                change.forEach(([row, prop, oldValue, newValue]) => {
+                  const user = this.hotRef.getSourceDataAtRow(row)
+                  if (!!user.id && !user.edited && prop !== 'edited')
+                    this.hotRef.setDataAtRowProp(row, 'edited', true)
+                })
+              }
               this.$emit('isValid', valid)
               const users = this.hotRef.getSourceData()
+              // debug
+              this.users = users
               this.$emit(
                 'newUsers',
                 users.filter(user => !user.id && !!user.sid)
               )
             })
+          }
+        },
+        afterUndo({ changes, actionType }) {
+          // recursive if undo in edited prop
+
+          if (actionType === 'change' && changes[0][1] === 'edited') {
+            this.undo()
           }
         },
         rowHeaders: true,
