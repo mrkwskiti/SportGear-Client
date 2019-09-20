@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div data-aos="fade">
     <nav-bar />
 
     <!-- <aside class="column is-2 section">

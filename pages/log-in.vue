@@ -10,20 +10,23 @@
       </div>
       <div class="columns">
         <div class="column has-text-centered">
-          <p class="title">Log in</p>
+          <p class="title">{{ $t('logIn.loginWord') }}</p>
         </div>
       </div>
       <div class="columns">
         <div class="column">
           <section>
             <b-field>
-              <b-input v-model="data.user" placeholder="User name"></b-input>
+              <b-input
+                v-model="data.user"
+                :placeholder="$t('logIn.Username')"
+              ></b-input>
             </b-field>
             <b-field>
               <b-input
                 v-model="data.password"
                 type="password"
-                placeholder="Password"
+                :placeholder="$t('logIn.Password')"
                 @keypress.native.enter="login"
               />
             </b-field>
@@ -34,7 +37,7 @@
       <div class="columns">
         <div class="column">
           <b-button class="is-primary is-fullwidth" @click="login">
-            Login
+            {{ $t('logIn.loginWord2') }}
           </b-button>
         </div>
       </div>
@@ -62,7 +65,7 @@ export default {
       const loadingComponent = this.$loading.open()
       this.loginUniver(this.data)
         .then(() => {
-          this.$router.push({ name: 'sign-up' })
+          this.$router.push(this.localePath({ name: 'sign-up' }))
         })
         .catch(e => {
           this.$notification.open({

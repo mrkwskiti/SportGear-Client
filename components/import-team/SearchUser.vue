@@ -49,6 +49,10 @@ export default {
       type: Boolean,
       default: false
     },
+    gender: {
+      type: String,
+      default: null
+    },
     team: {
       type: Array,
       default: null
@@ -78,12 +82,20 @@ export default {
       else return ' '
     }
   },
-  async mounted() {
-    this.users = await this.$axios
-      .get('/services/university/users')
-      .then(res => res.data)
+  watch: {
+    gender() {
+      this.fetchUsers()
+    }
+  },
+  mounted() {
+    this.fetchUsers()
   },
   methods: {
+    async fetchUsers() {
+      this.users = await this.$axios
+        .get('/services/university/users', { params: { gender: this.gender } })
+        .then(res => res.data)
+    },
     fetchUser() {
       if (this.sid.length === 12) {
         this.selected = this.filteredUsers[0]

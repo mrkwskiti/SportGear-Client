@@ -1,10 +1,12 @@
 <template>
   <div>
     <b-field grouped group-multiline>
-      <b-field label="Type of Sport">
+      <b-field :label="$t('ImportTeam.Selection.Type.sportType')">
         <b-dropdown v-model="data.sport" aria-role="list">
           <button slot="trigger" class="button">
-            <span v-if="!data.sport">choose sport</span>
+            <span v-if="!data.sport">{{
+              $t('ImportTeam.Selection.SportChoose')
+            }}</span>
             <span v-else>{{ data.sport }}</span>
             <b-icon
               pack="fas"
@@ -25,7 +27,7 @@
         </b-dropdown>
       </b-field>
 
-      <b-field label="Type of Competition">
+      <b-field :label="$t('ImportTeam.Selection.Type.CompeType')">
         <b-dropdown
           v-model="data.competition"
           :disabled="!data.sport"
@@ -33,7 +35,7 @@
         >
           <button slot="trigger" class="button">
             <span v-if="!data.competition">
-              choose competition
+              {{ $t('ImportTeam.Selection.CompeChoose') }}
             </span>
             <span v-else>{{ data.competition }}</span>
             <b-icon
@@ -55,14 +57,16 @@
         </b-dropdown>
       </b-field>
 
-      <b-field label="Teams">
+      <b-field :label="$t('ImportTeam.Selection.Type.Teams')">
         <b-dropdown
           v-model="data.team"
           :disabled="!data.competition"
           aria-role="list"
         >
           <button slot="trigger" class="button">
-            <span v-if="!data.team">choose team</span>
+            <span v-if="!data.team">{{
+              $t('ImportTeam.Selection.teamChoose')
+            }}</span>
             <span v-else>{{ data.team }}</span>
             <b-icon
               pack="fas"

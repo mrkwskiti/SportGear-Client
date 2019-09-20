@@ -37,7 +37,9 @@ export default {
   users: async (req, res, next) => {
     try {
       api.setToken(req.session.token)
-      const { data } = await api.get('/university/users/info')
+      const { data } = await api.get('/university/users/info', {
+        params: req.query
+      })
       res.json(data)
     } catch (e) {
       res.status(500).json({ message: e.message })
