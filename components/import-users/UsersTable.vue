@@ -60,7 +60,12 @@ export default {
           this.$t('ImportUser.UsersTable.Firstname'),
           this.$t('ImportUser.UsersTable.Lastname'),
           this.$t('ImportUser.UsersTable.Gender'),
-          this.$t('ImportUser.UsersTable.Email')
+          this.$t('ImportUser.UsersTable.Email'),
+          this.$t('ImportUser.UsersTable.bloodtype'),
+          this.$t('ImportUser.UsersTable.allergicfood'),
+          this.$t('ImportUser.UsersTable.congenitalDisease'),
+          this.$t('ImportUser.UsersTable.shirtSize'),
+          this.$t('ImportUser.UsersTable.phoneNum')
         ],
         columns: [
           {
@@ -117,13 +122,75 @@ export default {
             }
           },
           {
+            type: 'key-value',
             data: 'bloodType',
+            source: [
+              {
+                id: 1,
+                name: 'A'
+              },
+              {
+                id: 2,
+                name: 'B'
+              },
+              {
+                id: 3,
+                name: 'AB'
+              },
+              {
+                id: 4,
+                name: 'O'
+              }
+            ],
+            keyProperty: 'id',
+            valueProperty: 'name',
             validator: function(value, callback) {
               callback(isFilled(value) || !isRowFilled(this))
             }
           },
           {
-            data: 'allergicFoods',
+            data: 'allergicFoods'
+          },
+          {
+            data: 'congenitaldisease'
+          },
+          {
+            type: 'key-value',
+            data: 'shirtSize',
+            source: [
+              {
+                id: 1,
+                name: 'SS'
+              },
+              {
+                id: 2,
+                name: 'S'
+              },
+              {
+                id: 3,
+                name: 'M'
+              },
+              {
+                id: 4,
+                name: 'L'
+              },
+              {
+                id: 5,
+                name: 'XL'
+              },
+              {
+                id: 6,
+                name: 'XXL'
+              }
+            ],
+            keyProperty: 'id',
+            valueProperty: 'name',
+            validator: function(value, callback) {
+              callback(isFilled(value) || !isRowFilled(this))
+            }
+          },
+          {
+            data: 'phoneNum',
             validator: function(value, callback) {
               callback(isFilled(value) || !isRowFilled(this))
             }

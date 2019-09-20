@@ -50,13 +50,18 @@ export default {
       Firstname: 'Firstname',
       Lastname: 'Lastname',
       Gender: 'Gender',
-      Email: 'Email'
+      Email: 'Email',
+      bloodtype: 'Type of blood',
+      allergicfood: 'Allergic Food',
+      congenitalDisease: 'Congenital Disease',
+      shirtSize: 'Shirt Size',
+      phoneNum: 'Phone Number'
     }
   },
   Footer: {
     where: 'Faculty of Engineering, Chiang mai University'
   },
   UserCard: {
-    Adduser: 'เพิ่มนักกีฬา'
+    Adduser: 'Add Athletes'
   }
 }
