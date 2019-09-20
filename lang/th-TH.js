@@ -50,7 +50,12 @@ export default {
       Firstname: 'ชื่อ',
       Lastname: 'นามสกุล',
       Gender: 'เพศ',
-      Email: 'อีเมล'
+      Email: 'อีเมล',
+      bloodtype: 'กรุ๊ปเลือก',
+      allergicfood: 'อาหารที่แพ้',
+      congenitalDisease: 'โรคประจำตัว',
+      shirtSize: 'ไซต์เสื้อ',
+      phoneNum: 'หมายเลยโทรศัพท์'
     }
   },
   Footer: {
