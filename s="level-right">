@@ -1,0 +1,44 @@
+[1mdiff --git a/pages/sign-up.vue b/pages/sign-up.vue[m
+[1mindex a00a414..0fdbbbc 100644[m
+[1m--- a/pages/sign-up.vue[m
+[1m+++ b/pages/sign-up.vue[m
+[36m@@ -1,9 +1,14 @@[m
+ <template>[m
+   <div>[m
+[32m+[m[32m    <div class="container">[m
+[32m+[m[32m      <div class="row align-items-start">[m
+[32m+[m[32m        <h2>change password</h2>[m
+[32m+[m[32m      </div>[m
+[32m+[m[32m    </div>[m
+     <div class="contrainer grid">[m
+       <div class="columns">[m
+         <div class="column">[m
+[31m-          <h2 class="title is-1">{{ $t('SignUp.Signup') }}</h2>[m
+[32m+[m[32m          <h2 class="title is-1">Sign Up</h2>[m
+         </div>[m
+       </div>[m
+       <div class="field">[m
+[36m@@ -11,9 +16,9 @@[m
+           id="main-button"[m
+           class="is-fullwidth"[m
+           tag="router-link"[m
+[31m-          :to="localePath('import-users')"[m
+[32m+[m[32m          to="/import-users"[m
+         >[m
+[31m-          <p class="subtitle is-3">{{ $t('SignUp.ImportAthletes') }}</p>[m
+[32m+[m[32m          <p class="subtitle is-3">Import athletes</p>[m
+         </b-button>[m
+       </div>[m
+       <div class="field">[m
+[36m@@ -21,9 +26,9 @@[m
+           id="main-button"[m
+           class="is-fullwidth"[m
+           tag="router-link"[m
+[31m-          :to="localePath('import-team')"[m
+[32m+[m[32m          to="/import-team"[m
+         >[m
+[31m-          <p class="subtitle is-3">{{ $t('SignUp.ImportTeam') }}</p>[m
+[32m+[m[32m          <p class="subtitle is-3">Import/edit teams</p>[m
+         </b-button>[m
+       </div>[m
+     </div>[m

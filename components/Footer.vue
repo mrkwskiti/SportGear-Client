@@ -11,16 +11,6 @@
                   {{ $t('Footer.where') }}
                 </div>
               </div>
-              <div class="level-right">
-                <div class="has-text-right">
-                  <nuxt-link
-                    v-for="locale in availableLocales"
-                    :key="locale.code"
-                    :to="switchLocalePath(locale.code)"
-                    >{{ locale.name }}</nuxt-link
-                  >
-                </div>
-              </div>
             </div>
             <!-- <div class="content has-text-centered">
                 <p>
@@ -54,11 +44,11 @@
 
 <script>
 export default {
-  computed: {
-    availableLocales() {
-      return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale)
-    }
-  }
+  // computed: {
+  //   availableLocales() {
+  //     return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale)
+  //   }
+  // }
 }
 </script>
 

@@ -54,9 +54,8 @@ export default {
     },
     async push() {
       if (this.hasUpdate) {
+        const loadingComponent = this.$loading.open()
         try {
-          const loadingComponent = this.$loading.open()
-
           await this.$axios.post('/services/university/users', this.new_users)
 
           this.$notification.open({
@@ -67,7 +66,7 @@ export default {
             hasIcon: true
           })
           loadingComponent.close()
-          this.$router.push({ name: 'sign-up' })
+          this.$router.push({ path: 'sign-up' })
         } catch (e) {
           this.$notification.open({
             duration: 5000,
