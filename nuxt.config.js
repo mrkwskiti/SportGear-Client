@@ -2,6 +2,7 @@ import url from 'url'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 import pkg from './package'
+import { resolve } from 'q'
 
 export default {
   mode: 'universal',
@@ -145,6 +146,9 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    watch: [
+      'services'
+    ],
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
