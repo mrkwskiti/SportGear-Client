@@ -2,15 +2,28 @@
   <div>
     <b-table v-if="value" :data="value">
       <template slot-scope="props">
-        <b-table-column field="sid" label="SID" width="120" sortable>
+        <b-table-column
+          field="sid"
+          :label="$t('ImportTeam.TeamTable.SID')"
+          width="120"
+          sortable
+        >
           {{ props.row.sid }}
         </b-table-column>
 
-        <b-table-column field="firstName" label="First Name" sortable>
+        <b-table-column
+          field="firstName"
+          :label="$t('ImportTeam.TeamTable.Firstname')"
+          sortable
+        >
           {{ props.row.firstName }}
         </b-table-column>
 
-        <b-table-column field="lastName" label="Last Name" sortable>
+        <b-table-column
+          field="lastName"
+          :label="$t('ImportTeam.TeamTable.Lastname')"
+          sortable
+        >
           {{ props.row.lastName }}
         </b-table-column>
 
@@ -35,7 +48,7 @@
     </b-table>
     <div v-else class="columns">
       <div class="column has-text-centered">
-        Please select upper options first.
+        {{ $t('ImportTeam.TeamTable.Selected') }}
       </div>
     </div>
   </div>

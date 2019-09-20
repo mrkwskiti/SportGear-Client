@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       users: null,
-      update_users: [],
+      new_users: [],
       hotRef: null,
       hotSettings: {
         dataSchema: {
@@ -48,7 +48,13 @@ export default {
           gender: null
         },
         // filtersKeyValue: true,
-        colHeaders: ['SID', 'First Name', 'Last Name', 'Gender', 'E-mail'],
+        colHeaders: [
+          this.$t('ImportUser.UsersTable.SID'),
+          this.$t('ImportUser.UsersTable.Firstname'),
+          this.$t('ImportUser.UsersTable.Lastname'),
+          this.$t('ImportUser.UsersTable.Gender'),
+          this.$t('ImportUser.UsersTable.Email')
+        ],
         columns: [
           {
             data: 'sid',
@@ -111,14 +117,14 @@ export default {
               this.$emit('isValid', valid)
 
               const update = this.hotRef.getSourceData()
+
               // clear new users
-              this.update_users = []
+              this.new_users = []
               // clean empty row
               for (let i = this.users.length; i < update.length; i++) {
-                if (!this.hotRef.isEmptyRow(i))
-                  this.update_users.push(update[i])
+                if (!this.hotRef.isEmptyRow(i)) this.new_users.push(update[i])
               }
-              this.$emit('updateUsers', this.update_users)
+              this.$emit('newUsers', this.new_users)
             })
 
             this.hotRef.updateSettings({

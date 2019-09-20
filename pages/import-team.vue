@@ -1,7 +1,7 @@
 <template>
   <div class="contrainer grid">
     <div class="field">
-      <h2 class="title is-1">Import teams</h2>
+      <h2 class="title is-1">{{ $t('ImportTeam.Importteam') }}</h2>
 
       <div class="columns">
         <div class="column">
@@ -11,7 +11,7 @@
 
       <div class="columns">
         <div class="column">
-          <label class="label">Team</label>
+          <label class="label">{{ $t('ImportTeam.Team') }}</label>
           <team-table v-model="users" />
         </div>
       </div>
@@ -21,6 +21,7 @@
           <div class="column">
             <search-user
               :disabled="!canAddUser"
+              :gender="gender"
               :team="users"
               @user="addUser"
             />
@@ -36,10 +37,10 @@
             class="is-primary is-right"
             @click="push"
           >
-            Commit team
+            {{ $t('ImportTeam.CommitTeam') }}
           </b-button>
           <b-button tag="router-link" type="is-primary" outlined to="sign-up">
-            Cancel
+            {{ $t('ImportTeam.Cancel') }}
           </b-button>
         </b-field>
       </div>
@@ -73,6 +74,11 @@ export default {
     },
     canAddUser() {
       return this.sport ? this.sport.eachTeam > this.users.length : false
+    },
+    gender() {
+      return this.sport && this.sport.gender !== 'Male&Female'
+        ? this.sport.gender
+        : null
     }
   },
   watch: {

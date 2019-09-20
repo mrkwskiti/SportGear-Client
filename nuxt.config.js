@@ -2,6 +2,7 @@ import url from 'url'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 import pkg from './package'
+import { resolve } from 'q'
 
 export default {
   mode: 'universal',
@@ -29,6 +30,10 @@ export default {
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Rubik&display=swap'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Mitr:300&display=swap'
       }
     ]
   },
@@ -45,13 +50,18 @@ export default {
     '@fortawesome/fontawesome-svg-core/styles.css',
     'node_modules/handsontable/dist/handsontable.full.css',
     { src: '~/assets/buefy-overrides.scss', lang: 'scss' },
-    '~/css/main.css'
+    '~/assets/main.css',
+    // aos
+    'aos/dist/aos.css'
   ],
 
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/vue-handsontable', ssr: false }],
+  plugins: [
+    { src: '~/plugins/vue-handsontable', ssr: false },
+    { src: '~/plugins/aos', ssr: false }
+  ],
 
   /*
    ** Nuxt.js modules
@@ -61,7 +71,30 @@ export default {
     '@nuxtjs/axios',
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
-    'nuxt-fontawesome'
+    'nuxt-fontawesome',
+    // Doc: https://nuxt-community.github.io/nuxt-i18n/
+    [
+      'nuxt-i18n',
+      {
+        locales: [
+          {
+            name: 'English',
+            code: 'en',
+            iso: 'en-US',
+            file: 'en-US.js'
+          },
+          {
+            name: 'ไทย',
+            code: 'th',
+            iso: 'th-TH',
+            file: 'th-TH.js'
+          }
+        ],
+        langDir: 'lang/',
+        defaultLocale: 'en',
+        lazy: true
+      }
+    ]
   ],
   /*
    ** Axios module configuration
@@ -113,6 +146,9 @@ export default {
     /*
      ** You can extend webpack config here
      */
+    watch: [
+      'services'
+    ],
     extend(config, ctx) {
       if (ctx.isDev) {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'

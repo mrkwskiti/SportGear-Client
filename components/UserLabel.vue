@@ -18,7 +18,9 @@
       </span>
     </div>
     <div class="navbar-item" style="padding-right: 0">
-      <b-button rounded type="is-light" @click="logout">log out</b-button>
+      <b-button rounded type="is-light" @click="logout">{{
+        $t('logout.logOutButton')
+      }}</b-button>
     </div>
   </div>
 </template>
@@ -35,7 +37,7 @@ export default {
     async logout() {
       const loadingComponent = this.$loading.open()
       await this.removeUni()
-      this.$router.push({ name: 'index' })
+      this.$router.push(this.localePath({ name: 'index' }))
       loadingComponent.close()
     }
   }
