@@ -35,6 +35,7 @@
         >
           <p class="subtitle is-3">Import/edit staff</p>
         </b-button>
+        <br />
       </div>
     </div>
   </div>

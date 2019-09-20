@@ -1,7 +1,11 @@
 <template>
   <div class="contrainer grid">
     <div class="field">
-      <h2 class="title is-1">Import Staff</h2>
+      <div class="columns">
+        <div class="column">
+          <h2 class="title is-1">Import Staff</h2>
+        </div>
+      </div>
       <no-ssr>
         <staff-table>
           <!--  @isValid="isValid"
@@ -95,5 +99,8 @@ h2 {
 }
 .grid-xl {
   grid-column: xl;
+}
+.type {
+  margin-left: -30px;
 }
 </style>

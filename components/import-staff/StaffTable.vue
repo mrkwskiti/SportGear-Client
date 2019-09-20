@@ -117,26 +117,30 @@ export default {
             source: [
               {
                 id: 1,
-                name: 'korkorbo'
+                name: 'Fest member'
               },
               {
                 id: 2,
-                name: 'HeadGear'
+                name: 'Athlete/Participant'
               },
               {
                 id: 3,
-                name: 'Ambassador'
+                name: 'Head Gear'
               },
               {
                 id: 4,
-                name: 'Ambassador Staff'
+                name: 'Ambassador'
               },
               {
                 id: 5,
-                name: 'Faculty Member'
+                name: 'Ambassador Staff'
               },
               {
                 id: 6,
+                name: 'Faculty of teacher'
+              },
+              {
+                id: 7,
                 name: 'Staff'
               }
             ],
