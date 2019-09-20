@@ -45,7 +45,14 @@ export default {
           firstName: null,
           lastName: null,
           email: null,
-          gender: null
+          gender: null,
+          details: {
+            bloodType: null,
+            allergicFoods: null,
+            congenitaldisease: null,
+            shirtSize: null,
+            phoneNum: null
+          }
         },
         // filtersKeyValue: true,
         colHeaders: [
@@ -107,6 +114,18 @@ export default {
                   ? callback(duplicateValues(this, value) && isEmail(value))
                   : !isRowFilled(this)
               )
+            }
+          },
+          {
+            data: 'bloodType',
+            validator: function(value, callback) {
+              callback(isFilled(value) || !isRowFilled(this))
+            }
+          },
+          {
+            data: 'allergicFoods',
+            validator: function(value, callback) {
+              callback(isFilled(value) || !isRowFilled(this))
             }
           }
         ],
