@@ -36,10 +36,6 @@ export default {
   },
   data() {
     return {
-      users: [], // old users
-      all_users: [],
-      delete_users: [],
-      new_users: [],
       hotRef: null,
       hotSettings: {
         dataSchema: {
@@ -52,13 +48,23 @@ export default {
         },
         // filtersKeyValue: true,
         colHeaders: [
+          'id',
           this.$t('ImportUser.UsersTable.SID'),
           this.$t('ImportUser.UsersTable.Firstname'),
           this.$t('ImportUser.UsersTable.Lastname'),
           this.$t('ImportUser.UsersTable.Gender'),
-          this.$t('ImportUser.UsersTable.Email')
+          this.$t('ImportUser.UsersTable.Email'),
+          ''
         ],
+        hiddenColumns: {
+          columns: [0],
+          indicators: false
+        },
         columns: [
+          {
+            data: 'id',
+            readOnly: true
+          },
           {
             data: 'sid',
             validator: function(value, callback) {
@@ -107,7 +113,7 @@ export default {
             validator: function(value, callback) {
               callback(
                 isFilled(value)
-                  ? callback(duplicateValues(this, value) && isEmail(value))
+                  ? duplicateValues(this, value) && isEmail(value)
                   : !isRowFilled(this)
               )
             }
@@ -131,67 +137,27 @@ export default {
         cells: (row, columns, prop) => {
           const cellProperties = {}
           // set old users is read-only
-          if (
-            this.hotRef &&
-            this.users.length - this.delete_users.length > row
-          ) {
+          if (this.hotRef) {
             // read-only old users
-            const user = this.users.find(user => {
-              return this.hotRef.getSourceDataAtRow(row).sid === user.sid
-            })
-            cellProperties.readOnly = !!user
+            cellProperties.readOnly = !!this.hotRef.getSourceDataAtRow(row).id
           }
           return cellProperties
         },
         afterOnCellMouseDown: function(e, coords, TD) {
-          if (coords.col === 5) {
+          if (coords.col === 6) {
             this.alter('remove_row', coords.row)
           }
         },
-        beforeRemoveRow: (index, amount, physicalRows, source) => {
-          this.hotRef.validateCells(valid => {
-            this.$emit('isValid', valid)
-            if (index < this.users.length - this.delete_users.length) {
-              const user = this.hotRef.getSourceDataAtRow(index)
-              this.delete_users.push(user)
-            }
-          })
-        },
-        beforeUndo: action => {
-          if (action.actionType !== 'remove_row') {
-            return
-          }
-          if (this.users.length - this.delete_users.length >= action.index) {
-            this.delete_users = this.delete_users.filter(
-              user => user.sid !== action.data[0][0]
-            )
-          }
-        },
         afterChange: (change, source) => {
-          console.log('change')
           if (this.hotRef) {
             this.hotRef.validateCells(valid => {
               // this.valid = valid
               this.$emit('isValid', valid)
-
-              const update = this.hotRef.getSourceData()
-              this.all_users = update
-
-              // clear new users
-              this.new_users = []
-              // clean empty row
-              for (
-                let i = this.users.length - this.delete_users.length;
-                i < update.length;
-                i++
-              ) {
-                if (!this.hotRef.isEmptyRow(i)) this.new_users.push(update[i])
-              }
-              this.$emit('newUsers', this.new_users)
-            })
-
-            this.hotRef.updateSettings({
-              height: this.hotRef.getData().length * 24 + 26
+              const users = this.hotRef.getSourceData()
+              this.$emit(
+                'newUsers',
+                users.filter(user => !user.id && !!user.sid)
+              )
             })
           }
         },
@@ -208,7 +174,6 @@ export default {
     const loadingComponent = this.$loading.open()
     this.hotRef = await this.$refs.usersTable.hotInstance
     const { data } = await this.$axios.get('/services/university/users')
-    this.users = [...data] // make duplicate users
     this.hotRef.loadData(data)
     loadingComponent.close()
   }
