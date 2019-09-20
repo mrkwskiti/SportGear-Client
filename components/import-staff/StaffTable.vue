@@ -58,7 +58,7 @@ export default {
         ],
         columns: [
           {
-            data: 'sid',
+            data: 'Student ID',
             validator: function(value, callback) {
               callback(
                 isFilled(value)
