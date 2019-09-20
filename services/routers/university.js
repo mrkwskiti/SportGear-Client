@@ -15,6 +15,8 @@ router.get('/users', controllers.university.users)
 
 router.post('/users', controllers.university.addUsers)
 
+router.patch('/password', controllers.university.changePassword)
+
 router.get(
   '/sport/:sport_id/:team_name/users',
   controllers.university.fetchTeam

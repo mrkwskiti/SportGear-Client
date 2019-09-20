@@ -111,5 +111,14 @@ export default {
       console.log(e)
       res.status(500).json({ message: e.message })
     }
+  },
+  changePassword: async (req, res, next) => {
+    try {
+      api.setToken(req.session.token)
+      const { data } = await api.patch('/university/password')
+      res.json()
+    } catch (e) {
+      res.status(400).json({ message: e.message })
+    }
   }
 }

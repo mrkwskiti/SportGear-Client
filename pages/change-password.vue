@@ -6,27 +6,27 @@
         <div class="field">
           <div class="control">
             <input
-              v-model="data.password"
+              v-model="data.old_password"
               class="input is-medium "
               type="password"
               placeholder="old password"
             />
             <input
               id="check"
-              v-model="data.newpassword"
+              v-model="data.password"
               class="input is-medium"
               type="password"
               placeholder="new password"
             />
             <input
-              v-model="data.reEnternewpassword"
+              v-model="data.confirm_password"
               class="input is-medium"
               type="password"
               placeholder="re-enter new password"
             />
             <div class="content">
               <div v-show="ishidden">
-                <p v-if="data.newpassword === data.reEnternewpassword">
+                <p v-if="data.newpassword === data.confirm_password">
                   Password match
                 </p>
                 <!-- how to change color to this paragraph ???-->
@@ -36,7 +36,7 @@
               </div>
             </div>
           </div>
-          <b-button class="is-primary is-fullwidth" @click="ishidden = true">
+          <b-button class="is-primary is-fullwidth" @click="changepassword">
             Change Password
           </b-button>
           <b-button
@@ -55,14 +55,43 @@
 
 <script>
 export default {
+  layout: 'register',
+  middleware: 'authenticated',
   data() {
     return {
       ishidden: false,
       data: {
+        old_password: '',
         password: '',
-        newpassword: '',
-        reEnternewpassword: ''
+        confirm_password: ''
       }
+    }
+  },
+  methods: {
+    async changepassword() {
+      const loadingComponent = this.$loading.open()
+      this.ishidden = true
+      try {
+        console.log('changing')
+        await this.$axios.patch('/services/university/password', this.data)
+        console.log('changed')
+        this.this.$notification.open({
+          duration: 5000,
+          message: 'Password Change',
+          position: 'is-bottom-right',
+          type: 'is-success',
+          hasIcon: true
+        })
+      } catch (e) {
+        this.$notification.open({
+          duration: 5000,
+          message: `Fail to change password<br/>${e}<br/>Please try again`,
+          position: 'is-bottom-right',
+          type: 'is-danger',
+          hasIcon: true
+        })
+      }
+      loadingComponent.close()
     }
   }
 }
