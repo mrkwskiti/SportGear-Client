@@ -26,7 +26,7 @@
             />
             <div class="content">
               <div v-show="ishidden">
-                <p v-if="data.newpassword === data.confirm_password">
+                <p v-if="data.password === data.confirm_password">
                   Password match
                 </p>
                 <!-- how to change color to this paragraph ???-->
@@ -75,7 +75,7 @@ export default {
         console.log('changing')
         await this.$axios.patch('/services/university/password', this.data)
         console.log('changed')
-        this.this.$notification.open({
+        this.$notification.open({
           duration: 5000,
           message: 'Password Change',
           position: 'is-bottom-right',
