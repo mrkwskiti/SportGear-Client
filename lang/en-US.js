@@ -76,5 +76,14 @@ export default {
       size: 'Shirt Size',
       Phone: 'Phone Number'
     }
+  },
+  Type: {
+    Fest: 'Fest member',
+    Athlete: 'Athlete/Participant',
+    Headgear: 'Head Gear',
+    Ambassador: 'Ambassador',
+    AmbassadorStaff: 'Ambassador Staff',
+    Faculty: 'Faculty of teacher',
+    Staff: 'Staff'
   }
 }
