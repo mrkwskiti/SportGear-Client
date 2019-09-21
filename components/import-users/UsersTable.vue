@@ -166,13 +166,6 @@ export default {
                 })
               }
               this.$emit('isValid', valid)
-              const users = this.hotRef.getSourceData()
-              // debug
-              this.users = users
-              this.$emit(
-                'newUsers',
-                users.filter(user => !user.id && !!user.sid)
-              )
             })
           }
         },
@@ -198,6 +191,14 @@ export default {
     const { data } = await this.$axios.get('/services/university/users')
     this.hotRef.loadData(data)
     loadingComponent.close()
+  },
+  methods: {
+    getData() {
+      const user = this.hotRef.getSourceData()
+      const updateUsers = user.filter(user => !!user.id && user.edited)
+      const newUser = user.filter(user => !user.id && user.sid)
+      return { updateUsers, newUser }
+    }
   }
 }
 </script>
