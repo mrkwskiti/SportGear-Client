@@ -154,6 +154,13 @@ export default {
             this.alter('remove_row', coords.row)
           }
         },
+        beforeRemoveRow(index, amount, physicalRows, source) {
+          console.log(this.getSourceDataAtRow(index))
+          this.validateCells(valid => {
+            console.log(this)
+            console.log(this.users)
+          })
+        },
         afterChange: (change, source) => {
           if (this.hotRef && change) {
             this.hotRef.validateCells(valid => {
@@ -171,7 +178,8 @@ export default {
         },
         afterUndo({ changes, actionType }) {
           // recursive if undo in edited prop
-
+          console.log(actionType)
+          console.log(changes)
           if (actionType === 'change' && changes[0][1] === 'edited') {
             this.undo()
           }
@@ -196,8 +204,8 @@ export default {
     getData() {
       const user = this.hotRef.getSourceData()
       const updateUsers = user.filter(user => !!user.id && user.edited)
-      const newUser = user.filter(user => !user.id && user.sid)
-      return { updateUsers, newUser }
+      const newUsers = user.filter(user => !user.id && user.sid)
+      return { updateUsers, newUsers }
     }
   }
 }
