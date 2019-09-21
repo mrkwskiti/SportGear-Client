@@ -7,7 +7,7 @@
         </div>
       </div>
       <no-ssr>
-        <staff-table>
+        <staff-table @isValid="isValid" @newUsers="updateUsers">
           <!--  @isValid="isValid"
                 @updateUsers="updateUsers"-->
         </staff-table>
@@ -54,6 +54,9 @@ export default {
     isValid(value) {
       this.valid = value
     },
+    updateUsers(value) {
+      this.new_users = value
+    },
     async push() {
       if (this.hasUpdate) {
         try {
@@ -93,7 +96,6 @@ h2 {
   display: grid;
   grid-template-columns: [xl-start] 1fr 1.5rem [md-start] minmax(0, 624px) [md-end] 1.5rem 1fr [xl-end];
 }
-
 .grid * {
   grid-column: md;
 }

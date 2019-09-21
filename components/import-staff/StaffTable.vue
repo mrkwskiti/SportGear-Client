@@ -45,16 +45,28 @@ export default {
           lastName: null,
           email: null,
           gender: null,
-          type: null
+          type: null,
+          details: {
+            bloodType: null,
+            allergicFoods: null,
+            congenitaldisease: null,
+            shirtSize: null,
+            phoneNum: null
+          }
         },
         // filtersKeyValue: true,
         colHeaders: [
-          'SID',
+          'Student ID',
           'First Name',
           'Last Name',
           'Gender',
           'E-mail',
-          'Type'
+          'Type',
+          'Type of blood',
+          'Allergic Food',
+          'Congenital Disease',
+          'Shirt Size',
+          'Phone Number'
         ],
         columns: [
           {
@@ -149,6 +161,80 @@ export default {
             validator: function(value, callback) {
               callback(isFilled(value) || !isRowFilled(this))
             }
+          },
+          {
+            type: 'key-value',
+            data: 'bloodType',
+            source: [
+              {
+                id: 1,
+                name: 'A'
+              },
+              {
+                id: 2,
+                name: 'B'
+              },
+              {
+                id: 3,
+                name: 'AB'
+              },
+              {
+                id: 4,
+                name: 'O'
+              }
+            ],
+            keyProperty: 'id',
+            valueProperty: 'name',
+            validator: function(value, callback) {
+              callback(isFilled(value) || !isRowFilled(this))
+            }
+          },
+          {
+            data: 'allergicFoods'
+          },
+          {
+            data: 'congenitaldisease'
+          },
+          {
+            type: 'key-value',
+            data: 'shirtSize',
+            source: [
+              {
+                id: 1,
+                name: 'SS'
+              },
+              {
+                id: 2,
+                name: 'S'
+              },
+              {
+                id: 3,
+                name: 'M'
+              },
+              {
+                id: 4,
+                name: 'L'
+              },
+              {
+                id: 5,
+                name: 'XL'
+              },
+              {
+                id: 6,
+                name: 'XXL'
+              }
+            ],
+            keyProperty: 'id',
+            valueProperty: 'name',
+            validator: function(value, callback) {
+              callback(isFilled(value) || !isRowFilled(this))
+            }
+          },
+          {
+            data: 'phoneNum',
+            validator: function(value, callback) {
+              callback(isFilled(value) || !isRowFilled(this))
+            }
           }
         ],
         afterChange: () => {
@@ -181,9 +267,8 @@ export default {
         licenseKey: 'non-commercial-and-evaluation'
       }
     }
-  }
+  },
   // need axios get staff
-  /*,
   async mounted() {
     const loadingComponent = this.$loading.open()
     this.hotRef = await this.$refs.usersTable.hotInstance
@@ -197,6 +282,6 @@ export default {
       }
     }
     loadingComponent.close()
-  } */
+  }
 }
 </script>
