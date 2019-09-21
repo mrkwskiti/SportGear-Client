@@ -37,6 +37,7 @@ export default {
   data() {
     return {
       users: [],
+      deleteUsers: [],
       hotRef: null,
       hotSettings: {
         dataSchema: {
@@ -154,11 +155,10 @@ export default {
             this.alter('remove_row', coords.row)
           }
         },
-        beforeRemoveRow(index, amount, physicalRows, source) {
-          console.log(this.getSourceDataAtRow(index))
-          this.validateCells(valid => {
-            console.log(this)
-            console.log(this.users)
+        beforeRemoveRow: (index, amount, physicalRows, source) => {
+          const user = this.hotRef.getSourceDataAtRow(index)
+          this.hotRef.validateCells(valid => {
+            this.deleteUsers.push(user)
           })
         },
         afterChange: (change, source) => {
@@ -205,7 +205,8 @@ export default {
       const user = this.hotRef.getSourceData()
       const updateUsers = user.filter(user => !!user.id && user.edited)
       const newUsers = user.filter(user => !user.id && user.sid)
-      return { updateUsers, newUsers }
+      const deleteUsers = this.deleteUsers
+      return { updateUsers, newUsers, deleteUsers }
     }
   }
 }

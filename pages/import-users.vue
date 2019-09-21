@@ -3,7 +3,11 @@
     <div class="field">
       <h2 class="title is-1">{{ $t('ImportUser.ImportAthletes') }}</h2>
       <no-ssr>
-        <users-table @isValid="isValid" @newUsers="updateUsers"></users-table>
+        <users-table
+          ref="usersTable"
+          @isValid="isValid"
+          @newUsers="updateUsers"
+        ></users-table>
       </no-ssr>
     </div>
     <div class="columns">
@@ -42,7 +46,7 @@ export default {
   },
   computed: {
     hasUpdate() {
-      return this.valid && this.new_users.length !== 0
+      return this.valid
     }
   },
   methods: {
@@ -54,9 +58,29 @@ export default {
     },
     async push() {
       if (this.hasUpdate) {
+        const {
+          updateUsers,
+          newUsers,
+          deleteUsers
+        } = await this.$refs.usersTable.getData()
+        console.log(newUsers)
+        console.log(updateUsers)
         const loadingComponent = this.$loading.open()
         try {
-          await this.$axios.post('/services/university/users', this.new_users)
+          if (newUsers.length !== 0) {
+            console.log('add')
+            await this.$axios.post('/services/university/users', newUsers)
+          }
+          if (updateUsers.length !== 0) {
+            console.log('update')
+            await this.$axios.patch('/services/university/users', updateUsers)
+          }
+          if (deleteUsers.length !== 0) {
+            console.log('delete')
+            const users = deleteUsers.map(user => user.sid)
+            console.log(users)
+            await this.$axios.post('/services/university/users/delete', users)
+          }
 
           this.$notification.open({
             duration: 5000,
@@ -66,7 +90,7 @@ export default {
             hasIcon: true
           })
           loadingComponent.close()
-          this.$router.push({ path: 'sign-up' })
+          // this.$router.push({ path: 'sign-up' })
         } catch (e) {
           this.$notification.open({
             duration: 5000,

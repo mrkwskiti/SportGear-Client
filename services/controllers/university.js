@@ -64,6 +64,36 @@ export default {
       res.status(500).json({ message: e.message })
     }
   },
+  updateUsers: async (req, res, next) => {
+    try {
+      const params = req.body.map(user => {
+        return {
+          id: user.id,
+          sid: user.sid,
+          fname: user.firstName,
+          lname: user.lastName,
+          email: user.email,
+          gender: user.gender
+        }
+      })
+      api.setToken(req.session.token)
+      await api.patch('/university/users', params)
+      res.status(200).json({ message: 'Update complete' })
+    } catch (e) {
+      res.status(500).json({ message: e.message })
+    }
+  },
+  deleteUsers: async (req, res, next) => {
+    try {
+      const params = req.body
+      console.log(params)
+      api.setToken(req.session.token)
+      await api.post('/university/users/delete', params)
+      res.status(200).json({ message: 'Update complete' })
+    } catch (e) {
+      res.status(500).json({ message: e.message })
+    }
+  },
   fetchTeam: async (req, res, next) => {
     try {
       const { status, data } = await api.get('/sport/id', {
@@ -115,7 +145,7 @@ export default {
   changePassword: async (req, res, next) => {
     try {
       await api.setToken(req.session.token)
-      const { data } = await api.patch('/university/password', req.body)
+      await api.patch('/university/password', req.body)
       res.json({ message: 'password changed' })
     } catch (e) {
       res.status(400).json({ message: e.message })

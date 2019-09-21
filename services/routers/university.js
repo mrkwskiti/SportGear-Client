@@ -15,6 +15,10 @@ router.get('/users', controllers.university.users)
 
 router.post('/users', controllers.university.addUsers)
 
+router.patch('/users', controllers.university.updateUsers)
+
+router.post('/users/delete', controllers.university.deleteUsers)
+
 router.patch('/password', controllers.university.changePassword)
 
 router.get(
