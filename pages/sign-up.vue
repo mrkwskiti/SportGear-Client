@@ -31,9 +31,9 @@
           id="main-button"
           class="is-fullwidth"
           tag="router-link"
-          to="/import-staff"
+          :to="localePath('import-staff')"
         >
-          <p class="subtitle is-3">Import/edit staff</p>
+          <p class="subtitle is-3">{{ $t('ImportStaff.Importstaff') }}</p>
         </b-button>
         <br />
       </div>

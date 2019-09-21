@@ -3,7 +3,7 @@
     <div class="field">
       <div class="columns">
         <div class="column">
-          <h2 class="title is-1">Import Staff</h2>
+          <h2 class="title is-1">{{ $t('ImportStaff.Importstaff') }}</h2>
         </div>
       </div>
       <no-ssr>
@@ -21,10 +21,10 @@
             class="is-primary is-right"
             @click="push"
           >
-            Update Staff
+            {{ $t('ImportStaff.Update') }}
           </b-button>
           <b-button tag="router-link" type="is-primary" outlined to="sign-up">
-            Cancel
+            {{ $t('ImportStaff.Cancel') }}
           </b-button>
         </b-field>
       </div>

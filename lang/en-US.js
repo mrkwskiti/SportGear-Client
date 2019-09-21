@@ -58,5 +58,17 @@ export default {
   },
   UserCard: {
     Adduser: 'เพิ่มนักกีฬา'
+  },
+  ImportStaff: {
+    Importstaff: 'Import Staff',
+    Update: 'Update',
+    Cancel: 'Cancle',
+    StaffTable: {
+      studentID: 'Student ID',
+      Firstname: 'Firstname',
+      Lastname: 'Lastname',
+      Gender: 'Gender',
+      Email: 'Email'
+    }
   }
 }
