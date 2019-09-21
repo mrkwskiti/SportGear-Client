@@ -56,17 +56,17 @@ export default {
         },
         // filtersKeyValue: true,
         colHeaders: [
-          'Student ID',
-          'First Name',
-          'Last Name',
-          'Gender',
-          'E-mail',
-          'Type',
-          'Type of blood',
-          'Allergic Food',
-          'Congenital Disease',
-          'Shirt Size',
-          'Phone Number'
+          this.$t('ImportStaff.StaffTable.studentID'),
+          this.$t('ImportStaff.StaffTable.Firstname'),
+          this.$t('ImportStaff.StaffTable.Lastname'),
+          this.$t('ImportStaff.StaffTable.Gender'),
+          this.$t('ImportStaff.StaffTable.Email'),
+          this.$t('ImportStaff.StaffTable.Type'),
+          this.$t('ImportStaff.StaffTable.blood'),
+          this.$t('ImportStaff.StaffTable.AllerFood'),
+          this.$t('ImportStaff.StaffTable.CongenDisease'),
+          this.$t('ImportStaff.StaffTable.size'),
+          this.$t('ImportStaff.StaffTable.Phone')
         ],
         columns: [
           {

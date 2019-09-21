@@ -68,7 +68,13 @@ export default {
       Firstname: 'Firstname',
       Lastname: 'Lastname',
       Gender: 'Gender',
-      Email: 'Email'
+      Email: 'Email',
+      Type: 'Type',
+      blood: 'Type of blood',
+      AllerFood: 'Allergic Food',
+      CongenDisease: 'Congenital Disease',
+      size: 'Shirt Size',
+      Phone: 'Phone Number'
     }
   }
 }
