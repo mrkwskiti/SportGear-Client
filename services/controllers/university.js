@@ -96,7 +96,7 @@ export default {
           account_id: req.body
         })
       } else {
-        // posts
+        // post
         const id = await api
           .post('/sport/list/addTeam', { ...req.session.university.sport })
           .then(res => res.data.id)
@@ -110,6 +110,15 @@ export default {
     } catch (e) {
       console.log(e)
       res.status(500).json({ message: e.message })
+    }
+  },
+  changePassword: async (req, res, next) => {
+    try {
+      await api.setToken(req.session.token)
+      const { data } = await api.patch('/university/password', req.body)
+      res.json({ message: 'password changed' })
+    } catch (e) {
+      res.status(400).json({ message: e.message })
     }
   }
 }
