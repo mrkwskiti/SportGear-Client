@@ -26,6 +26,17 @@
           <p class="subtitle is-3">{{ $t('SignUp.ImportTeam') }}</p>
         </b-button>
       </div>
+      <div class="field">
+        <b-button
+          id="main-button"
+          class="is-fullwidth"
+          tag="router-link"
+          :to="localePath('import-staff')"
+        >
+          <p class="subtitle is-3">{{ $t('ImportStaff.Importstaff') }}</p>
+        </b-button>
+        <br />
+      </div>
     </div>
   </div>
 </template>

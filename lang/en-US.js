@@ -58,5 +58,32 @@ export default {
   },
   UserCard: {
     Adduser: 'เพิ่มนักกีฬา'
+  },
+  ImportStaff: {
+    Importstaff: 'Import Staff',
+    Update: 'Update',
+    Cancel: 'Cancle',
+    StaffTable: {
+      studentID: 'Student ID',
+      Firstname: 'Firstname',
+      Lastname: 'Lastname',
+      Gender: 'Gender',
+      Email: 'Email',
+      Type: 'Type',
+      blood: 'Type of blood',
+      AllerFood: 'Allergic Food',
+      CongenDisease: 'Congenital Disease',
+      size: 'Shirt Size',
+      Phone: 'Phone Number'
+    }
+  },
+  Type: {
+    Fest: 'Fest member',
+    Athlete: 'Athlete/Participant',
+    Headgear: 'Head Gear',
+    Ambassador: 'Ambassador',
+    AmbassadorStaff: 'Ambassador Staff',
+    Faculty: 'Faculty of teacher',
+    Staff: 'Staff'
   }
 }

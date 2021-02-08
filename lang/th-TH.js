@@ -58,5 +58,23 @@ export default {
   },
   UserCard: {
     Adduser: 'เพิ่มนักกีฬา'
+  },
+  ImportStaff: {
+    Importstaff: 'เพิ่มสต๊าฟ',
+    Update: 'อัพเดทสต๊าฟ',
+    Cancel: 'ยกเลิก',
+    StaffTable: {
+      studentID: 'รหัสนักศึกษา',
+      Firstname: 'ชื่อ',
+      Lastname: 'นามสกุล',
+      Gender: 'เพศ',
+      Email: 'อีเมล',
+      Type: 'ประเภท',
+      blood: 'กรุ๊ปเลือด',
+      AllerFood: 'อาหารที่แพ้',
+      CongenDisease: 'โรคประจำตัว',
+      size: 'ไซส์เสื้อ',
+      Phone: 'หมายเลขโทรศัพท์'
+    }
   }
 }
